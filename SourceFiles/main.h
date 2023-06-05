@@ -1,1 +1,19 @@
-﻿
+﻿#pragma once
+
+#define SCREEN_WIDTH 1280
+#define SCREEN_HEIGHT 720
+#define GAME_NAME "ゲーム名未決定"
+
+#include <stdio.h>
+#include <math.h>
+#include <string>
+using std::string;
+using std::to_string;
+#include <time.h>
+#include "SceneManager.h"
+
+#include "DxLib.h"
+
+// 各シーンのヘッダーファイル
+#include "TitleScene.h"
+#include "GameMainScene.h"
