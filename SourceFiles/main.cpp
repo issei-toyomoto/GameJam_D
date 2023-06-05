@@ -1,39 +1,29 @@
-﻿#include "DxLib.h"
+﻿#include "main.h"
 
-#define _SCREEN_WIDHT_	1280
-#define _SCREEN_HEIGHT_ 720
-#define _SCREEN_COLOR_BIT_32_ 32
+/********************************
+* メインプログラム 開始
+********************************/
+int WINAPI WinMain(_In_ HINSTANCE  hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPSTR LpCmdLine, _In_ int NCmdShow) {
+    SetMainWindowText(GAME_NAME);                  // ウィンドウタイトルを設定
+    SetMainWindowClassName(GAME_NAME);             // 他のDxLibと競合しないようにウィンドウクラスを設定
+    ChangeWindowMode(TRUE);                        // ウインドウモードで起動
+    SetGraphMode(SCREEN_WIDTH, SCREEN_HEIGHT, 32); // ウインドウのサイズ
+    if (DxLib_Init() == -1) return -1;             // DXライブラリの初期化処理
+    SetDrawScreen(DX_SCREEN_BACK);                 // 描画先画面を裏にする（ダブルバッファリング）
 
+    // タイトル シーンオブジェクト作成
+    SceneManager* sceneMng = new SceneManager((AbstractScene*) new Title());
 
-int WINAPI WinMain(_In_ HINSTANCE ih, _In_opt_ HINSTANCE ioh, _In_ LPSTR il, _In_ int ii)
-{
-    // ウィンドウモードで起動
-    if (ChangeWindowMode(TRUE) != DX_CHANGESCREEN_OK)
-    {
-        return -1;
-    }
+    // ゲームループし、シーンマネジャーでシーンの更新
+    while ((ProcessMessage() == 0) && (sceneMng->Update() != nullptr)) {
+        ClearDrawScreen(); // 画面の初期化
 
-    // 画面サイズを変更
-    if (SetGraphMode(_SCREEN_WIDHT_, _SCREEN_HEIGHT_, _SCREEN_COLOR_BIT_32_) != DX_CHANGESCREEN_OK)
-    {
-        return -1;
-    }
+        // シーンマネジャーでシーンの描画開始
+        sceneMng->Draw();
 
-    // DXライブラリの初期化
-    if (DxLib_Init() == -1)
-    {
-        return -1;
-    }
+        ScreenFlip(); // 裏画面の内容を表画面に反映する
+    };
 
-    while (ProcessMessage() != -1)
-    {
-        ClearDrawScreen();
-
-        ScreenFlip();
-    }
-
-    // DXライブラリの終了処理
-    DxLib_End();
-
-    return 0;
-}
+    DxLib_End(); // DXライブラリ使用の終了処理
+    return 0;    // プログラムの終了
+};
