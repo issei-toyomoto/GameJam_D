@@ -5,6 +5,10 @@
 class GameMain : public AbstractScene {
 private:
     int state;
+    int score = 0;
+
+    int BackImg;    //背景画像
+
 public:
     // コンストラクタ
     GameMain();

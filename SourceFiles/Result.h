@@ -5,9 +5,10 @@
 class Result : public AbstractScene {
 private:
     int state;
+    int score;
 public:
     // コンストラクタ
-    Result();
+    Result(int score);
 
     // デストラクタ
     ~Result();
