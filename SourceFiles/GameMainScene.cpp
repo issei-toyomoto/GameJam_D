@@ -1,7 +1,3 @@
-/********************************
-* ゲームメイン
-* 作者：島袋
-********************************/
 #include "main.h"
 #include "Result.h"
 #include "PadInput.h"
@@ -26,7 +22,7 @@ AbstractScene* GameMain::Update() { // ここで値の更新など、処理
 void GameMain::Draw() const { // やることは描画のみ、絶対に値の更新はしない
     SetFontSize(16);
     DrawGraph(0, 0, BackImg, true);
-
-    DrawFormatString(20, 50, 0xffffff, "Game Main");
-    DrawFormatString(20, 100, 0xffffff, "SCORE : %d", score);
+    DrawBox(0, 0, 1280, 100, GetColor(0, 0, 0), TRUE);
+    DrawFormatString(20, 120, 0xffffff, "Game Main");
+    DrawFormatString(1130, 10, 0xffffff, "SCORE : %d", score);
 };
