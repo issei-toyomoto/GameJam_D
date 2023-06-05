@@ -1,28 +1,33 @@
-/********************************
-* ƒ^ƒCƒgƒ‹
-* ìÒF“‡‘Ü
+ï»¿/********************************
+* ã‚¿ã‚¤ãƒˆãƒ«
+* ä½œè€…ï¼šå³¶è¢‹
 ********************************/
 #include "main.h"
+#include "PadInput.h"
+#include "GameMainScene.h"
 
 Title::Title() {
-    // ‰Šú‰»ˆ—
+    // åˆæœŸåŒ–å‡¦ç†
     state = 0;
 };
 
 Title::~Title() {
-    // I—¹ˆ—
+    // çµ‚äº†å‡¦ç†
 };
 
-AbstractScene* Title::Update() { // ‚±‚±‚Å’l‚ÌXV‚È‚ÇAˆ—
+AbstractScene* Title::Update() { // ã“ã“ã§å€¤ã®æ›´æ–°ãªã©ã€å‡¦ç†
 
-    return this; // ƒV[ƒ“Œp‘±
+    if (PAD_INPUT::OnClick(XINPUT_BUTTON_A))return new GameMain();
+    if (PAD_INPUT::OnClick(XINPUT_BUTTON_B))return nullptr;
+
+    return this; // ã‚·ãƒ¼ãƒ³ç¶™ç¶š
 };
 
-void Title::Draw() const { // ‚â‚é‚±‚Æ‚Í•`‰æ‚Ì‚İAâ‘Î‚É’l‚ÌXV‚Í‚µ‚È‚¢
+void Title::Draw() const { // ã‚„ã‚‹ã“ã¨ã¯æç”»ã®ã¿ã€çµ¶å¯¾ã«å€¤ã®æ›´æ–°ã¯ã—ãªã„
     SetFontSize(16);
 
     DrawFormatString(20, 50, 0xffffff, GAME_NAME);
 
-    DrawFormatString(20, 95, 0xffffff, "ƒQ[ƒ€ƒXƒ^[ƒgFSpaceƒL[");
-    DrawFormatString(20, 110, 0xffffff, "ƒQ[ƒ€I—¹FEscƒL[");
+    DrawFormatString(20, 95, 0xffffff, "ã‚²ãƒ¼ãƒ ã‚¹ã‚¿ãƒ¼ãƒˆï¼šAãƒœã‚¿ãƒ³");
+    DrawFormatString(20, 110, 0xffffff, "ã‚²ãƒ¼ãƒ çµ‚äº†ï¼šBãƒœã‚¿ãƒ³");
 };

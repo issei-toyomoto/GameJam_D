@@ -1,4 +1,5 @@
 ﻿#include "main.h"
+#include "PadInput.h"
 
 /********************************
 * メインプログラム 開始
@@ -21,6 +22,7 @@ int WINAPI WinMain(_In_ HINSTANCE  hInstance, _In_opt_ HINSTANCE hPrevInstance, 
         // シーンマネジャーでシーンの描画開始
         sceneMng->Draw();
 
+        PAD_INPUT::UpdateKey(); //コントローラー入力更新
         ScreenFlip(); // 裏画面の内容を表画面に反映する
     };
 
