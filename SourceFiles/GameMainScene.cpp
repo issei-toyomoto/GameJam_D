@@ -1,4 +1,3 @@
-
 /********************************
 * ゲームメイン
 * 作者：島袋
@@ -19,9 +18,9 @@ GameMain::~GameMain() {
 };
 
 AbstractScene* GameMain::Update() { // ここで値の更新など、処理
-    if (PAD_INPUT::OnClick(XINPUT_BUTTON_A))return new Result(score);
+    if (InputControl::PressBotton(XINPUT_BUTTON_START))return new Result(score);
 
-    return this; // シーン継続
+    return this;    //シーン継続
 };
 
 void GameMain::Draw() const { // やることは描画のみ、絶対に値の更新はしない
