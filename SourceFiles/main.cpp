@@ -5,6 +5,7 @@
 * メインプログラム 開始
 ********************************/
 int WINAPI WinMain(_In_ HINSTANCE  hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPSTR LpCmdLine, _In_ int NCmdShow) {
+
     SetMainWindowText(GAME_NAME);                  // ウィンドウタイトルを設定
     SetMainWindowClassName(GAME_NAME);             // 他のDxLibと競合しないようにウィンドウクラスを設定
     ChangeWindowMode(TRUE);                        // ウインドウモードで起動
@@ -31,7 +32,7 @@ int WINAPI WinMain(_In_ HINSTANCE  hInstance, _In_opt_ HINSTANCE hPrevInstance, 
         SetFontSize(16);
         DrawFormatString(20, 10, 0xffffff, "FPS : %d", fps);
 
-        PAD_INPUT::UpdateKey(); //コントローラー入力更新
+        InputControl::Update(); //コントローラー入力更新
         
         ScreenFlip(); // 裏画面の内容を表画面に反映する
 

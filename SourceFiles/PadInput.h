@@ -1,50 +1,32 @@
 ﻿#pragma once
-#include"DxLib.h"
+#include "DxLib.h"
 
-#define BUTTONS 16
-#define MARGIN 32767*0.25
-#define TRIGGER 255*0.25
+/*マクロ定義*/
+#define BUTTONS 16		//XINPUTpadのボタン数
+#define STICKL_X 1		
+#define STICKL_Y 2		
+#define MAXL_X 32767.f  //左スティックX軸の最大値(float型)
+#define MAXL_Y 32767.f  //左スティックY軸の最大値(float型)
 
-enum class PADSTATE
+class InputControl
 {
-    NOT = 0,
-    ON,
-    DOWN
-};
-
-
-class PAD_INPUT
-{
-private:
-    static char oldKey[BUTTONS];    //前回の入力キー
-    static char nowKey[BUTTONS];    //今回の入力キー
-    static PADSTATE state;
-    static XINPUT_STATE Input;
-
-private:
-    PAD_INPUT() = default;
 public:
-    static void UpdateKey();
-    static int GetPadThumbLX() { return Input.ThumbLX; }
-    static int GetPadThumbLY() { return Input.ThumbLY; }
-    static int GetPadLeftTrigger() { return Input.LeftTrigger; }
-    static int GetPadRightTrigger() { return Input.RightTrigger; }
-    //ボタンを押した瞬間
-    static bool OnClick(int inputKey)
+    static int key_flg;			//静的メンバ変数
+    static int now_key;
+    static int old_key;
+    static XINPUT_STATE xinput;	//メンバ変数の初期化
+
+public:
+    InputControl()		//関数の宣言
     {
-        bool ret = (nowKey[inputKey] == 1 && oldKey[inputKey] == 0);
-        return ret;
+        key_flg = 0;
+        now_key = 0;
+        old_key = 0;
     }
-    //ボタンを押してる間
-    static bool OnPressed(int inputKey)
-    {
-        bool ret = (nowKey[inputKey] == 1);
-        return ret;
-    }
-    //ボタンを離した瞬間
-    static bool OnRelease(int inputKey)
-    {
-        bool ret = (oldKey[inputKey] == 1 && nowKey[inputKey] == 0);
-        return ret;
-    }
+
+    static void Update();						//更新
+    static int GetKey(int key);					//キー情報取得
+    static int GetKeyDown(int key);				//キー押下状態取得
+    static int PressBotton(int Button);			//キー入力情報取得
+    static float TipLeftLStick(short StickL);	//スティック縦操作取得
 };

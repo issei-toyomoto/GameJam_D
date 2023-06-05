@@ -18,7 +18,7 @@ Result::~Result() {
 };
 
 AbstractScene* Result::Update() { // ここで値の更新など、処理
-    if (PAD_INPUT::OnClick(XINPUT_BUTTON_A))return new Title();
+    if (InputControl::GetKey(XINPUT_BUTTON_A))return new Title();
     return this; // シーン継続
 };
 
