@@ -21,13 +21,18 @@
   <ItemGroup>
     <ClCompile Include="SourceFiles\GameMainScene.cpp" />
     <ClCompile Include="SourceFiles\main.cpp" />
+    <ClCompile Include="SourceFiles\PadInput.cpp" />
+    <ClCompile Include="SourceFiles\Result.cpp" />
     <ClCompile Include="SourceFiles\SceneManager.cpp" />
     <ClCompile Include="SourceFiles\TitleScene.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="common.h" />
     <ClInclude Include="SourceFiles\AbstractScene.h" />
     <ClInclude Include="SourceFiles\GameMainScene.h" />
     <ClInclude Include="SourceFiles\main.h" />
+    <ClInclude Include="SourceFiles\PadInput.h" />
+    <ClInclude Include="SourceFiles\Result.h" />
     <ClInclude Include="SourceFiles\SceneManager.h" />
     <ClInclude Include="SourceFiles\TitleScene.h" />
   </ItemGroup>

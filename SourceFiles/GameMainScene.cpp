@@ -1,23 +1,27 @@
+
 /********************************
-* ƒQ[ƒ€ƒƒCƒ“
+* ã‚²ãƒ¼ãƒ ãƒ¡ã‚¤ãƒ³
+* ä½œè€…ï¼šå³¶è¢‹
 ********************************/
 #include "main.h"
+#include "Result.h"
+#include "PadInput.h"
 
 GameMain::GameMain() {
-    // ‰Šú‰»ˆ—
+    // åˆæœŸåŒ–å‡¦ç†
     state = 0;
 };
 
 GameMain::~GameMain() {
-    // I—¹ˆ—
+    // çµ‚äº†å‡¦ç†
 };
 
-AbstractScene* GameMain::Update() { // ‚±‚±‚Å’l‚ÌXV‚È‚ÇAˆ—
-
-    return this; // ƒV[ƒ“Œp‘±
+AbstractScene* GameMain::Update() { // ã“ã“ã§å€¤ã®æ›´æ–°ãªã©ã€å‡¦ç†
+    if (PAD_INPUT::OnClick(XINPUT_BUTTON_A))return new Result();
+    return this; // ã‚·ãƒ¼ãƒ³ç¶™ç¶š
 };
 
-void GameMain::Draw() const { // ‚â‚é‚±‚Æ‚Í•`‰æ‚Ì‚İAâ‘Î‚É’l‚ÌXV‚Í‚µ‚È‚¢
+void GameMain::Draw() const { // ã‚„ã‚‹ã“ã¨ã¯æç”»ã®ã¿ã€çµ¶å¯¾ã«å€¤ã®æ›´æ–°ã¯ã—ãªã„
     SetFontSize(16);
 
     DrawFormatString(20, 50, 0xffffff, "Game Main");
