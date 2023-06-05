@@ -1,4 +1,5 @@
 ﻿#include "main.h"
+#include "PadInput.h"
 
 /********************************
 * メインプログラム 開始
@@ -30,6 +31,8 @@ int WINAPI WinMain(_In_ HINSTANCE  hInstance, _In_opt_ HINSTANCE hPrevInstance, 
         SetFontSize(16);
         DrawFormatString(20, 10, 0xffffff, "FPS : %d", fps);
 
+        PAD_INPUT::UpdateKey(); //コントローラー入力更新
+        
         ScreenFlip(); // 裏画面の内容を表画面に反映する
 
         /********************************
