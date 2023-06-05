@@ -1,8 +1,7 @@
 ﻿#include "DxLib.h"
 
-#define _SCREEN_HEIGHT_ 720
 #define _SCREEN_WIDHT_	1280
-#define _SCREEN_COLOR_BIT_16_ 16
+#define _SCREEN_HEIGHT_ 720
 #define _SCREEN_COLOR_BIT_32_ 32
 
 
