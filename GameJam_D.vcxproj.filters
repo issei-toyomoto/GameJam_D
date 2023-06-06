@@ -56,9 +56,6 @@
     <ClInclude Include="SourceFiles\SceneManager.h">
       <Filter>シーンマネージャー</Filter>
     </ClInclude>
-    <ClInclude Include="SourceFiles\common.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="SourceFiles\PadInput.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
@@ -66,6 +63,9 @@
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="SourceFiles\player.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceFiles\common.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
