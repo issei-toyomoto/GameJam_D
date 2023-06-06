@@ -15,5 +15,5 @@ using std::to_string;
 #include "DxLib.h"
 
 // 各シーンのヘッダーファイル
-#include "TitleScene.h"
+#include "Title.h"
 #include "GameMainScene.h"

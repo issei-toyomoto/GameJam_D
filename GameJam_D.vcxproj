@@ -25,7 +25,7 @@
     <ClCompile Include="SourceFiles\player.cpp" />
     <ClCompile Include="SourceFiles\Result.cpp" />
     <ClCompile Include="SourceFiles\SceneManager.cpp" />
-    <ClCompile Include="SourceFiles\TitleScene.cpp" />
+    <ClCompile Include="SourceFiles\Title.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SourceFiles\AbstractScene.h" />
@@ -36,7 +36,7 @@
     <ClInclude Include="SourceFiles\player.h" />
     <ClInclude Include="SourceFiles\Result.h" />
     <ClInclude Include="SourceFiles\SceneManager.h" />
-    <ClInclude Include="SourceFiles\TitleScene.h" />
+    <ClInclude Include="SourceFiles\Title.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

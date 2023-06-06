@@ -24,7 +24,7 @@
     <ClCompile Include="SourceFiles\GameMainScene.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="SourceFiles\TitleScene.cpp">
+    <ClCompile Include="SourceFiles\Title.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="SourceFiles\SceneManager.cpp">
@@ -47,7 +47,7 @@
     <ClInclude Include="SourceFiles\GameMainScene.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="SourceFiles\TitleScene.h">
+    <ClInclude Include="SourceFiles\Title.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="SourceFiles\AbstractScene.h">
