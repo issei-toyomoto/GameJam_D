@@ -50,7 +50,7 @@ AbstractScene* Title::Update() {
     if (!CheckHitKey(KEY_INPUT_UP) && !CheckHitKey(KEY_INPUT_DOWN) && !CheckHitKey(KEY_INPUT_SPACE)) {
         ctrl_state = 0;
     };
-    if (InputControl::PressBotton(XINPUT_BUTTON_DPAD_UP) || (CheckHitKey(KEY_INPUT_UP) && ctrl_state == 0)) {
+    if (InputControl::OnButton(XINPUT_BUTTON_DPAD_UP) || (CheckHitKey(KEY_INPUT_UP) && ctrl_state == 0)) {
         // カーソル上
         PlaySoundMem(se_cursor, DX_PLAYTYPE_BACK, TRUE);
         if (state <= 0) {
@@ -61,7 +61,7 @@ AbstractScene* Title::Update() {
         };
         ctrl_state = 1;
     }
-    else if (InputControl::PressBotton(XINPUT_BUTTON_DPAD_DOWN) || (CheckHitKey(KEY_INPUT_DOWN) && ctrl_state == 0)) {
+    else if (InputControl::OnButton(XINPUT_BUTTON_DPAD_DOWN) || (CheckHitKey(KEY_INPUT_DOWN) && ctrl_state == 0)) {
         // カーソル下
         PlaySoundMem(se_cursor, DX_PLAYTYPE_BACK, TRUE);
         if (state >= 3) {
@@ -73,7 +73,7 @@ AbstractScene* Title::Update() {
         ctrl_state = 1;
     };
 
-    if (InputControl::PressBotton(XINPUT_BUTTON_B) || CheckHitKey(KEY_INPUT_SPACE)) {
+    if (InputControl::OnButton(XINPUT_BUTTON_B) || CheckHitKey(KEY_INPUT_SPACE)) {
         if (CheckSoundMem(se_select) == 0) PlaySoundMem(se_select, DX_PLAYTYPE_BACK, TRUE);
         if (state == 0) {
             // スタート選択
