@@ -1,9 +1,9 @@
 ﻿/********************************
 * タイトル
+* 担当：島袋
 ********************************/
 #include "main.h"
 #include "PadInput.h"
-#include "GameMainScene.h"
 
 Title::Title() {
     // 初期化処理
@@ -81,7 +81,7 @@ AbstractScene* Title::Update() {
         }
         else if (state == 1) {
             // ヘルプ選択
-            //return new Help();
+            return new Help();
         }
         else if (state == 2) {
             // ランキング選択
