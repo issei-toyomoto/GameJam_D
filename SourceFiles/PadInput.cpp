@@ -1,6 +1,8 @@
 ﻿#include "PadInput.h"
 #include"DxLib.h"
 
+#include<math.h>
+
 //関数の定義
 XINPUT_STATE InputControl::xinput;
 int InputControl::key_flg;
@@ -59,4 +61,25 @@ float InputControl::TipLeftLStick(short StickL)
     }
 
     return 0;
+}
+
+float InputControl::LstickRad()
+{
+    float L_X = xinput.ThumbLX / MAXL_X;
+    float L_Y = xinput.ThumbLY / MAXL_Y;
+
+    if (L_X == 0 && L_Y == 0)return 0;
+    return (float)atan2(L_Y, L_X);
+}
+
+float InputControl::LstickTilt()
+{
+    float L_X = xinput.ThumbLX / MAXL_X;
+    float L_Y = xinput.ThumbLY / MAXL_Y;
+
+    L_X *= L_X;
+    L_Y *= L_Y;
+
+    if (L_X == 0 && L_Y == 0)return 0;
+    return (float)sqrt(L_Y + L_X);
 }
