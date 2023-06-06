@@ -22,7 +22,7 @@ AbstractScene* GameMain::Update() { // ここで値の更新など、処理
 
     player.Update();
 
-    if (InputControl::PressBotton(XINPUT_BUTTON_START))return new Result(score);
+    if (InputControl::OnButton(XINPUT_BUTTON_START))return new Result(score);
     if (UI::Update() == -1) {
         return nullptr;
     };
