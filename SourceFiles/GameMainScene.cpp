@@ -3,6 +3,8 @@
 #include "Result.h"
 #include "PadInput.h"
 
+#define DEBUG
+
 GameMain::GameMain() {
     // 初期化処理
     state = 0;
@@ -25,16 +27,21 @@ void GameMain::Draw() const { // やることは描画のみ、絶対に値の�
     DrawGraph(0, 0, BackImg, true);
     DrawBox(0, 0, 1280, 100, GetColor(0, 0, 0), TRUE);
 
-    for (int i = 100; i < 720; i += BLOCK_SIZE)
+   #ifdef DEBUG
+    int margin = (SCREEN_HEIGHT - 100) % BLOCK_SIZE / 2;
+    for (int i = 100 + margin; i < 720; i += BLOCK_SIZE)
     {
-        DrawLine(0, i, 1280, i, 0xffffff);
-        if ((i - 100) / BLOCK_SIZE % 5 == 0)DrawLine(0, i, 1280, i, 0xff0000);
+        DrawLine(margin, i, 1280 - margin, i, 0xffffff);
+        if ((i - 100) / BLOCK_SIZE % 5 == 0)DrawLine(margin, i, 1280 - margin, i, 0xff0000);
     }
-    for (int i = 0; i < 1280; i += BLOCK_SIZE)
+
+    margin = SCREEN_WIDTH % BLOCK_SIZE / 2;
+    for (int i = margin; i < 1280; i += BLOCK_SIZE)
     {
-        DrawLine(i, 100, i, 720, 0xffffff);
-        if (i / BLOCK_SIZE % 5 == 0)DrawLine(i, 100, i, 720, 0xff0000);
+        DrawLine(i, 100 + margin, i, 720 - margin, 0xffffff);
+        if (i / BLOCK_SIZE % 5 == 0)DrawLine(i, 100 + margin, i, 720 - margin, 0xff0000);
     }
+#endif
 
     DrawFormatString(20, 120, 0xffffff, "Game Main");
     DrawFormatString(1130, 10, 0xffffff, "SCORE : %d", score);
