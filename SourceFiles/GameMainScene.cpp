@@ -78,13 +78,15 @@ void GameMain::Draw() const { // やることは描画のみ、絶対に値の�
 
 void GameMain::SetStage(int stage) 
 {
+    
+
     for (int i = 0; i < MAP_HEIGHT; i++) {
         for (int j = 0; j < MAP_WIDTH; j++) {
             Grass[i][j] = 0;
         }
     }
 
-    for (int i = 0; i < 30; i++) {
+    for (int i = 0; i < 30*stage; i++) {
         y = GetRand(MAP_HEIGHT);
         x = GetRand(MAP_WIDTH);
         if (Grass[y][x] == 0) {
@@ -96,7 +98,7 @@ void GameMain::SetStage(int stage)
         
     }
    
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < 10*stage; i++) {
         y = GetRand(MAP_HEIGHT);
         x = GetRand(MAP_WIDTH);
         if (Grass[y][x] == 0) {
