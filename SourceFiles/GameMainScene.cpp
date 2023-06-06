@@ -23,7 +23,9 @@ AbstractScene* GameMain::Update() { // ここで値の更新など、処理
     player.Update();
 
     if (InputControl::PressBotton(XINPUT_BUTTON_START))return new Result(score);
-
+    if (UI::Update() == -1) {
+        return nullptr;
+    };
     return this;    //シーン継続
 };
 
@@ -46,10 +48,10 @@ void GameMain::Draw() const { // やることは描画のみ、絶対に値の�
         DrawLine(i, 100 + margin, i, 720 - margin, 0xffffff);
         if (i / BLOCK_SIZE % 5 == 0)DrawLine(i, 100 + margin, i, 720 - margin, 0xff0000);
     }
+    
 #endif
-
+    
     player.Draw();
 
-    DrawFormatString(20, 120, 0xffffff, "Game Main");
-    DrawFormatString(1130, 10, 0xffffff, "SCORE : %d", score);
+    UI::Draw();
 };
