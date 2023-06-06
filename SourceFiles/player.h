@@ -1,17 +1,17 @@
-#pragma once
+ï»¿#pragma once
 class Player
 {
 private:
-    float X, Y;   //À•W
-    float SpdX, SpdY;   //‘¬“x
-    float MSpdX, MSpdY;   //Å‚‘¬“x
-    float Angle = 0;          //ˆÚ“®•ûŒü(-180`180)
-    int Way = 0;               //UŒ‚•ûŒü(1`8)
+    float X, Y;   //åº§æ¨™
+    float SpdX, SpdY;   //é€Ÿåº¦
+    float MSpdX, MSpdY;   //æœ€é«˜é€Ÿåº¦
+    float Angle = 0;          //ç§»å‹•æ–¹å‘(-180ï½180)
+    int Way = 0;               //æ”»æ’ƒæ–¹å‘(1ï½8)
 
-    int Attack = 0;     //UŒ‚ŠÇ—
-    int Combo = 0;      //UŒ‚‰ñ”
+    int Attack = 0;     //æ”»æ’ƒç®¡ç†
+    int Combo = 0;      //æ”»æ’ƒå›æ•°
 
-    int SickleIng;  //Š™‚Ì‰æ‘œ
+    int SickleIng;  //éŒã®ç”»åƒ
 
 public:
     Player();
