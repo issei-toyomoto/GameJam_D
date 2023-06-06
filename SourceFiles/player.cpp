@@ -13,8 +13,8 @@ Player::Player()
     //ç≈çÇë¨ìxÇê›íËÇ∑ÇÈ
     SpdX = 0;
     SpdY = 0;
-    MSpdX = 6;
-    MSpdY = 6;
+    MSpdX = 8;
+    MSpdY = 8;
 }
 
 Player::~Player()
