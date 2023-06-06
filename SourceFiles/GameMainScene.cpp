@@ -75,9 +75,6 @@ void GameMain::Draw() const { // やることは描画のみ、絶対に値の�
 
     UI::Draw();
 };
-    DrawFormatString(20, 120, 0xffffff, "Game Main");
-    DrawFormatString(1130, 10, 0xffffff, "SCORE : %d", score);
-};
 
 void GameMain::SetStage(int stage) 
 {
