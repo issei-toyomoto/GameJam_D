@@ -6,6 +6,17 @@ class Result : public AbstractScene {
 private:
     int state;
     int score;
+
+    int FlowerImg;
+    int GrassImg;
+
+    int Stage1Time;
+    int Stage2Time;
+    int Stage3Time;
+
+    int TotalScore;
+
+    int timer;
 public:
     // コンストラクタ
     Result(int score);
