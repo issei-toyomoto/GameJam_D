@@ -26,6 +26,7 @@
     <ClCompile Include="SourceFiles\Result.cpp" />
     <ClCompile Include="SourceFiles\SceneManager.cpp" />
     <ClCompile Include="SourceFiles\TitleScene.cpp" />
+    <ClCompile Include="SourceFiles\UI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SourceFiles\AbstractScene.h" />
@@ -37,6 +38,7 @@
     <ClInclude Include="SourceFiles\Result.h" />
     <ClInclude Include="SourceFiles\SceneManager.h" />
     <ClInclude Include="SourceFiles\TitleScene.h" />
+    <ClInclude Include="SourceFiles\UI.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
