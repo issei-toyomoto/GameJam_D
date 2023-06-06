@@ -20,23 +20,27 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SourceFiles\GameMainScene.cpp" />
+    <ClCompile Include="SourceFiles\Help.cpp" />
     <ClCompile Include="SourceFiles\main.cpp" />
     <ClCompile Include="SourceFiles\PadInput.cpp" />
     <ClCompile Include="SourceFiles\player.cpp" />
     <ClCompile Include="SourceFiles\Result.cpp" />
     <ClCompile Include="SourceFiles\SceneManager.cpp" />
-    <ClCompile Include="SourceFiles\TitleScene.cpp" />
+    <ClCompile Include="SourceFiles\UI.cpp" />
+    <ClCompile Include="SourceFiles\Title.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SourceFiles\AbstractScene.h" />
     <ClInclude Include="SourceFiles\common.h" />
     <ClInclude Include="SourceFiles\GameMainScene.h" />
+    <ClInclude Include="SourceFiles\Help.h" />
     <ClInclude Include="SourceFiles\main.h" />
     <ClInclude Include="SourceFiles\PadInput.h" />
     <ClInclude Include="SourceFiles\player.h" />
     <ClInclude Include="SourceFiles\Result.h" />
     <ClInclude Include="SourceFiles\SceneManager.h" />
-    <ClInclude Include="SourceFiles\TitleScene.h" />
+    <ClInclude Include="SourceFiles\UI.h" />
+    <ClInclude Include="SourceFiles\Title.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
