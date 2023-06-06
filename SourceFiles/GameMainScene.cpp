@@ -5,6 +5,7 @@
 
 #include "Player.h"
 
+
 #define DEBUG
 
 GameMain::GameMain() {
@@ -12,6 +13,10 @@ GameMain::GameMain() {
     state = 0;
 
     BackImg = LoadGraph("images/back.png");
+    FlowerImg = LoadGraph("images/flower.png");
+    WeedImg = LoadGraph("images/kusa.png");
+    
+    SetStage(1);
 };
 
 GameMain::~GameMain() {
@@ -19,6 +24,9 @@ GameMain::~GameMain() {
 };
 
 AbstractScene* GameMain::Update() { // ここで値の更新など、処理
+    
+
+
 
     player.Update();
 
@@ -33,6 +41,18 @@ void GameMain::Draw() const { // やることは描画のみ、絶対に値の�
     SetFontSize(16);
     DrawGraph(0, 0, BackImg, true);
     DrawBox(0, 0, 1280, 100, GetColor(0, 0, 0), TRUE);
+
+    for (int i = 0; i < MAP_HEIGHT; i++) {
+        for (int j = 0; j < MAP_WIDTH; j++) {
+            if (Grass[i][j] == 2) {
+                DrawGraph(MARGIN_X + (j * BLOCK_SIZE), MARGIN_Y + UI_SIZE + (i * BLOCK_SIZE), FlowerImg, true);
+            }
+
+            if (Grass[i][j] == 1) {
+                DrawGraph(MARGIN_X + (j * BLOCK_SIZE), MARGIN_Y + UI_SIZE + (i * BLOCK_SIZE), WeedImg, true);
+            }
+        }
+    }
 
    #ifdef DEBUG
     int margin = (SCREEN_HEIGHT - 100) % BLOCK_SIZE / 2;
@@ -55,3 +75,37 @@ void GameMain::Draw() const { // やることは描画のみ、絶対に値の�
 
     UI::Draw();
 };
+
+void GameMain::SetStage(int stage) 
+{
+    for (int i = 0; i < MAP_HEIGHT; i++) {
+        for (int j = 0; j < MAP_WIDTH; j++) {
+            Grass[i][j] = 0;
+        }
+    }
+
+    for (int i = 0; i < 30; i++) {
+        y = GetRand(MAP_HEIGHT);
+        x = GetRand(MAP_WIDTH);
+        if (Grass[y][x] == 0) {
+            Grass[y][x] = 1;
+        }
+        else {
+            i--;
+        }
+        
+    }
+   
+    for (int i = 0; i < 10; i++) {
+        y = GetRand(MAP_HEIGHT);
+        x = GetRand(MAP_WIDTH);
+        if (Grass[y][x] == 0) {
+            Grass[y][x] = 2;
+        }
+        else {
+            i--;
+        }
+
+    }
+   
+}
