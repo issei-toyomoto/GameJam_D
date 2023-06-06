@@ -11,4 +11,4 @@
 #define MAP_WIDTH 14
 
 //ブロック1つのサイズ(正方形)
-#define BLOCK_SIZE 160
+#define BLOCK_SIZE 60

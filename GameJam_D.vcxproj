@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -27,8 +27,8 @@
     <ClCompile Include="SourceFiles\TitleScene.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="common.h" />
     <ClInclude Include="SourceFiles\AbstractScene.h" />
+    <ClInclude Include="SourceFiles\common.h" />
     <ClInclude Include="SourceFiles\GameMainScene.h" />
     <ClInclude Include="SourceFiles\main.h" />
     <ClInclude Include="SourceFiles\PadInput.h" />
