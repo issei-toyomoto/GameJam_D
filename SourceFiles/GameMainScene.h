@@ -2,11 +2,13 @@
 
 #include "AbstractScene.h"
 #include "Player.h"
+#include "UI.h"
 
 class GameMain : public AbstractScene {
 private:
     int state;
     int score = 0;
+    int Time;
 
     int BackImg;    //”wŒi‰æ‘œ
 

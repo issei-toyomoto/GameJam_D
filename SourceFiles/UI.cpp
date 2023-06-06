@@ -28,8 +28,9 @@ int UI::Update() //キー入力情報更新
 void UI::Draw() { // やることは描画のみ、絶対に値の更新はしない
     SetFontSize(60);
 
-    DrawFormatString(10, 10, 0xffffff, "Stage\n % d");
-    DrawFormatString(570, 10, 0xffffff, "Time\n %2d",Timelimit);
+    DrawFormatString(10, 15, 0xffffff, "Stage ");
+    SetFontSize(40);
+    DrawFormatString(600, 10, 0xffffff, "Time\n %2d",Timelimit);
     SetFontSize(50);
-    DrawFormatString(900, 40, 0xffffff, "SCORE : %d", score);
+    DrawFormatString(800, 25, 0xffffff, "SCORE : %d", score);
 };
