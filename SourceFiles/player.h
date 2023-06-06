@@ -2,7 +2,7 @@
 class Player
 {
 private:
-    int X, Y;   //座標
+    float X, Y;   //座標
     float SpdX, SpdY;   //速度
     float MSpdX, MSpdY;   //最高速度
 
