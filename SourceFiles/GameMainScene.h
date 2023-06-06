@@ -2,16 +2,25 @@
 
 #include "AbstractScene.h"
 #include "Player.h"
+#include "common.h"
+
 
 class GameMain : public AbstractScene {
 private:
     int state;
     int score = 0;
 
+    int x;
+    int y;
+
     int BackImg;    //背景画像
+    int FlowerImg;  //
+    int WeedImg;
 
     Player player; //プレイヤー
 
+    int Grass[MAP_HEIGHT][MAP_WIDTH];   //草・花の状態(0：何もない　1：草　2：花)
+    
 public:
     // コンストラクタ
     GameMain();
@@ -24,4 +33,7 @@ public:
 
 	// 描画に関することを実装
 	virtual void Draw() const override;
+
+    //ステージ初期化
+    void SetStage(int level);
 };
