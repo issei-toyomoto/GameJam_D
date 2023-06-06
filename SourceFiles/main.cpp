@@ -1,5 +1,10 @@
-﻿#include "main.h"
+﻿#include "DxLib.h"
+#include "main.h"
+#include "Fps.h"
 #include "PadInput.h"
+#include "common.h"
+#include"SceneManager.h"
+#include"GameMainScene.h"
 
 /********************************
 * メインプログラム 開始
@@ -13,13 +18,10 @@ int WINAPI WinMain(_In_ HINSTANCE  hInstance, _In_opt_ HINSTANCE hPrevInstance, 
     if (DxLib_Init() == -1) return -1;             // DXライブラリの初期化処理
     SetDrawScreen(DX_SCREEN_BACK);                 // 描画先画面を裏にする（ダブルバッファリング）
 
-    // FPS計測
-    LONGLONG nowTime = GetNowHiPerformanceCount(), oldTime = nowTime, fpsCheckTime = GetNowHiPerformanceCount();
-    double deltaTime = 0, nextTime = 0;
-    int fpsCounter = 0, fps = 0;
-
     // タイトル シーンオブジェクト作成
     SceneManager* sceneMng = new SceneManager((AbstractScene*) new Title());
+
+    Fps fps;
 
     // ゲームループし、シーンマネジャーでシーンの更新
     while ((ProcessMessage() == 0) && (sceneMng->Update() != nullptr)) {
@@ -28,36 +30,12 @@ int WINAPI WinMain(_In_ HINSTANCE  hInstance, _In_opt_ HINSTANCE hPrevInstance, 
         // シーンマネジャーでシーンの描画開始
         sceneMng->Draw();
 
-        // FPS 表示
-        SetFontSize(16);
-        DrawFormatString(20, 10, 0xffffff, "FPS : %d", fps);
-
+        fps.Update();
+        fps.Draw();
         InputControl::Update(); //コントローラー入力更新
         
         ScreenFlip(); // 裏画面の内容を表画面に反映する
-
-        /********************************
-        * FPS計測
-        ********************************/
-        // １ループ時点のシステム時間を取得
-        oldTime = nowTime;
-        nowTime = GetNowHiPerformanceCount();
-        // １ループの時間経過を求める
-        deltaTime = (nowTime - oldTime) / 1000000.0F;
-        // １秒間のFPSを計測する、１秒ごとに初期化する
-        fpsCounter++;
-        if (nowTime - fpsCheckTime > 1000000) { // 1000000(240FPS) 500000(120FPS) 250000(60FPS)
-            fps = fpsCounter;
-            fpsCounter = 0;
-            fpsCheckTime = nowTime;
-        };
-        //Main::SetFPS(fps);
-        // FPS 60 固定
-        nextTime = GetNowCount();
-        nextTime += 16.6666666666667;
-        if (nextTime > GetNowCount()) {
-            WaitTimer(nextTime - GetNowCount());
-        };
+        fps.Wait();		//待機
 
     };
 
