@@ -1,6 +1,7 @@
 #pragma once
 
 #include "AbstractScene.h"
+#include "Player.h"
 
 class GameMain : public AbstractScene {
 private:
@@ -8,6 +9,8 @@ private:
     int score = 0;
 
     int BackImg;    //背景画像
+
+    Player player; //プレイヤー
 
 public:
     // コンストラクタ

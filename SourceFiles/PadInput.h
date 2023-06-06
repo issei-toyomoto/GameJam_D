@@ -29,4 +29,6 @@ public:
     static int GetKeyDown(int key);				//キー押下状態取得
     static int PressBotton(int Button);			//キー入力情報取得
     static float TipLeftLStick(short StickL);	//スティック縦操作取得
+    static float LstickRad();                  //スティック角度取得
+    static float LstickTilt();                 //スティック傾き取得
 };
