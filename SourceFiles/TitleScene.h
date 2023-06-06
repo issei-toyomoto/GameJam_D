@@ -8,6 +8,7 @@ private:
     int ctrl_state;
     int img_title;
     int font[2][4];
+    int bgm, se_cursor, se_select;
 public:
     // コンストラクタ
     Title();
