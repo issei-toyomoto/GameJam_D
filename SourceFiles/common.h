@@ -7,8 +7,8 @@
 #define SCREEN_COLOR_BIT_16 16
 
 //マップブロック数(縦・横)
-#define MAP_HEIGHT 11
-#define MAP_WIDTH 24
+#define MAP_HEIGHT 12
+#define MAP_WIDTH 25
 
 //UI枠のサイズ
 #define UI_SIZE 100
