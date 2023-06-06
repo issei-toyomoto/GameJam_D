@@ -25,7 +25,7 @@ void GameMain::Draw() const { // やることは描画のみ、絶対に値の�
     DrawGraph(0, 0, BackImg, true);
     DrawBox(0, 0, 1280, 100, GetColor(0, 0, 0), TRUE);
 
-    for (int i = 100; i < 720; i+=BLOCK_SIZE)
+    for (int i = 100; i < 720; i += BLOCK_SIZE)
     {
         DrawLine(0, i, 1280, i, 0xffffff);
         if ((i - 100) / BLOCK_SIZE % 5 == 0)DrawLine(0, i, 1280, i, 0xff0000);
