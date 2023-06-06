@@ -1,4 +1,4 @@
-#include"common.h"
+ï»¿#include"common.h"
 #include "player.h"
 #include"DxLib.h"
 #include"PadInput.h"
@@ -6,11 +6,11 @@
 
 Player::Player()
 {
-    //‰Šú‚ÌÀ•W
+    //åˆæœŸã®åº§æ¨™
     X = SCREEN_WIDTH / 2;
     Y = SCREEN_HEIGHT / 2 + UI_SIZE / 2;
 
-    //Å‚‘¬“x‚ğİ’è‚·‚é
+    //æœ€é«˜é€Ÿåº¦ã‚’è¨­å®šã™ã‚‹
     SpdX = 0;
     SpdY = 0;
     MSpdX = 8;
@@ -25,43 +25,43 @@ Player::~Player()
 
 void Player::Update() 
 {
-    //ƒXƒeƒBƒbƒN“ü—Í’l
+    //ã‚¹ãƒ†ã‚£ãƒƒã‚¯å…¥åŠ›å€¤
     float InpX = InputControl::TipLeftLStick(STICKL_X);
     float InpY = -InputControl::TipLeftLStick(STICKL_Y);
 
-    //ƒXƒeƒBƒbƒNŠp“xEŒX‚«
+    //ã‚¹ãƒ†ã‚£ãƒƒã‚¯è§’åº¦ãƒ»å‚¾ã
     float Rad = InputControl::LstickRad();
     float Tilt = InputControl::LstickTilt();
 
-    //‰Á‘¬“x
+    //åŠ é€Ÿåº¦
     float add = 0.2;
 
-    //ƒXƒeƒBƒbƒN‚ÌŒX‚«‚ªˆê’èˆÈã‚È‚ç‰Á‘¬
+    //ã‚¹ãƒ†ã‚£ãƒƒã‚¯ã®å‚¾ããŒä¸€å®šä»¥ä¸Šãªã‚‰åŠ é€Ÿ
     if (0.2 <= Tilt && !Attack) 
     {
-        //Šp“xæ“¾
+        //è§’åº¦å–å¾—
         Angle = 180 / 3.14 * Rad + 180;
         
-        //UŒ‚•ûŒü‚ğ“¾‚é
+        //æ”»æ’ƒæ–¹å‘ã‚’å¾—ã‚‹
         Way = (Angle - 22.5) / 45;
         if (Angle < 22.5 || 360 - 22.5 < Angle)Way = 7;
 
-        //X²
+        //Xè»¸
         SpdX += add * InpX;
-        //‘¬“x‚ªÅ‘å‘¬“xˆÈã‚È‚ç’²®‚·‚é
+        //é€Ÿåº¦ãŒæœ€å¤§é€Ÿåº¦ä»¥ä¸Šãªã‚‰èª¿æ•´ã™ã‚‹
         if (0 < InpX && MSpdX * InpX < SpdX)SpdX = MSpdX * InpX;
         if (InpX < 0 && SpdX < MSpdX * InpX)SpdX = MSpdX * InpX;
 
-        //Y²
+        //Yè»¸
         SpdY += add * InpY;
-        //‘¬“x‚ªÅ‘å‘¬“xˆÈã‚È‚ç’²®‚·‚é
+        //é€Ÿåº¦ãŒæœ€å¤§é€Ÿåº¦ä»¥ä¸Šãªã‚‰èª¿æ•´ã™ã‚‹
         if (0 < InpY && MSpdY * InpY < SpdY)SpdY = MSpdY * InpY;
         if (InpY < 0 && SpdY < MSpdY * InpY)SpdY = MSpdY * InpY;
     }
-    //ƒXƒeƒBƒbƒN‚ÌŒX‚«‚ªˆê’èˆÈ‰º‚È‚çŒ¸‘¬
+    //ã‚¹ãƒ†ã‚£ãƒƒã‚¯ã®å‚¾ããŒä¸€å®šä»¥ä¸‹ãªã‚‰æ¸›é€Ÿ
     else 
     {
-        //‘¬“x‚Ì‡Œv‚ğæ‚é
+        //é€Ÿåº¦ã®åˆè¨ˆã‚’å–ã‚‹
         float absX = fabsf(SpdX);
         float absY = fabsf(SpdY);
         float total = absX + absY;
@@ -72,7 +72,7 @@ void Player::Update()
             absY *= 3;
         }
 
-        //X‘¬“x‚ğ‡Œv‚É‘Î‚·‚é”ä—¦‚É‰‚¶‚ÄŒ¸‘¬‚³‚¹‚é
+        //Xé€Ÿåº¦ã‚’åˆè¨ˆã«å¯¾ã™ã‚‹æ¯”ç‡ã«å¿œã˜ã¦æ¸›é€Ÿã•ã›ã‚‹
         if (SpdX < 0)
         {
             SpdX += add * (absX / total);
@@ -84,7 +84,7 @@ void Player::Update()
             if (SpdX < 0)SpdX = 0;
         }
 
-        //Y‘¬“x‚ğ‡Œv‚É‘Î‚·‚é”ä—¦‚É‰‚¶‚ÄŒ¸‘¬‚³‚¹‚é
+        //Yé€Ÿåº¦ã‚’åˆè¨ˆã«å¯¾ã™ã‚‹æ¯”ç‡ã«å¿œã˜ã¦æ¸›é€Ÿã•ã›ã‚‹
         if (SpdY < 0)
         {
             SpdY += add * (absY / total);
@@ -97,9 +97,9 @@ void Player::Update()
         }
     }
 
-    //XÀ•W‚ğX‘¬“x‚É‰‚¶‚Ä•Ï‰»‚³‚¹‚é
+    //Xåº§æ¨™ã‚’Xé€Ÿåº¦ã«å¿œã˜ã¦å¤‰åŒ–ã•ã›ã‚‹
     X += SpdX;
-    //‰æ–Ê’[‚É‚½‚Ç‚è’…‚¢‚½‚Æ‚«‚É•â³‚·‚é
+    //ç”»é¢ç«¯ã«ãŸã©ã‚Šç€ã„ãŸã¨ãã«è£œæ­£ã™ã‚‹
     while (X - BLOCK_SIZE / 2 < MARGIN_X)
     {
         X++;
@@ -110,9 +110,9 @@ void Player::Update()
         X--;
     }
 
-    //YÀ•W‚ğY‘¬“x‚É‰‚¶‚Ä•Ï‰»‚³‚¹‚é
+    //Yåº§æ¨™ã‚’Yé€Ÿåº¦ã«å¿œã˜ã¦å¤‰åŒ–ã•ã›ã‚‹
     Y += SpdY;
-    //‰æ–Ê’[‚É‚½‚Ç‚è’…‚¢‚½‚Æ‚«‚É•â³‚·‚é
+    //ç”»é¢ç«¯ã«ãŸã©ã‚Šç€ã„ãŸã¨ãã«è£œæ­£ã™ã‚‹
     while (Y - BLOCK_SIZE / 2 < MARGIN_Y + 100)
     {
         Y++;
@@ -148,11 +148,11 @@ void Player::Draw() const
     
     if (Attack) 
     {
-        double stX = 0, stY = 0;		//U‚è‚©‚Ô‚é‘O‚ÌÀ•W
-        double finX = 0, finY = 0;		//U‚è‚©‚Ô‚Á‚½Œã‚ÌÀ•W
-        double Dis = 0;			//‘Ì‚Ì’†S‚©‚ç‚Ì‹——£
+        double stX = 0, stY = 0;		//æŒ¯ã‚Šã‹ã¶ã‚‹å‰ã®åº§æ¨™
+        double finX = 0, finY = 0;		//æŒ¯ã‚Šã‹ã¶ã£ãŸå¾Œã®åº§æ¨™
+        double Dis = 0;			//ä½“ã®ä¸­å¿ƒã‹ã‚‰ã®è·é›¢
 
-        double finAng = 0;	//U‚è‚©‚Ô‚éŠp“x
+        double finAng = 0;	//æŒ¯ã‚Šã‹ã¶ã‚‹è§’åº¦
         if (Attack <= 6) 
         {
             finAng = 45 * (-Way + 3) + (180 / 5 * (Attack - 1));
