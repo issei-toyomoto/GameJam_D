@@ -5,6 +5,9 @@
 class Title : public AbstractScene {
 private:
     int state = 0;
+    int ctrl_state;
+    int img_title;
+    int font[2][4];
 public:
     // コンストラクタ
     Title();
