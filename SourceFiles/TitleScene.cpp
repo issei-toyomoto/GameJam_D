@@ -1,6 +1,5 @@
 ﻿/********************************
 * タイトル
-* 作者：島袋
 ********************************/
 #include "main.h"
 #include "PadInput.h"
@@ -9,26 +8,124 @@
 Title::Title() {
     // 初期化処理
     state = 0;
+    ctrl_state = 0;
+
+    img_title = 0;
+
+    font[0][0] = CreateFontToHandle(NULL, 128, -1, DX_FONTTYPE_NORMAL);
+    font[0][1] = CreateFontToHandle(NULL, 64, -1, DX_FONTTYPE_NORMAL);
+    font[0][2] = CreateFontToHandle(NULL, 32, -1, DX_FONTTYPE_NORMAL);
+    font[0][3] = CreateFontToHandle(NULL, 16, -1, DX_FONTTYPE_NORMAL);
+
+    LPCSTR font_path = "Resources/Fonts/syokakiutage.ttf"; // 読み込むフォントファイルのパス
+    if (AddFontResourceEx(font_path, FR_PRIVATE, NULL) < 0) {
+        // フォント読込エラー処理
+        MessageBox(NULL, "フォント読込失敗", "", MB_OK);
+    };
+
+    font[1][0] = CreateFontToHandle("しょかきうたげ（無料版）", 128, 9, DX_FONTTYPE_EDGE);
+    font[1][1] = CreateFontToHandle("しょかきうたげ（無料版）", 64, 9, DX_FONTTYPE_EDGE);
+    font[1][2] = CreateFontToHandle("しょかきうたげ（無料版）", 32, 9, DX_FONTTYPE_EDGE);
+    font[1][3] = CreateFontToHandle("しょかきうたげ（無料版）", 16, 9, DX_FONTTYPE_EDGE);
+
+    if ((img_title = LoadGraph("Resources/Images/title.png")) == -1) {};
 };
 
 Title::~Title() {
     // 終了処理
 };
 
-AbstractScene* Title::Update() { // ここで値の更新など、処理
+AbstractScene* Title::Update() {
 
-    if (InputControl::PressBotton(XINPUT_BUTTON_A))return new GameMain();
-    if (InputControl::PressBotton(XINPUT_BUTTON_B))return nullptr;
+    /********************************
+    * ゲームモードセレクト処理
+    ********************************/
+    // キーボードのボタンが戻ったら操作受付
+    if (!CheckHitKey(KEY_INPUT_UP) && !CheckHitKey(KEY_INPUT_DOWN) && !CheckHitKey(KEY_INPUT_SPACE)) {
+        ctrl_state = 0;
+    };
+    // スティックが戻ると操作受付
+    if (InputControl::TipLeftLStick(STICKL_Y) < 100 && ctrl_state == 1) {
+        if (InputControl::TipLeftLStick(STICKL_Y) > 0) {
+            ctrl_state = 0;
+        };
+    };
+    if ((InputControl::TipLeftLStick(STICKL_Y) > 100 && ctrl_state == 0) || (CheckHitKey(KEY_INPUT_UP) && ctrl_state == 0)) {
+        // カーソル上
+        //PlaySoundMem(Sound::GetSounds(SND_SE_CURSOR), DX_PLAYTYPE_BACK, TRUE);
+        if (state <= 0) {
+            state = 3;
+        }
+        else {
+            state -= 1;
+        };
+        ctrl_state = 1;
+    }
+    else if ((InputControl::TipLeftLStick(STICKL_Y) < -32000 && ctrl_state == 0) || (CheckHitKey(KEY_INPUT_DOWN) && ctrl_state == 0)) {
+        // カーソル下
+        //PlaySoundMem(Sound::GetSounds(SND_SE_CURSOR), DX_PLAYTYPE_BACK, TRUE);
+        if (state >= 3) {
+            state = 0;
+        }
+        else {
+            state += 1;
+        };
+        ctrl_state = 1;
+    };
 
-    return this; // シーン継続
+    if (InputControl::PressBotton(XINPUT_BUTTON_B) || CheckHitKey(KEY_INPUT_SPACE)) {
+        //if (CheckSoundMem(Sound::GetSounds(SND_SE_SELECT)) == 0) PlaySoundMem(Sound::GetSounds(SND_SE_SELECT), DX_PLAYTYPE_BACK, TRUE);
+        if (state == 0) {
+            // スタート選択
+            return new GameMain();
+        }
+        else if (state == 1) {
+            // ヘルプ選択
+            //return new Help();
+        }
+        else if (state == 2) {
+            // ランキング選択
+            //return new Ranking();
+        }
+        else if (state == 3) {
+            // 終わる選択
+            //return new End();
+            return nullptr;
+        };
+    };
+
+    return this;
 };
 
-void Title::Draw() const { // やることは描画のみ、絶対に値の更新はしない
-    SetFontSize(16);
+void Title::Draw() const {
+    // 背景表示
+    DrawGraph(0, 0, img_title, TRUE);
 
-    DrawFormatString(20, 50, 0xffffff, GAME_NAME);
+    // タイトル表示
+    DrawStringToHandle(330, 150, GAME_NAME, 0x000000, font[1][0], 0xffffff);
 
-    DrawFormatString(20, 95, 0xffffff, "ゲームスタート：Aボタン");
-    DrawFormatString(20, 110, 0xffffff, "ゲーム終了：Bボタン");
+    // バージョン表示（仮）
+    DrawStringToHandle(20, 690, "v6.06", 0x000000, font[1][3], 0xffffff);
 
+    // ゲームモードセレクトの項目
+    DrawStringToHandle(630, 350, "スタート", 0x000000, font[1][2], 0xffffff);
+    DrawStringToHandle(630, 400, "ヘルプ", 0x000000, font[1][2], 0xffffff);
+    DrawStringToHandle(630, 450, "ランキング", 0x000000, font[1][2], 0xffffff);
+    DrawStringToHandle(630, 500, "終わる", 0x000000, font[1][2], 0xffffff);
+
+    DrawStringToHandle(380, 670, "左スティックで選たく、Bボタンで決定", 0x000000, font[1][2], 0xffffff);
+
+    // ゲームモードセレクトのカーソル処理
+    if (state == 0) {
+        DrawStringToHandle(570, 350, "→", 0x000000, font[1][2], 0xffffff);
+    }
+    else if (state == 1) {
+        DrawStringToHandle(570, 400, "→", 0x000000, font[1][2], 0xffffff);
+    }
+    else if (state == 2) {
+        DrawStringToHandle(570, 450, "→", 0x000000, font[1][2], 0xffffff);
+    }
+    else if (state == 3) {
+        DrawStringToHandle(570, 500, "→", 0x000000, font[1][2], 0xffffff);
+    };
 };
