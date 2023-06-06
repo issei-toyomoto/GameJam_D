@@ -32,7 +32,6 @@ Title::Title() {
     bgm = LoadSoundMem("Resources/Sounds/bgm_title.wav");
     se_cursor = LoadSoundMem("Resources/Sounds/se_cursor.wav");
     se_select = LoadSoundMem("Resources/Sounds/se_select.wav");
-
     ChangeVolumeSoundMem(255, bgm);
     ChangeVolumeSoundMem(130, se_cursor);
     ChangeVolumeSoundMem(150, se_select);
@@ -51,13 +50,7 @@ AbstractScene* Title::Update() {
     if (!CheckHitKey(KEY_INPUT_UP) && !CheckHitKey(KEY_INPUT_DOWN) && !CheckHitKey(KEY_INPUT_SPACE)) {
         ctrl_state = 0;
     };
-    // スティックが戻ると操作受付
-    if (InputControl::TipLeftLStick(STICKL_Y) < 100 && ctrl_state == 1) {
-        if (InputControl::TipLeftLStick(STICKL_Y) > 0) {
-            ctrl_state = 0;
-        };
-    };
-    if ((InputControl::TipLeftLStick(STICKL_Y) > 100 && ctrl_state == 0) || (CheckHitKey(KEY_INPUT_UP) && ctrl_state == 0)) {
+    if (InputControl::PressBotton(XINPUT_BUTTON_DPAD_UP) || (CheckHitKey(KEY_INPUT_UP) && ctrl_state == 0)) {
         // カーソル上
         PlaySoundMem(se_cursor, DX_PLAYTYPE_BACK, TRUE);
         if (state <= 0) {
@@ -68,7 +61,7 @@ AbstractScene* Title::Update() {
         };
         ctrl_state = 1;
     }
-    else if ((InputControl::TipLeftLStick(STICKL_Y) < -32000 && ctrl_state == 0) || (CheckHitKey(KEY_INPUT_DOWN) && ctrl_state == 0)) {
+    else if (InputControl::PressBotton(XINPUT_BUTTON_DPAD_DOWN) || (CheckHitKey(KEY_INPUT_DOWN) && ctrl_state == 0)) {
         // カーソル下
         PlaySoundMem(se_cursor, DX_PLAYTYPE_BACK, TRUE);
         if (state >= 3) {
@@ -109,31 +102,31 @@ void Title::Draw() const {
     DrawGraph(0, 0, img_title, TRUE);
 
     // タイトル表示
-    DrawStringToHandle(330, 150, GAME_NAME, 0x000000, font[1][0], 0xffffff);
+    DrawStringToHandle(400, 150, GAME_NAME, 0x000000, font[FONT_TYPE_LOAD_1][FONT_SIZE_64], 0xffffff);
 
     // バージョン表示（仮）
-    DrawStringToHandle(20, 690, "v6.06", 0x000000, font[1][3], 0xffffff);
+    DrawStringToHandle(20, 690, "v6.06", 0x000000, font[FONT_TYPE_DEFAULT][FONT_SIZE_16], 0xffffff);
 
     // ゲームモードセレクトの項目
-    DrawStringToHandle(630, 350, "スタート", 0x000000, font[1][2], 0xffffff);
-    DrawStringToHandle(630, 400, "ヘルプ", 0x000000, font[1][2], 0xffffff);
-    DrawStringToHandle(630, 450, "ランキング", 0x000000, font[1][2], 0xffffff);
-    DrawStringToHandle(630, 500, "終わる", 0x000000, font[1][2], 0xffffff);
+    DrawStringToHandle(630, 350, "スタート", 0x000000, font[FONT_TYPE_LOAD_1][FONT_SIZE_32], 0xffffff);
+    DrawStringToHandle(630, 400, "ヘルプ", 0x000000, font[FONT_TYPE_LOAD_1][FONT_SIZE_32], 0xffffff);
+    DrawStringToHandle(630, 450, "ランキング", 0x000000, font[FONT_TYPE_LOAD_1][FONT_SIZE_32], 0xffffff);
+    DrawStringToHandle(630, 500, "終わる", 0x000000, font[FONT_TYPE_LOAD_1][FONT_SIZE_32], 0xffffff);
 
-    DrawStringToHandle(380, 670, "左スティックで選たく、Bボタンで決定", 0x000000, font[1][2], 0xffffff);
+    DrawStringToHandle(380, 670, "左スティックで選たく、Bボタンで決定", 0x000000, font[FONT_TYPE_LOAD_1][FONT_SIZE_32], 0xffffff);
 
     // ゲームモードセレクトのカーソル処理
     if (state == 0) {
-        DrawStringToHandle(570, 350, "→", 0x000000, font[1][2], 0xffffff);
+        DrawStringToHandle(570, 350, "→", 0x000000, font[FONT_TYPE_LOAD_1][FONT_SIZE_32], 0xffffff);
     }
     else if (state == 1) {
-        DrawStringToHandle(570, 400, "→", 0x000000, font[1][2], 0xffffff);
+        DrawStringToHandle(570, 400, "→", 0x000000, font[FONT_TYPE_LOAD_1][FONT_SIZE_32], 0xffffff);
     }
     else if (state == 2) {
-        DrawStringToHandle(570, 450, "→", 0x000000, font[1][2], 0xffffff);
+        DrawStringToHandle(570, 450, "→", 0x000000, font[FONT_TYPE_LOAD_1][FONT_SIZE_32], 0xffffff);
     }
     else if (state == 3) {
-        DrawStringToHandle(570, 500, "→", 0x000000, font[1][2], 0xffffff);
+        DrawStringToHandle(570, 500, "→", 0x000000, font[FONT_TYPE_LOAD_1][FONT_SIZE_32], 0xffffff);
     };
 
     // BGM 再生

@@ -2,6 +2,14 @@
 
 #include "AbstractScene.h"
 
+#define FONT_TYPE_DEFAULT 0
+#define FONT_TYPE_LOAD_1 1
+
+#define FONT_SIZE_128 0
+#define FONT_SIZE_64 1
+#define FONT_SIZE_32 2
+#define FONT_SIZE_16 3
+
 class Title : public AbstractScene {
 private:
     int state = 0;

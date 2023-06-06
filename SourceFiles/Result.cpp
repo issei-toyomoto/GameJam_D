@@ -3,7 +3,7 @@
 * 作者：島袋
 ********************************/
 #include "Result.h"
-#include "TitleScene.h"
+#include "Title.h"
 #include "PadInput.h"
 
 Result::Result(int score) {
