@@ -2,8 +2,7 @@
 * リザルト
 * 作者：島袋
 ********************************/
-#include "Result.h"
-#include "Title.h"
+#include "main.h"
 #include "PadInput.h"
 
 Result::Result(int score) {

@@ -17,3 +17,5 @@ using std::to_string;
 // 各シーンのヘッダーファイル
 #include "Title.h"
 #include "GameMainScene.h"
+#include "Result.h"
+#include "Help.h"
