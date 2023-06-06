@@ -15,6 +15,8 @@ Player::Player()
     SpdY = 0;
     MSpdX = 8;
     MSpdY = 8;
+
+    SickleIng = LoadGraph("images/kama.png");
 }
 
 Player::~Player()
@@ -35,8 +37,15 @@ void Player::Update()
     float add = 0.2;
 
     //スティックの傾きが一定以上なら加速
-    if (0.2 <= Tilt) 
+    if (0.2 <= Tilt && !Attack) 
     {
+        //角度取得
+        Angle = 180 / 3.14 * Rad + 180;
+        
+        //攻撃方向を得る
+        Way = (Angle - 22.5) / 45;
+        if (Angle < 22.5 || 360 - 22.5 < Angle)Way = 7;
+
         //X軸
         SpdX += add * InpX;
         //速度が最大速度以上なら調整する
@@ -52,10 +61,18 @@ void Player::Update()
     //スティックの傾きが一定以下なら減速
     else 
     {
+        //速度の合計を取る
         float absX = fabsf(SpdX);
         float absY = fabsf(SpdY);
         float total = absX + absY;
 
+        if (Attack) 
+        {
+            absX *= 3;
+            absY *= 3;
+        }
+
+        //X速度を合計に対する比率に応じて減速させる
         if (SpdX < 0)
         {
             SpdX += add * (absX / total);
@@ -67,6 +84,7 @@ void Player::Update()
             if (SpdX < 0)SpdX = 0;
         }
 
+        //Y速度を合計に対する比率に応じて減速させる
         if (SpdY < 0)
         {
             SpdY += add * (absY / total);
@@ -79,7 +97,9 @@ void Player::Update()
         }
     }
 
+    //X座標をX速度に応じて変化させる
     X += SpdX;
+    //画面端にたどり着いたときに補正する
     while (X - BLOCK_SIZE / 2 < MARGIN_X)
     {
         X++;
@@ -90,7 +110,9 @@ void Player::Update()
         X--;
     }
 
+    //Y座標をY速度に応じて変化させる
     Y += SpdY;
+    //画面端にたどり着いたときに補正する
     while (Y - BLOCK_SIZE / 2 < MARGIN_Y + 100)
     {
         Y++;
@@ -100,18 +122,57 @@ void Player::Update()
     {
         Y--;
     }
+
+    if (Attack) 
+    {
+        Attack++;
+        if (20 < Attack) 
+        {
+            Attack = 0;
+            Combo = 0;
+        }
+    }
+
+    if (InputControl::OnButton(XINPUT_BUTTON_B) && Attack == 0)
+    {
+        Attack++;
+        Combo++;
+    }
 }
 
 void Player::Draw() const
 {
     DrawBox(X - BLOCK_SIZE / 2, Y - BLOCK_SIZE / 2, X + BLOCK_SIZE / 2, Y + BLOCK_SIZE / 2, 0x0000ff, true);
 
-    DrawFormatString(200, 50, 0xffffff, "X : %f", InputControl::TipLeftLStick(STICKL_X));
-    DrawFormatString(200, 70, 0xffffff, "Y : %f", InputControl::TipLeftLStick(STICKL_Y));
+    DrawFormatString(200, 20, 0xffffff, "%d", Way);
+    
+    if (Attack) 
+    {
+        double stX = 0, stY = 0;		//振りかぶる前の座標
+        double finX = 0, finY = 0;		//振りかぶった後の座標
+        double Dis = 0;			//体の中心からの距離
 
-    DrawFormatString(350, 50, 0xffffff, "RAD  : %f", InputControl::LstickRad());
-    DrawFormatString(350, 70, 0xffffff, "TILT : %f", InputControl::LstickTilt());
+        double finAng = 0;	//振りかぶる角度
+        if (Attack <= 6) 
+        {
+            finAng = 45 * (-Way + 3) + (180 / 5 * (Attack - 1));
+            stX = X;
+            stY = Y;
+            Dis = 70;
 
-    DrawFormatString(500, 50, 0xffffff, "SPDX : %f", SpdX);
-    DrawFormatString(500, 70, 0xffffff, "SPDY : %f", SpdY);
+            finX = stX + Dis * cos((3.14 / 180) * (finAng - 90));
+            finY = stY + Dis * sin((3.14 / 180) * (finAng - 90));
+        }
+        else
+        {
+            finAng = 45 * (-Way + 3) + 180;
+            stX = X;
+            stY = Y;
+            Dis = 70;
+
+            finX = stX + Dis * cos((3.14 / 180) * (finAng - 90));
+            finY = stY + Dis * sin((3.14 / 180) * (finAng - 90));
+        }
+        DrawRotaGraph(finX, finY, 1, (3.14 / 180) * finAng, SickleIng, true, true);
+    }
 }
