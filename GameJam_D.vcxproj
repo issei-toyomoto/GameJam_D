@@ -32,6 +32,7 @@
   <ItemGroup>
     <ClInclude Include="SourceFiles\AbstractScene.h" />
     <ClInclude Include="SourceFiles\common.h" />
+    <ClInclude Include="SourceFiles\Fps.h" />
     <ClInclude Include="SourceFiles\GameMainScene.h" />
     <ClInclude Include="SourceFiles\Help.h" />
     <ClInclude Include="SourceFiles\main.h" />
