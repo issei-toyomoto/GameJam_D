@@ -43,7 +43,7 @@ Help::~Help() {
 
 AbstractScene* Help::Update() {
 
-    if (InputControl::PressBotton(XINPUT_BUTTON_A) || CheckHitKey(KEY_INPUT_ESCAPE)) {
+    if (InputControl::OnButton(XINPUT_BUTTON_A) || CheckHitKey(KEY_INPUT_ESCAPE)) {
         if (CheckSoundMem(se_select) == 0) PlaySoundMem(se_select, DX_PLAYTYPE_BACK, TRUE);
         return new Title();
     };
