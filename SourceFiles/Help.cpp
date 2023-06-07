@@ -3,7 +3,6 @@
 * 担当：島袋
 ********************************/
 #include "main.h"
-#include "PadInput.h"
 
 Help::Help() {
     // 初期化処理
@@ -40,6 +39,23 @@ Help::Help() {
 
 Help::~Help() {
     // 終了処理
+    img_title = 0;
+    img_ctrl = 0;
+
+    // フォント削除
+    for (int i = 0; i < 2; i++) {
+        for (int j = 0; j < 4; j++) {
+            DeleteFontToHandle(font[i][j]);
+        };
+    };
+
+    // サウンド削除
+    StopSoundMem(bgm);
+    DeleteSoundMem(bgm);
+    StopSoundMem(se_cursor);
+    DeleteSoundMem(se_cursor);
+    StopSoundMem(se_select);
+    DeleteSoundMem(se_select);
 };
 
 AbstractScene* Help::Update() {
@@ -47,6 +63,18 @@ AbstractScene* Help::Update() {
     if (InputControl::OnButton(XINPUT_BUTTON_A) || CheckHitKey(KEY_INPUT_ESCAPE)) {
         if (CheckSoundMem(se_select) == 0) PlaySoundMem(se_select, DX_PLAYTYPE_BACK, TRUE);
         return new Title();
+    } else if (InputControl::OnButton(XINPUT_BUTTON_B) || CheckHitKey(KEY_INPUT_SPACE)) {
+        if (CheckSoundMem(se_select) == 0) PlaySoundMem(se_select, DX_PLAYTYPE_BACK, TRUE);
+        return new GameMain();
+    }
+    else if (InputControl::OnButton(XINPUT_BUTTON_X) || CheckHitKey(KEY_INPUT_X)) {
+        if (CheckSoundMem(se_select) == 0) PlaySoundMem(se_select, DX_PLAYTYPE_BACK, TRUE);
+        if (state >= 1) {
+            state = 0;
+        }
+        else {
+            state++;
+        };
     };
 
     return this;
@@ -56,31 +84,55 @@ void Help::Draw() const {
     // 背景表示
     DrawGraph(0, 0, img_title, TRUE);
 
-    // コントローラー画像表示
-    DrawExtendGraph(330, 290, 630, 490, img_ctrl, TRUE);
-    //DrawExtendGraph(400, 500, 500, 600, image.controller_s, TRUE);
-
-    // B Btn
-    DrawLine(587, 368, 700, 368, 0x000000);
-    DrawStringToHandle(700, 345, "Bボタン：決定", 0x000000, font[1][2], 0xffffff);
-
-    // A Btn
-    DrawLine(566, 392, 700, 392, 0x000000);
-    DrawStringToHandle(700, 380, "Aボタン：もどる", 0x000000, font[1][2], 0xffffff);
-
-    // Left Stick
-    DrawLine(436, 421, 436, 550, 0x000000);
-    DrawStringToHandle(280, 550, "左スティック：プレイヤーと、選たくカーソルの移動", 0x000000, font[1][2], 0xffffff);
-
-    // Back Btn
-    DrawLine(447, 350, 700, 276, 0x000000);
-    DrawStringToHandle(700, 255, "BACKボタン：ゲームを終わる", 0x000000, font[1][2], 0xffffff);
-
-    // Start Btn
-    DrawLine(510, 350, 700, 300, 0x000000);
-    DrawStringToHandle(700, 290, "STARTボタン：ポーズ", 0x000000, font[1][2], 0xffffff);
-
     // タイトル表示
-    //DrawStringToHandle(400, 150, "ヘルプ", 0x000000, font[FONT_TYPE_LOAD_1][FONT_SIZE_32], 0xffffff);
+    DrawStringToHandle(180, 40, "ヘルプ", 0x000000, font[FONT_TYPE_LOAD_1][FONT_SIZE_128], 0xffffff);
 
+    // 説明表示
+    DrawStringToHandle(700, 130, "Xボタンで説明を切りかえ", 0x000000, font[FONT_TYPE_LOAD_1][FONT_SIZE_32], 0xffffff);
+
+    // 戻る表示
+    DrawStringToHandle(370, 670, "Bボタンでゲーム開始、Aボタンでもどる", 0x000000, font[FONT_TYPE_LOAD_1][FONT_SIZE_32], 0xffffff);
+
+    if (state == 0) {
+        // サブタイトル表示
+        DrawStringToHandle(735, 40, "操作説明", 0x000000, font[FONT_TYPE_LOAD_1][FONT_SIZE_64], 0xffffff);
+
+        // コントローラー画像表示
+        DrawExtendGraph(330, 290, 630, 490, img_ctrl, TRUE);
+
+        // B Btn
+        DrawLine(587, 368, 700, 368, 0x000000);
+        DrawStringToHandle(700, 345, "Bボタン：カマでこうげき", 0x000000, font[FONT_TYPE_LOAD_1][FONT_SIZE_32], 0xffffff);
+
+        // A Btn
+        DrawLine(566, 392, 700, 392, 0x000000);
+        DrawStringToHandle(700, 380, "Aボタン：花をつむ", 0x000000, font[FONT_TYPE_LOAD_1][FONT_SIZE_32], 0xffffff);
+
+        // Left Stick
+        DrawLine(436, 421, 436, 550, 0x000000);
+        DrawStringToHandle(280, 550, "左スティック：プレイヤーと、選たくカーソルの移動", 0x000000, font[FONT_TYPE_LOAD_1][FONT_SIZE_32], 0xffffff);
+
+        // Back Btn
+        DrawLine(447, 350, 700, 276, 0x000000);
+        DrawStringToHandle(700, 255, "BACKボタン：ゲームを終わる", 0x000000, font[FONT_TYPE_LOAD_1][FONT_SIZE_32], 0xffffff);
+
+        // Start Btn
+        DrawLine(510, 350, 700, 300, 0x000000);
+        DrawStringToHandle(700, 290, "STARTボタン：ポーズ", 0x000000, font[FONT_TYPE_LOAD_1][FONT_SIZE_32], 0xffffff);
+    }
+    else if (state == 1) {
+        // サブタイトル表示
+        DrawStringToHandle(730, 40, "ゲーム説明", 0x000000, font[FONT_TYPE_LOAD_1][FONT_SIZE_64], 0xffffff);
+
+        // 説明内容
+        DrawStringToHandle(120, 220, "このゲームは、カマをふり回す危険な主人公を操作して草をかったり、", 0x000000, font[FONT_TYPE_LOAD_1][FONT_SIZE_32], 0xffffff);
+        DrawStringToHandle(250, 270, "お花をつんだりする非常にほのぼのしたゲームです。", 0x000000, font[FONT_TYPE_LOAD_1][FONT_SIZE_32], 0xffffff);
+        //DrawStringToHandle(300, 320, "他のリンゴを取ってポイントをかせいでください。", 0x000000, font[FONT_TYPE_LOAD_1][FONT_SIZE_32], 0xffffff);
+        //DrawStringToHandle(100, 370, "落下してくるリンゴは４種類です。", 0x000000, font[FONT_TYPE_LOAD_1][FONT_SIZE_32], 0xffffff);
+    };
+
+    // BGM 再生
+    if (CheckSoundMem(bgm) == 0) {
+        PlaySoundMem(bgm, DX_PLAYTYPE_LOOP, TRUE);
+    };
 };
