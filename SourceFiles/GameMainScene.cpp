@@ -31,7 +31,6 @@ AbstractScene* GameMain::Update() { // ここで値の更新など、処理
 
 
     player.Update();
-    ui.Update(0);
 
     //花、草を刈った時のスコア処理
     for (int i = 0; i < 3; i++)
@@ -99,7 +98,7 @@ AbstractScene* GameMain::Update() { // ここで値の更新など、処理
     
 
     if (InputControl::OnButton(XINPUT_BUTTON_START))return new Result(score);
-    if (ui.Update(1) == -1) {
+    if (ui.Update() == -1) {
         return nullptr;
     };
 
