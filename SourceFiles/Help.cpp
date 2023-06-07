@@ -9,6 +9,10 @@ Help::Help() {
     state = 0;
     ctrl_state = 0;
 
+    AnimImg = LoadGraph("images/readyback.png");
+    Anim = 0;
+    Start = false;
+
     // 画像読み込み
     if ((img_title = LoadGraph("Resources/Images/title.png")) == -1) {};
     if ((img_ctrl = LoadGraph("Resources/Images/controller.png")) == -1) {};
@@ -60,22 +64,31 @@ Help::~Help() {
 
 AbstractScene* Help::Update() {
 
-    if (InputControl::OnButton(XINPUT_BUTTON_A) || CheckHitKey(KEY_INPUT_ESCAPE)) {
-        if (CheckSoundMem(se_select) == 0) PlaySoundMem(se_select, DX_PLAYTYPE_BACK, TRUE);
-        return new Title();
-    } else if (InputControl::OnButton(XINPUT_BUTTON_B) || CheckHitKey(KEY_INPUT_SPACE)) {
-        if (CheckSoundMem(se_select) == 0) PlaySoundMem(se_select, DX_PLAYTYPE_BACK, TRUE);
-        return new GameMain();
-    }
-    else if (InputControl::OnButton(XINPUT_BUTTON_X) || CheckHitKey(KEY_INPUT_X)) {
-        if (CheckSoundMem(se_select) == 0) PlaySoundMem(se_select, DX_PLAYTYPE_BACK, TRUE);
-        if (state >= 1) {
-            state = 0;
+    if (!Start)
+    {
+        if (InputControl::OnButton(XINPUT_BUTTON_A) || CheckHitKey(KEY_INPUT_ESCAPE)) {
+            if (CheckSoundMem(se_select) == 0) PlaySoundMem(se_select, DX_PLAYTYPE_BACK, TRUE);
+            return new Title();
         }
-        else {
-            state++;
+        else if (InputControl::OnButton(XINPUT_BUTTON_B) || CheckHitKey(KEY_INPUT_SPACE)) {
+            if (CheckSoundMem(se_select) == 0) PlaySoundMem(se_select, DX_PLAYTYPE_BACK, TRUE);
+            Start = true;
+        }
+        else if (InputControl::OnButton(XINPUT_BUTTON_X) || CheckHitKey(KEY_INPUT_X)) {
+            if (CheckSoundMem(se_select) == 0) PlaySoundMem(se_select, DX_PLAYTYPE_BACK, TRUE);
+            if (state >= 1) {
+                state = 0;
+            }
+            else {
+                state++;
+            };
         };
-    };
+    }
+    else
+    {
+        Anim++;
+        if (30 < Anim)return new GameMain();
+    }
 
     return this;
 };
@@ -135,4 +148,10 @@ void Help::Draw() const {
     if (CheckSoundMem(bgm) == 0) {
         PlaySoundMem(bgm, DX_PLAYTYPE_LOOP, TRUE);
     };
+
+    if (Start)
+    {
+        //画像フェードイン
+        DrawGraph(SCREEN_WIDTH - (SCREEN_WIDTH / 30.f) * Anim, 0, AnimImg, true);
+    }
 };
