@@ -7,9 +7,6 @@ private:
     int state;
     int score;
 
-    int FlowerImg;
-    int GrassImg;
-
     int Stage1Time;
     int Stage2Time;
     int Stage3Time;
