@@ -18,10 +18,23 @@ Result::Result(int score) {
     TotalScore = 0;
 
     timer = 0;
+
+    //サウンド読込
+    se_result = LoadSoundMem("Resources/Sounds/se_result.wav");
+    se_result_total = LoadSoundMem("Resources/Sounds/se_result_total.wav");
+    ChangeVolumeSoundMem(160, se_result);
+    ChangeVolumeSoundMem(160, se_result_total);
+
 };
 
 Result::~Result() {
     // 終了処理
+
+    // サウンド削除
+    StopSoundMem(se_result);
+    DeleteSoundMem(se_result);
+    StopSoundMem(se_result_total);
+    DeleteSoundMem(se_result_total);
 };
 
 AbstractScene* Result::Update() { // ここで値の更新など、処理
@@ -33,7 +46,10 @@ AbstractScene* Result::Update() { // ここで値の更新など、処理
 
     if (InputControl::OnButton(XINPUT_BUTTON_A)&&timer>=200)return new Title();
     
-    if (InputControl::OnButton(XINPUT_BUTTON_A)) timer += 200;
+    if (InputControl::OnButton(XINPUT_BUTTON_A)) {
+        timer += 200;
+        if (CheckSoundMem(se_result_total) == 0) PlaySoundMem(se_result_total, DX_PLAYTYPE_BACK, TRUE);
+    }
     
     if (InputControl::OnButton(XINPUT_BUTTON_B) && timer < 40 ) timer = 40;
     if (InputControl::OnButton(XINPUT_BUTTON_B) && timer < 80 && timer > 40) timer = 80;
@@ -59,23 +75,23 @@ void Result::Draw() const { // やることは描画のみ、絶対に値の更�
     
     if (timer > 40) {
         DrawFormatString(650, 150, 0xffffff, "%6d", score);
-    }
+    }else if (timer == 40) { if (CheckSoundMem(se_result) == 0) PlaySoundMem(se_result, DX_PLAYTYPE_BACK, TRUE);}
 
     if (timer > 80) {
         SetFontSize(40);
         DrawString(350, 330, "ステージ１", 0x0000aa);
         DrawFormatString(350, 370, 0xffffff, "%02d秒 ×  100 = %6d", Stage1Time, Stage1Time * 100);
-    }
+    }else if (timer == 80) { if (CheckSoundMem(se_result) == 0) PlaySoundMem(se_result, DX_PLAYTYPE_BACK, TRUE);}
 
     if (timer > 120) {
         DrawString(350, 420, "ステージ2", 0x0000aa);
         DrawFormatString(350, 460, 0xffffff, "%02d秒 ×  100 = %6d", Stage2Time, Stage2Time * 100);
-    }
+    }else if (timer == 120) {if (CheckSoundMem(se_result) == 0) PlaySoundMem(se_result, DX_PLAYTYPE_BACK, TRUE);}
 
     if (timer > 160) {
         DrawString(350, 510, "ステージ3", 0x0000aa);
         DrawFormatString(350, 550, 0xffffff, "%02d秒 ×  100 = %6d", Stage3Time, Stage3Time * 100);
-    }
+    }else if (timer == 160) {if (CheckSoundMem(se_result) == 0) PlaySoundMem(se_result, DX_PLAYTYPE_BACK, TRUE);}
 
     SetFontSize(70);
     DrawString(400, 40, "ゲームクリア", 0xfff000);
@@ -85,4 +101,5 @@ void Result::Draw() const { // やることは描画のみ、絶対に値の更�
     if (timer > 200) {
         DrawFormatString(650, 620, 0xffffff, "%6d", score);
     }
+    else if (timer == 200) {if (CheckSoundMem(se_result_total) == 0) PlaySoundMem(se_result_total, DX_PLAYTYPE_BACK, TRUE);}
 };
