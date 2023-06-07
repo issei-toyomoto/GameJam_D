@@ -14,7 +14,7 @@ class Help : public AbstractScene {
 private:
     int state = 0;
     int ctrl_state;
-    int img_title;
+    int img_title, img_ctrl;
     int font[2][4];
     int bgm, se_cursor, se_select;
 public:
