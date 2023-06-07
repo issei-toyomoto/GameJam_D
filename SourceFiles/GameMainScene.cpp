@@ -6,6 +6,8 @@
 #include "Player.h"
 #include "UI.h"
 
+#include<math.h>
+
 
 #define DEBUG
 
@@ -29,6 +31,7 @@ AbstractScene* GameMain::Update() { // ここで値の更新など、処理
 
     player.Update();
 
+
     //花、草を刈った時のスコア処理
     int AtkX = (player.AtkPos('X') - MARGIN_X) / BLOCK_SIZE;
     int AtkY = (player.AtkPos('Y') - UI_SIZE - MARGIN_Y) / BLOCK_SIZE;
@@ -40,7 +43,42 @@ AbstractScene* GameMain::Update() { // ここで値の更新など、処理
         if (Grass[AtkY][AtkX] == WEED) {
             score += WEED_AtkSCORE;
             Grass[AtkY][AtkX] = 0;
-        }        
+        }
+    }
+
+    if (InputControl::OnButton(XINPUT_BUTTON_A))
+    {
+        float Px = player.GetX();
+        float Py = player.GetY();
+
+        int MapX = (Px - MARGIN_X) / BLOCK_SIZE;
+        int MapY = (Py - UI_SIZE - MARGIN_Y) / BLOCK_SIZE;
+
+        if (0 <= MapX && 0 <= MapY)
+        {
+            for (int i = -1; i <= 1; i++)
+            {
+                for (int j = -1; j <= 1; j++)
+                {
+                    float DisX = abs(Px - ((MapX + i) * BLOCK_SIZE + MARGIN_X + BLOCK_SIZE / 2));
+                    float DisY = abs(Py - ((MapY + j) * BLOCK_SIZE + UI_SIZE + MARGIN_Y + BLOCK_SIZE / 2));
+
+                    DisX *= DisX;
+                    DisY *= DisY;
+
+                    float Dis = (float)sqrt(DisX + DisY);
+
+                    if (Dis <= BLOCK_SIZE * 1 && Grass[MapY + j][MapX + i] == 2)
+                    {
+                        score += 500;
+                        Grass[MapY + j][MapX + i] = 0;
+                        i = 2;
+                        break;
+                    }
+                }
+            }
+        }
+
     }
 
     if (InputControl::OnButton(XINPUT_BUTTON_START))return new Result(score);
