@@ -19,7 +19,7 @@ private:
     int timer;
 public:
     // コンストラクタ
-    Result(int score);
+    Result(int score, int time[3]);
 
     // デストラクタ
     ~Result();

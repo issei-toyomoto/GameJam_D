@@ -5,7 +5,7 @@
 #include "main.h"
 #include "PadInput.h"
 
-Result::Result(int score) {
+Result::Result(int score, int time[3]) {
     // 初期化処理
     state = 0;
 
@@ -14,9 +14,9 @@ Result::Result(int score) {
     FlowerImg = 0;
     GrassImg = 0;
 
-    Stage1Time = 0;
-    Stage2Time = 0;
-    Stage3Time = 0;
+    Stage1Time = time[0];
+    Stage2Time = time[1];
+    Stage3Time = time[2];
 
     TotalScore = 0;
 
@@ -79,6 +79,6 @@ void Result::Draw() const { // やることは描画のみ、絶対に値の更�
     DrawString(310, 620, "合計スコア ", 0xff0000);
 
     if (timer > 200) {
-        DrawFormatString(650, 620, 0xffffff, "%6d", score);
+        DrawFormatString(650, 620, 0xffffff, "%6d", TotalScore);
     }
 };
