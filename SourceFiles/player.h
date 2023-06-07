@@ -1,4 +1,5 @@
 ﻿#pragma once
+#include"common.h"
 class Player
 {
 private:
@@ -24,4 +25,21 @@ public:
     float GetY() { return Y; }
 
     int AtkPos(char XY, double Dis) const;
+    void Reset() 
+    {
+        //初期の座標
+        X = SCREEN_WIDTH / 2;
+        Y = SCREEN_HEIGHT / 2 + UI_SIZE / 2;
+
+        //最高速度を設定する
+        SpdX = 0;
+        SpdY = 0;
+        MSpdX = 8;
+        MSpdY = 8;
+        
+        Angle = 0;
+        Way = 0;
+        Attack = 0;
+        Combo = 0;
+    }
 };
