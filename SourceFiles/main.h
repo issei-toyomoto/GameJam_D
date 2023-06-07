@@ -12,6 +12,8 @@ using std::to_string;
 #include <time.h>
 #include "SceneManager.h"
 
+#include "PadInput.h"
+
 #include "DxLib.h"
 
 // 各シーンのヘッダーファイル
@@ -19,3 +21,4 @@ using std::to_string;
 #include "GameMainScene.h"
 #include "Result.h"
 #include "Help.h"
+#include "Ranking.h"

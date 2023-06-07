@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "AbstractScene.h"
 #include "Player.h"
@@ -11,31 +11,39 @@ private:
     int state;
     int score = 0;
     int Time;
+    int StageNum = 1;
 
     int x;
     int y;
 
-    int BackImg;    //”wŒi‰æ‘œ
+    int BackImg;    //èƒŒæ™¯ç”»åƒ
     int FlowerImg;  //
     int WeedImg;
 
-    Player player; //ƒvƒŒƒCƒ„[
+    Player player; //ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼
+    UI ui;          //UI
 
-    int Grass[MAP_HEIGHT][MAP_WIDTH];   //‘E‰Ô‚Ìó‘Ô(0F‰½‚à‚È‚¢@1F‘@2F‰Ô)
+    int Grass[MAP_HEIGHT][MAP_WIDTH];   //è‰ãƒ»èŠ±ã®çŠ¶æ…‹(0ï¼šä½•ã‚‚ãªã„ã€€1ï¼šè‰ã€€2ï¼šèŠ±)
+    int GrassTmp[MAP_HEIGHT][MAP_WIDTH];
     
+    int ZeroCnt;
+    int ItemCnt;
+
 public:
-    // ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+    // ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     GameMain();
 
-    // ƒfƒXƒgƒ‰ƒNƒ^
+    // ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     ~GameMain();
 
-	// •`‰æˆÈŠO‚ÌXV‚ğÀ‘•
+	// æç”»ä»¥å¤–ã®æ›´æ–°ã‚’å®Ÿè£…
 	virtual AbstractScene* Update() override;
 
-	// •`‰æ‚ÉŠÖ‚·‚é‚±‚Æ‚ğÀ‘•
+	// æç”»ã«é–¢ã™ã‚‹ã“ã¨ã‚’å®Ÿè£…
 	virtual void Draw() const override;
 
-    //ƒXƒe[ƒW‰Šú‰»
+    //ã‚¹ãƒ†ãƒ¼ã‚¸åˆæœŸåŒ–
     void SetStage(int level);
+
+    int GetScore() { return score; }
 };
