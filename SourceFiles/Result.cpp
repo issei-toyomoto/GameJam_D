@@ -11,15 +11,11 @@ Result::Result(int score) {
 
     this->score = score;
 
-    FlowerImg = 0;
-    GrassImg = 0;
-
     Stage1Time = 0;
     Stage2Time = 0;
     Stage3Time = 0;
 
     TotalScore = 0;
-
 
     timer = 0;
 };
@@ -35,7 +31,15 @@ AbstractScene* Result::Update() { // ここで値の更新など、処理
     //totalscore計算
     TotalScore = score + (Stage1Time * 100) + (Stage1Time * 100) + (Stage1Time * 100);
 
-    if (InputControl::OnButton(XINPUT_BUTTON_A))return new Title();
+    if (InputControl::OnButton(XINPUT_BUTTON_A)&&timer>=200)return new Title();
+    
+    if (InputControl::OnButton(XINPUT_BUTTON_A)) timer += 200;
+    
+    if (InputControl::OnButton(XINPUT_BUTTON_B) && timer < 40 ) timer = 40;
+    if (InputControl::OnButton(XINPUT_BUTTON_B) && timer < 80 && timer > 40) timer = 80;
+    if (InputControl::OnButton(XINPUT_BUTTON_B) && timer < 120 && timer > 80) timer = 120;
+    if (InputControl::OnButton(XINPUT_BUTTON_B) && timer < 160 && timer > 120) timer = 160;
+    if (InputControl::OnButton(XINPUT_BUTTON_B) && timer < 200 && timer > 160) timer = 200;
 
     return this; // シーン継続
 };
