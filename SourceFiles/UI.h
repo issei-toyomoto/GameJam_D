@@ -12,5 +12,5 @@ public:
     ~UI();
 
     int Update();
-    void Draw() const;
+    void Draw(int score) const;
 };

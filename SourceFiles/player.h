@@ -20,5 +20,8 @@ public:
     void Update();
     void Draw()const;
 
+    float GetX() { return X; }
+    float GetY() { return Y; }
+
     int AtkPos(char XY) const;
 };
