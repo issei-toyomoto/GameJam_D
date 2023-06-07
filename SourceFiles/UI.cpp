@@ -15,13 +15,16 @@ UI::UI() {
 UI::~UI() {
 }
 
-int UI::Update() //キー入力情報更新
+int UI::Update(int StopTime) //キー入力情報更新
 {
-    if ((FPSCnt++) % 60 == 0) {
-        Timelimit = Timelimit - 1;
-    }
-    if (Timelimit <= 0) {
-        return -1;
+    if (StopTime == 0) 
+    {
+        if ((FPSCnt++) % 60 == 0 && count) {
+            Timelimit = Timelimit - 1;
+        }
+        if (Timelimit <= 0) {
+            return -1;
+        }
     }
 }
 
