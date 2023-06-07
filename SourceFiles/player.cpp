@@ -198,11 +198,10 @@ void Player::Draw() const
     }
 }
 
-int Player::AtkPos(char XY) const
+int Player::AtkPos(char XY, double Dis) const
 {
     double stX = 0, stY = 0;		//振りかぶる前の座標
     double finX = 0, finY = 0;		//振りかぶった後の座標
-    double Dis = 65;			//体の中心からの距離
     bool Xturn = true;      //画像反転
 
     double finAng = 0;	//振りかぶる角度
