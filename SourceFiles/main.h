@@ -22,6 +22,7 @@ using std::to_string;
 #include "Result.h"
 #include "Help.h"
 #include "Ranking.h"
+#include"DrawRanking.h"
 
 #define IMG 0
 #define SND 1
