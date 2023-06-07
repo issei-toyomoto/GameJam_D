@@ -129,7 +129,8 @@ void Title::Draw() const {
     DrawGraph(0, 0, img_title, TRUE);
 
     // タイトル表示
-    DrawStringToHandle(400, 150, GAME_NAME, 0x000000, font[FONT_TYPE_LOAD_1][FONT_SIZE_64], 0xffffff);
+    DrawStringToHandle(280, 130, GAME_NAME, 0x000000, font[FONT_TYPE_LOAD_1][FONT_SIZE_128], 0xffffff);
+    DrawStringToHandle(300, 260, "草地のかり取りでん説 ～勇者たけしのちょう戦～", 0x000000, font[FONT_TYPE_LOAD_1][FONT_SIZE_32], 0xffffff);
 
     // バージョン表示（仮）
     DrawStringToHandle(20, 690, "v6.06", 0x000000, font[FONT_TYPE_DEFAULT][FONT_SIZE_16], 0xffffff);
