@@ -13,7 +13,7 @@ Result::Result(int score, int time[3]) {
 
     Stage1Time = time[0];
     Stage2Time = time[1];
-    Stage3Time = time[2];\
+    Stage3Time = time[2];
 
     TotalScore = 0;
 
@@ -25,6 +25,7 @@ Result::Result(int score, int time[3]) {
     ChangeVolumeSoundMem(160, se_result);
     ChangeVolumeSoundMem(160, se_result_total);
 
+    AnimImg = LoadGraph("images/readyback.png");
 };
 
 Result::~Result() {
@@ -39,23 +40,23 @@ Result::~Result() {
 
 AbstractScene* Result::Update() { // ここで値の更新など、処理
 
-    if(timer<=200)   timer++;
+    if(timer<=230)   timer++;
 
     //totalscore計算
     TotalScore = score + (Stage1Time * 100) + (Stage1Time * 100) + (Stage1Time * 100);
 
-    if (InputControl::OnButton(XINPUT_BUTTON_A)&&timer>=200)return new Title();
+    if (InputControl::OnButton(XINPUT_BUTTON_A)&&timer>=230)return new Title();
     
     if (InputControl::OnButton(XINPUT_BUTTON_A)) {
-        timer += 200;
+        timer += 230;
         if (CheckSoundMem(se_result_total) == 0) PlaySoundMem(se_result_total, DX_PLAYTYPE_BACK, TRUE);
     }
     
-    if (InputControl::OnButton(XINPUT_BUTTON_B) && timer < 40 ) timer = 40;
-    if (InputControl::OnButton(XINPUT_BUTTON_B) && timer < 80 && timer > 40) timer = 80;
-    if (InputControl::OnButton(XINPUT_BUTTON_B) && timer < 120 && timer > 80) timer = 120;
-    if (InputControl::OnButton(XINPUT_BUTTON_B) && timer < 160 && timer > 120) timer = 160;
-    if (InputControl::OnButton(XINPUT_BUTTON_B) && timer < 200 && timer > 160) timer = 200;
+    if (InputControl::OnButton(XINPUT_BUTTON_B) && timer < 70 && 30 < timer) timer = 70;
+    if (InputControl::OnButton(XINPUT_BUTTON_B) && timer < 110 && timer > 100) timer = 110;
+    if (InputControl::OnButton(XINPUT_BUTTON_B) && timer < 150 && timer > 110) timer = 150;
+    if (InputControl::OnButton(XINPUT_BUTTON_B) && timer < 190 && timer > 150) timer = 190;
+    if (InputControl::OnButton(XINPUT_BUTTON_B) && timer < 230 && timer > 190) timer = 230;
 
     return this; // シーン継続
 };
@@ -102,4 +103,10 @@ void Result::Draw() const { // やることは描画のみ、絶対に値の更�
         DrawFormatString(650, 620, 0xffffff, "%6d", TotalScore);
     }
     else if (timer == 200) {if (CheckSoundMem(se_result_total) == 0) PlaySoundMem(se_result_total, DX_PLAYTYPE_BACK, TRUE);}
+
+    if (timer<30)
+    {
+        //画像フェードイン
+        DrawGraph((SCREEN_WIDTH / 30.f) * timer, 0, AnimImg, true);
+    }
 };

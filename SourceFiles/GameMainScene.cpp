@@ -135,6 +135,7 @@ AbstractScene* GameMain::Update() { // ここで値の更新など、処理
         {
             SetStage(StageNum);
             ui.SetTime(30 + (30 * StageNum));
+            player.Reset();
         }
     }
 

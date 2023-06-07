@@ -18,6 +18,7 @@ private:
     int se_result;
     int se_result_total;
 
+    int AnimImg;    //画面移行演出に使う画像
    
 public:
     // コンストラクタ
