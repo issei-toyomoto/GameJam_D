@@ -11,7 +11,7 @@ private:
     int state;
     int score = 0;
     int Time;
-    int StageNum;
+    int StageNum = 1;
 
     int x;
     int y;
@@ -26,7 +26,7 @@ private:
     int Grass[MAP_HEIGHT][MAP_WIDTH];   //草・花の状態(0：何もない　1：草　2：花)
     int GrassTmp[MAP_HEIGHT][MAP_WIDTH];
     
-    
+    int GrassZeroCnt = 0;
 public:
     // コンストラクタ
     GameMain();
@@ -42,4 +42,6 @@ public:
 
     //ステージ初期化
     void SetStage(int level);
+
+    int GetScore() { return score; }
 };

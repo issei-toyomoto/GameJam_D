@@ -17,7 +17,7 @@ GameMain::GameMain() {
     FlowerImg = LoadGraph("images/flower.png");
     WeedImg = LoadGraph("images/kusa.png");
     
-    SetStage(1);
+    SetStage(StageNum);
 };
 
 GameMain::~GameMain() {
@@ -29,10 +29,28 @@ AbstractScene* GameMain::Update() { // ここで値の更新など、処理
 
     player.Update();
 
+    //花、草を刈った時のスコア処理
+    int AtkX = (player.AtkPos('X') - MARGIN_X) / BLOCK_SIZE;
+    int AtkY = (player.AtkPos('Y') - UI_SIZE - MARGIN_Y) / BLOCK_SIZE;
+    if (AtkX >= 0 && AtkY >= 0) {
+        if (Grass[AtkY][AtkX] == FLOWER) {
+            score -= FLOWER_AtkSCORE;
+            Grass[AtkY][AtkX] = 0;
+        }
+        if (Grass[AtkY][AtkX] == WEED) {
+            score += WEED_AtkSCORE;
+            Grass[AtkY][AtkX] = 0;
+        }
+        
+    }
+
+    
+
     if (InputControl::OnButton(XINPUT_BUTTON_START))return new Result(score);
     if (ui.Update() == -1) {
         return nullptr;
     };
+
     return this;    //シーン継続
 };
 
@@ -41,25 +59,22 @@ void GameMain::Draw() const { // やることは描画のみ、絶対に値の�
     DrawGraph(0, 0, BackImg, true);
     DrawBox(0, 0, 1280, 100, GetColor(0, 0, 0), TRUE);
 
+    DrawFormatString(20, 100, GetColor(255, 0, 0), "SCORE:%d", score);
+
     //花、草表示処理
     for (int i = 0; i < MAP_HEIGHT; i++) {
         for (int j = 0; j < MAP_WIDTH; j++) {
-            if (Grass[i][j] == 2) {
-                DrawGraph(MARGIN_X + (j * BLOCK_SIZE), MARGIN_Y + UI_SIZE + (i * BLOCK_SIZE), FlowerImg, true);
-            }
-
-            if (Grass[i][j] == 1) {
+            if (Grass[i][j] == WEED) {
                 DrawGraph(MARGIN_X + (j * BLOCK_SIZE), MARGIN_Y + UI_SIZE + (i * BLOCK_SIZE), WeedImg, true);
             }
+
+            if (Grass[i][j] == FLOWER) {
+                DrawGraph(MARGIN_X + (j * BLOCK_SIZE), MARGIN_Y + UI_SIZE + (i * BLOCK_SIZE), FlowerImg, true);
+            }
         }
     }
 
-    //花、草が消えた時のスコア処理
-    for (int i = 0; i < MAP_HEIGHT; i++) {
-        for (int j = 0; j < MAP_WIDTH; j++) {
-            GrassTmp[i][j] = Grass[i][j];
-        }
-    }
+    
    #ifdef DEBUG
     int margin = (SCREEN_HEIGHT - 100) % BLOCK_SIZE / 2;
     for (int i = 100 + margin; i < 720; i += BLOCK_SIZE)
@@ -83,7 +98,7 @@ void GameMain::Draw() const { // やることは描画のみ、絶対に値の�
     
     player.Draw();
 
-    ui.Draw();
+    ui.Draw(score);
 };
 
 void GameMain::SetStage(int stage) 
@@ -96,7 +111,7 @@ void GameMain::SetStage(int stage)
         }
     }
 
-    for (int i = 0; i < FLOWER_NUM * stage; i++) {
+    for (int i = 0; i < WEED_NUM * stage; i++) {
         y = GetRand(MAP_HEIGHT);
         x = GetRand(MAP_WIDTH);
         if (Grass[y][x] == 0) {
@@ -108,7 +123,7 @@ void GameMain::SetStage(int stage)
         
     }
    
-    for (int i = 0; i < WEED_NUM * stage; i++) {
+    for (int i = 0; i < FLOWER_NUM * stage; i++) {
         y = GetRand(MAP_HEIGHT);
         x = GetRand(MAP_WIDTH);
         if (Grass[y][x] == 0) {
