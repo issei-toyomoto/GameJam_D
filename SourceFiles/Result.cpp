@@ -52,7 +52,7 @@ void Result::Draw() const { // やることは描画のみ、絶対に値の更�
     DrawString(230, 270, "タイムスコア(残りタイム×100)", 0xaa0000);
 
     DrawString(350, 150, "スコア", 0xff0000);
-
+    
     if (timer > 40) {
         DrawFormatString(650, 150, 0xffffff, "%6d", score);
     }
@@ -64,12 +64,12 @@ void Result::Draw() const { // やることは描画のみ、絶対に値の更�
     }
 
     if (timer > 120) {
-        DrawString(350, 420, "ステージ２", 0x0000aa);
+        DrawString(350, 420, "ステージ2", 0x0000aa);
         DrawFormatString(350, 460, 0xffffff, "%02d秒 ×  100 = %6d", Stage2Time, Stage2Time * 100);
     }
 
     if (timer > 160) {
-        DrawString(350, 510, "ステージ３", 0x0000aa);
+        DrawString(350, 510, "ステージ3", 0x0000aa);
         DrawFormatString(350, 550, 0xffffff, "%02d秒 ×  100 = %6d", Stage3Time, Stage3Time * 100);
     }
 
