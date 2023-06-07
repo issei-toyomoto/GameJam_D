@@ -85,7 +85,7 @@ AbstractScene* Title::Update() {
         }
         else if (state == 2) {
             // ランキング選択
-            //return new Ranking();
+            return new DrawRanking();
         }
         else if (state == 3) {
             // 終わる選択
