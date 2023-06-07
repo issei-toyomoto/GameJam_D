@@ -16,7 +16,7 @@ GameMain::GameMain() {
     FlowerImg = LoadGraph("images/flower.png");
     WeedImg = LoadGraph("images/kusa.png");
     
-    SetStage(1);
+    SetStage(3);
 };
 
 GameMain::~GameMain() {
@@ -86,7 +86,7 @@ void GameMain::SetStage(int stage)
         }
     }
 
-    for (int i = 0; i < 30*stage; i++) {
+    for (int i = 0; i < FLOWER_NUM * stage; i++) {
         y = GetRand(MAP_HEIGHT);
         x = GetRand(MAP_WIDTH);
         if (Grass[y][x] == 0) {
@@ -98,7 +98,7 @@ void GameMain::SetStage(int stage)
         
     }
    
-    for (int i = 0; i < 10*stage; i++) {
+    for (int i = 0; i < WEED_NUM * stage; i++) {
         y = GetRand(MAP_HEIGHT);
         x = GetRand(MAP_WIDTH);
         if (Grass[y][x] == 0) {

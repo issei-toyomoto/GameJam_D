@@ -19,3 +19,7 @@
 //フィールドの余白
 #define MARGIN_X SCREEN_WIDTH % BLOCK_SIZE / 2
 #define MARGIN_Y (SCREEN_HEIGHT - 100) % BLOCK_SIZE / 2
+
+//花、草のマップ上での数
+#define FLOWER_NUM 30
+#define WEED_NUM 10
