@@ -8,8 +8,9 @@
 //int UI::FPSCnt;
 UI::UI() {
     score = 0;
-    Timelimit = 61;
+    Timelimit = 60;
     FPSCnt = 0;
+    stage = 1;
 }
 
 UI::~UI() {
@@ -17,14 +18,17 @@ UI::~UI() {
 
 int UI::Update() //キー入力情報更新
 {
-    
-    if ((FPSCnt++) % 60 == 0 && count) {
-        Timelimit = Timelimit - 1;
+    if (count)
+    {
+        if ((FPSCnt++) % 60 == 0) {
+            Timelimit = Timelimit - 1;
+        }
+        if (Timelimit <= 0) {
+            Timelimit = 0;
+            return -1;
+        }
     }
-    if (Timelimit <= 0) {
-        return -1;
-    }
-    
+    return 0;
 }
 
 
