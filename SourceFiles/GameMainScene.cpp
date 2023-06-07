@@ -36,7 +36,7 @@ AbstractScene* GameMain::Update() { // ここで値の更新など、処理
 
 
    if(!Clear && !Pause) player.Update();
-    ui.Update(0);
+    ui.Update();
 
     //花、草を刈った時のスコア処理
     for (int i = 0; i < 3; i++)
