@@ -16,7 +16,7 @@ GameMain::GameMain() {
     FlowerImg = LoadGraph("images/flower.png");
     WeedImg = LoadGraph("images/kusa.png");
     
-    SetStage(3);
+    SetStage(1);
 };
 
 GameMain::~GameMain() {
@@ -24,7 +24,7 @@ GameMain::~GameMain() {
 };
 
 AbstractScene* GameMain::Update() { // ここで値の更新など、処理
-    
+ 
 
 
 
@@ -42,6 +42,7 @@ void GameMain::Draw() const { // やることは描画のみ、絶対に値の�
     DrawGraph(0, 0, BackImg, true);
     DrawBox(0, 0, 1280, 100, GetColor(0, 0, 0), TRUE);
 
+    //花、草表示処理
     for (int i = 0; i < MAP_HEIGHT; i++) {
         for (int j = 0; j < MAP_WIDTH; j++) {
             if (Grass[i][j] == 2) {
@@ -54,6 +55,12 @@ void GameMain::Draw() const { // やることは描画のみ、絶対に値の�
         }
     }
 
+    //花、草が消えた時のスコア処理
+    for (int i = 0; i < MAP_HEIGHT; i++) {
+        for (int j = 0; j < MAP_WIDTH; j++) {
+            GrassTmp[i][j] = Grass[i][j];
+        }
+    }
    #ifdef DEBUG
     int margin = (SCREEN_HEIGHT - 100) % BLOCK_SIZE / 2;
     for (int i = 100 + margin; i < 720; i += BLOCK_SIZE)
@@ -83,6 +90,7 @@ void GameMain::SetStage(int stage)
     for (int i = 0; i < MAP_HEIGHT; i++) {
         for (int j = 0; j < MAP_WIDTH; j++) {
             Grass[i][j] = 0;
+            GrassTmp[i][j] = 0;
         }
     }
 
@@ -90,7 +98,7 @@ void GameMain::SetStage(int stage)
         y = GetRand(MAP_HEIGHT);
         x = GetRand(MAP_WIDTH);
         if (Grass[y][x] == 0) {
-            Grass[y][x] = 1;
+            Grass[y][x] = FLOWER;
         }
         else {
             i--;
@@ -102,7 +110,7 @@ void GameMain::SetStage(int stage)
         y = GetRand(MAP_HEIGHT);
         x = GetRand(MAP_WIDTH);
         if (Grass[y][x] == 0) {
-            Grass[y][x] = 2;
+            Grass[y][x] = WEED;
         }
         else {
             i--;
