@@ -1,6 +1,6 @@
 ﻿#include "main.h"
 
-#define FILEPATH "Resources/SaveData/ranking.txt"
+#define FILEPATH "../SaveData/ranking.txt"
 
 RankingData Ranking::Data[RANK_MAX];
 
@@ -54,6 +54,7 @@ void Ranking::SortRanking()
 void Ranking::SaveRanking(void) {
     FILE* fp = NULL;
 
+
     //ファイルオープン
     if (fopen_s(&fp, FILEPATH, "w") != NULL)
     {
@@ -81,6 +82,7 @@ void Ranking::ReadRanking(void) {
     for (int i = 0; i < RANK_MAX; i++) {
         fscanf_s(fp, "%1d%10d%10s", &Data[i].no, &Data[i].score, Data[i].name, NAME_MAX);
     }
+
 
     //ファイルクローズ
     fclose(fp);
