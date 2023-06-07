@@ -3,7 +3,6 @@
 class UI  {
 private:    
     int score;
-    int time;
     int stage;
     int Timelimit;
     int FPSCnt;
@@ -14,9 +13,13 @@ public:
 
     void switchcount() { 
         count = !count;
-        FPSCnt = 0;
     }
     int GetTime() { return Timelimit; }
+    void SetTime(int Time) 
+    { 
+        Timelimit = Time;
+        FPSCnt = 1;
+    }
 
     int Update(int StopTime);
 
