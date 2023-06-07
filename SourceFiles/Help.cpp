@@ -12,6 +12,7 @@ Help::Help() {
 
     // 画像読み込み
     if ((img_title = LoadGraph("Resources/Images/title.png")) == -1) {};
+    if ((img_ctrl = LoadGraph("Resources/Images/controller.png")) == -1) {};
 
     // フォント読み込み
     font[0][0] = CreateFontToHandle(NULL, 128, -1, DX_FONTTYPE_NORMAL);
@@ -55,7 +56,31 @@ void Help::Draw() const {
     // 背景表示
     DrawGraph(0, 0, img_title, TRUE);
 
+    // コントローラー画像表示
+    DrawExtendGraph(330, 290, 630, 490, img_ctrl, TRUE);
+    //DrawExtendGraph(400, 500, 500, 600, image.controller_s, TRUE);
+
+    // B Btn
+    DrawLine(587, 368, 700, 368, 0x000000);
+    DrawStringToHandle(700, 345, "Bボタン：決定", 0x000000, font[1][2], 0xffffff);
+
+    // A Btn
+    DrawLine(566, 392, 700, 392, 0x000000);
+    DrawStringToHandle(700, 380, "Aボタン：もどる", 0x000000, font[1][2], 0xffffff);
+
+    // Left Stick
+    DrawLine(436, 421, 436, 550, 0x000000);
+    DrawStringToHandle(280, 550, "左スティック：プレイヤーと、選たくカーソルの移動", 0x000000, font[1][2], 0xffffff);
+
+    // Back Btn
+    DrawLine(447, 350, 700, 276, 0x000000);
+    DrawStringToHandle(700, 255, "BACKボタン：ゲームを終わる", 0x000000, font[1][2], 0xffffff);
+
+    // Start Btn
+    DrawLine(510, 350, 700, 300, 0x000000);
+    DrawStringToHandle(700, 290, "STARTボタン：ポーズ", 0x000000, font[1][2], 0xffffff);
+
     // タイトル表示
-    DrawStringToHandle(400, 150, "ヘルプ", 0x000000, font[FONT_TYPE_LOAD_1][FONT_SIZE_32], 0xffffff);
+    //DrawStringToHandle(400, 150, "ヘルプ", 0x000000, font[FONT_TYPE_LOAD_1][FONT_SIZE_32], 0xffffff);
 
 };
