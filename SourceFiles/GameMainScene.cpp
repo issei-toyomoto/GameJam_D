@@ -40,11 +40,8 @@ AbstractScene* GameMain::Update() { // ここで値の更新など、処理
         if (Grass[AtkY][AtkX] == WEED) {
             score += WEED_AtkSCORE;
             Grass[AtkY][AtkX] = 0;
-        }
-        
+        }        
     }
-
-    
 
     if (InputControl::OnButton(XINPUT_BUTTON_START))return new Result(score);
     if (ui.Update() == -1) {
