@@ -24,7 +24,7 @@ int WINAPI WinMain(_In_ HINSTANCE  hInstance, _In_opt_ HINSTANCE hPrevInstance, 
     Fps fps;
 
     // ゲームループし、シーンマネジャーでシーンの更新
-    while ((ProcessMessage() == 0) && (sceneMng->Update() != nullptr)) {
+    while ((ProcessMessage() == 0) && (sceneMng->Update() != nullptr) && !(InputControl::OnButton(XINPUT_BUTTON_BACK))) {
         ClearDrawScreen(); // 画面の初期化
 
         // シーンマネジャーでシーンの描画開始
