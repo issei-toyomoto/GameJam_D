@@ -23,5 +23,5 @@ public:
     float GetX() { return X; }
     float GetY() { return Y; }
 
-    int AtkPos(char XY) const;
+    int AtkPos(char XY, double Dis) const;
 };
