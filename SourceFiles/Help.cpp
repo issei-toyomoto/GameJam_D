@@ -27,6 +27,14 @@ Help::Help() {
     font[1][1] = CreateFontToHandle("しょかきうたげ（無料版）", 64, 9, DX_FONTTYPE_EDGE);
     font[1][2] = CreateFontToHandle("しょかきうたげ（無料版）", 32, 9, DX_FONTTYPE_EDGE);
     font[1][3] = CreateFontToHandle("しょかきうたげ（無料版）", 16, 9, DX_FONTTYPE_EDGE);
+
+    // サウンド読み込み
+    bgm = LoadSoundMem("Resources/Sounds/bgm_title.wav");
+    se_cursor = LoadSoundMem("Resources/Sounds/se_cursor.wav");
+    se_select = LoadSoundMem("Resources/Sounds/se_select.wav");
+    ChangeVolumeSoundMem(255, bgm);
+    ChangeVolumeSoundMem(130, se_cursor);
+    ChangeVolumeSoundMem(150, se_select);
 };
 
 Help::~Help() {
@@ -40,6 +48,14 @@ Help::~Help() {
             DeleteFontToHandle(font[i][j]);
         };
     };
+
+    // サウンド削除
+    StopSoundMem(bgm);
+    DeleteSoundMem(bgm);
+    StopSoundMem(se_cursor);
+    DeleteSoundMem(se_cursor);
+    StopSoundMem(se_select);
+    DeleteSoundMem(se_select);
 };
 
 AbstractScene* Help::Update() {
@@ -92,7 +108,8 @@ void Help::Draw() const {
     DrawLine(510, 350, 700, 300, 0x000000);
     DrawStringToHandle(700, 290, "STARTボタン：ポーズ", 0x000000, font[FONT_TYPE_LOAD_1][FONT_SIZE_32], 0xffffff);
 
-    // タイトル表示
-    //DrawStringToHandle(400, 150, "ヘルプ", 0x000000, font[FONT_TYPE_LOAD_1][FONT_SIZE_32], 0xffffff);
-
+    // BGM 再生
+    if (CheckSoundMem(bgm) == 0) {
+        PlaySoundMem(bgm, DX_PLAYTYPE_LOOP, TRUE);
+    };
 };
