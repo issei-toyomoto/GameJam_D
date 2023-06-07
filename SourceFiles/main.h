@@ -2,7 +2,7 @@
 
 #define SCREEN_WIDTH 1280
 #define SCREEN_HEIGHT 720
-#define GAME_NAME "ゲーム名未決定"
+#define GAME_NAME "草花スラッシュ"
 
 #include <stdio.h>
 #include <math.h>
@@ -35,37 +35,26 @@ using std::to_string;
 
 class Resources {
 private:
-    static int bgm_title;
-    static int bgm_main;
-    static int se_cursor;
-    static int se_select;
+    static int snd_bgm[];
+    static int snd_se[];
 public:
-    int Get(int media, int type, int getNum) {
+    static int Get(int media, int type, int getNum) {
         if (media == 1) {
             if (type == 0) {
-                if (getNum == 0) {
-                    return bgm_title;
-                } else if (getNum == 1) {
-                    return bgm_main;
-                }
+                return snd_bgm[getNum];
             }
             else if (type == 1) {
-
+                return snd_se[getNum];
             };
         }
     };
-    void Set(int media, int type, int getNum, int data) {
+    static void Set(int media, int type, int getNum, int data) {
         if (media == 1) {
             if (type == 0) {
-                if (getNum == 0) {
-                    bgm_title = data;
-                }
-                else if (getNum == 1) {
-                    bgm_main = data;
-                }
+                snd_bgm[getNum] = data;
             }
             else if (type == 1) {
-
+                snd_se[getNum] = data;
             };
         }
     };
