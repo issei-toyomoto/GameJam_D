@@ -6,6 +6,8 @@
 #include "Player.h"
 #include "UI.h"
 
+#include<math.h>
+
 
 #define DEBUG
 
@@ -27,6 +29,40 @@ GameMain::~GameMain() {
 AbstractScene* GameMain::Update() { // ここで値の更新など、処理
 
     player.Update();
+
+    if (InputControl::OnButton(XINPUT_BUTTON_A))
+    {
+        float Px = player.GetX();
+        float Py = player.GetY();
+
+        int MapX = (Px - MARGIN_X) / BLOCK_SIZE;
+        int MapY = (Py - UI_SIZE - MARGIN_Y) / BLOCK_SIZE;
+
+        if (0 <= MapX && 0 <= MapY)
+        {
+            for (int i = -1; i <= 1; i++)
+            {
+                for (int j = -1; j <= 1; j++)
+                {
+                    float DisX = abs(Px - ((MapX + i) * BLOCK_SIZE + MARGIN_X + BLOCK_SIZE / 2));
+                    float DisY = abs(Py - ((MapY + j) * BLOCK_SIZE + UI_SIZE + MARGIN_Y + BLOCK_SIZE / 2));
+
+                    DisX *= DisX;
+                    DisY *= DisY;
+
+                    float Dis = (float)sqrt(DisX + DisY);
+
+                    if (Dis <= BLOCK_SIZE * 1 && Grass[MapY + j][MapX + i] == 2)
+                    {
+                        score += 500;
+                        Grass[MapY + j][MapX + i] = 0;
+                        i = 2;
+                        break;
+                    }
+                }
+            }
+        }
+    }
 
     if (InputControl::OnButton(XINPUT_BUTTON_START))return new Result(score);
     if (ui.Update() == -1) {
@@ -75,7 +111,7 @@ void GameMain::Draw() const { // やることは描画のみ、絶対に値の�
     
     player.Draw();
 
-    ui.Draw();
+    ui.Draw(score);
 };
 
 void GameMain::SetStage(int stage) 
