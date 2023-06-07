@@ -95,7 +95,7 @@ void GameMain::Draw() const { // やることは描画のみ、絶対に値の�
     
     player.Draw();
 
-    ui.Draw(score);
+    ui.Draw(score,StageNum);
 };
 
 void GameMain::SetStage(int stage) 

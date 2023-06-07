@@ -12,5 +12,5 @@ public:
     ~UI();
 
     int Update();
-    void Draw(int score) const;
+    void Draw(int score,int stage) const;
 };
