@@ -7,16 +7,18 @@ private:
     int state;
     int score;
 
-    int FlowerImg;
-    int GrassImg;
-
     int Stage1Time;
     int Stage2Time;
     int Stage3Time;
 
     int TotalScore;
-
+ 
     int timer;
+
+    int se_result;
+    int se_result_total;
+
+   
 public:
     // コンストラクタ
     Result(int score, int time[3]);

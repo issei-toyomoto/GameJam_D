@@ -7,12 +7,8 @@
 // デフォルトの抽象シーンクラス
 // ユーザーはこれを継承してシーンを実装すると楽
 
-class AbstractScene {
-private:
-	int num = 0;
-	void a() {
-		num = 0;
-	};
+class AbstractScene
+{
 public:
 	// デストラクタ
 	virtual ~AbstractScene() {};
