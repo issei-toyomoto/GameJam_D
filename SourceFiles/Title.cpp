@@ -62,10 +62,10 @@ AbstractScene* Title::Update() {
     * ゲームモードセレクト処理
     ********************************/
     // キーボードのボタンが戻ったら操作受付
-    if (!CheckHitKey(KEY_INPUT_UP) && !CheckHitKey(KEY_INPUT_DOWN) && !CheckHitKey(KEY_INPUT_SPACE)) {
+    if (((InputControl::TipLeftLStick(STICKL_Y) <= 0.1) && (InputControl::TipLeftLStick(STICKL_Y) >= -0.1)) && !CheckHitKey(KEY_INPUT_UP) && !CheckHitKey(KEY_INPUT_DOWN) && !CheckHitKey(KEY_INPUT_SPACE)) {
         ctrl_state = 0;
     };
-    if (InputControl::OnButton(XINPUT_BUTTON_DPAD_UP) || (CheckHitKey(KEY_INPUT_UP) && ctrl_state == 0)) {
+    if (((InputControl::TipLeftLStick(STICKL_Y) >= 0.5) && ctrl_state == 0) || InputControl::OnButton(XINPUT_BUTTON_DPAD_UP) || (CheckHitKey(KEY_INPUT_UP) && ctrl_state == 0)) {
         // カーソル上
         PlaySoundMem(se_cursor, DX_PLAYTYPE_BACK, TRUE);
         if (state <= 0) {
@@ -76,7 +76,7 @@ AbstractScene* Title::Update() {
         };
         ctrl_state = 1;
     }
-    else if (InputControl::OnButton(XINPUT_BUTTON_DPAD_DOWN) || (CheckHitKey(KEY_INPUT_DOWN) && ctrl_state == 0)) {
+    else if (((InputControl::TipLeftLStick(STICKL_Y) <= -0.5) && ctrl_state == 0) || InputControl::OnButton(XINPUT_BUTTON_DPAD_DOWN) || (CheckHitKey(KEY_INPUT_DOWN) && ctrl_state == 0)) {
         // カーソル下
         PlaySoundMem(se_cursor, DX_PLAYTYPE_BACK, TRUE);
         if (state >= 3) {
@@ -148,4 +148,6 @@ void Title::Draw() const {
     if (CheckSoundMem(bgm) == 0) {
         PlaySoundMem(bgm, DX_PLAYTYPE_LOOP, TRUE);
     };
+
+    DrawFormatString(20, 600, GetColor(255, 255, 255), "%.1f", InputControl::TipLeftLStick(STICKL_Y));
 };
