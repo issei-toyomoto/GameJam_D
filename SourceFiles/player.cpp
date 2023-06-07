@@ -37,7 +37,7 @@ void Player::Update()
     float add = 0.2;
 
     //スティックの傾きが一定以上なら加速
-    if (0.2 <= Tilt && !Attack) 
+    if (0.2 <= Tilt && (!Attack || (2 <= Combo && Attack <= 6)))
     {
         //角度取得
         Angle = 180 / 3.14 * Rad + 180;
@@ -123,39 +123,55 @@ void Player::Update()
         Y--;
     }
 
+    //攻撃
     if (Attack) 
     {
         Attack++;
-        if (20 < Attack) 
+        if (30 < Attack) 
         {
             Attack = 0;
             Combo = 0;
         }
     }
 
-    if (InputControl::OnButton(XINPUT_BUTTON_B) && Attack == 0)
+    //攻撃に移行
+    if (InputControl::OnButton(XINPUT_BUTTON_B) && (Attack == 0 || 15 <= Attack))
     {
-        Attack++;
+        Attack = 1;
         Combo++;
+
+        if (0.2 < Tilt)
+        {
+            //角度取得
+            Angle = 180 / 3.14 * Rad + 180;
+
+            //攻撃方向を得る
+            Way = (Angle - 22.5) / 45;
+            if (Angle < 22.5 || 360 - 22.5 < Angle)Way = 7;
+        }
     }
 }
 
 void Player::Draw() const
 {
     DrawBox(X - BLOCK_SIZE / 2, Y - BLOCK_SIZE / 2, X + BLOCK_SIZE / 2, Y + BLOCK_SIZE / 2, 0x0000ff, true);
-
-    DrawFormatString(200, 20, 0xffffff, "%d", Way);
     
     if (Attack) 
     {
         double stX = 0, stY = 0;		//振りかぶる前の座標
         double finX = 0, finY = 0;		//振りかぶった後の座標
         double Dis = 0;			//体の中心からの距離
+        bool Xturn = true;      //画像反転
 
         double finAng = 0;	//振りかぶる角度
         if (Attack <= 6) 
         {
-            finAng = 45 * (-Way + 3) + (180 / 5 * (Attack - 1));
+            if (Combo % 2 == 0)
+            {
+                finAng = 45 * (-Way + 3) + 180 - (180 / 5 * (Attack - 1));
+                Xturn = false;
+            }
+            else finAng = 45 * (-Way + 3) + (180 / 5 * (Attack - 1));
             stX = X;
             stY = Y;
             Dis = 50;
@@ -165,7 +181,12 @@ void Player::Draw() const
         }
         else
         {
-            finAng = 45 * (-Way + 3) + 180;
+            if (Combo % 2 == 0)
+            {
+                finAng = 45 * (-Way + 3);
+                Xturn = false;
+            }
+            else finAng = 45 * (-Way + 3) + 180;
             stX = X;
             stY = Y;
             Dis = 50;
@@ -173,6 +194,53 @@ void Player::Draw() const
             finX = stX + Dis * cos((3.14 / 180) * (finAng - 90));
             finY = stY + Dis * sin((3.14 / 180) * (finAng - 90));
         }
-        DrawRotaGraph(finX, finY, 1, (3.14 / 180) * finAng, SickleIng, true, true);
+        DrawRotaGraph(finX, finY, 1, (3.14 / 180) * finAng, SickleIng, true, Xturn);
     }
+}
+
+int Player::AtkPos(char XY) const
+{
+    double stX = 0, stY = 0;		//振りかぶる前の座標
+    double finX = 0, finY = 0;		//振りかぶった後の座標
+    double Dis = 65;			//体の中心からの距離
+    bool Xturn = true;      //画像反転
+
+    double finAng = 0;	//振りかぶる角度
+    if (Attack)
+    {
+        if (Attack <= 6)
+        {
+            if (Combo % 2 == 0)
+            {
+                finAng = 45 * (-Way + 3) + 180 - (180 / 5 * (Attack - 1));
+                Xturn = false;
+            }
+            else finAng = 45 * (-Way + 3) + (180 / 5 * (Attack - 1));
+            stX = X;
+            stY = Y;
+
+            finX = stX + Dis * cos((3.14 / 180) * (finAng - 90));
+            finY = stY + Dis * sin((3.14 / 180) * (finAng - 90));
+        }
+        else
+        {
+            if (Combo % 2 == 0)
+            {
+                finAng = 45 * (-Way + 3);
+                Xturn = false;
+            }
+            else finAng = 45 * (-Way + 3) + 180;
+            stX = X;
+            stY = Y;
+
+            finX = stX + Dis * cos((3.14 / 180) * (finAng - 90));
+            finY = stY + Dis * sin((3.14 / 180) * (finAng - 90));
+        }
+    }
+    else return -1;
+
+    if (XY == 'X')return finX;
+    if (XY == 'Y')return finY;
+
+    return -1;
 }

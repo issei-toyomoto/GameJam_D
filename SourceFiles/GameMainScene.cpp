@@ -66,6 +66,10 @@ void GameMain::Draw() const { // やることは描画のみ、絶対に値の�
         DrawLine(i, 100 + margin, i, 720 - margin, 0xffffff);
         if (i / BLOCK_SIZE % 5 == 0)DrawLine(i, 100 + margin, i, 720 - margin, 0xff0000);
     }
+
+    DrawFormatString(200, 20, 0xffffff, "X    : %d", player.AtkPos('X'));
+    DrawFormatString(200, 40, 0xffffff, "Y    : %d", player.AtkPos('Y'));
+    DrawFormatString(200, 60, 0xffffff, "NONE : %d", player.AtkPos('Z'));
     
 #endif
     
@@ -76,7 +80,6 @@ void GameMain::Draw() const { // やることは描画のみ、絶対に値の�
 
 void GameMain::SetStage(int stage) 
 {
-    
 
     for (int i = 0; i < MAP_HEIGHT; i++) {
         for (int j = 0; j < MAP_WIDTH; j++) {
