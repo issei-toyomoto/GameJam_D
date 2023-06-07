@@ -12,8 +12,13 @@ private:
     int Stage3Time;
 
     int TotalScore;
-
+ 
     int timer;
+
+    int se_result;
+    int se_result_total;
+
+   
 public:
     // コンストラクタ
     Result(int score);
