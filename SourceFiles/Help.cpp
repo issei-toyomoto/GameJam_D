@@ -69,7 +69,7 @@ AbstractScene* Help::Update() {
     }
     else if (InputControl::OnButton(XINPUT_BUTTON_X) || CheckHitKey(KEY_INPUT_X)) {
         if (CheckSoundMem(se_select) == 0) PlaySoundMem(se_select, DX_PLAYTYPE_BACK, TRUE);
-        if (state >= 2) {
+        if (state >= 1) {
             state = 0;
         }
         else {
@@ -123,6 +123,12 @@ void Help::Draw() const {
     else if (state == 1) {
         // サブタイトル表示
         DrawStringToHandle(730, 40, "ゲーム説明", 0x000000, font[FONT_TYPE_LOAD_1][FONT_SIZE_64], 0xffffff);
+
+        // 説明内容
+        DrawStringToHandle(120, 220, "このゲームは、カマをふり回す危険な主人公を操作して草をかったり、", 0x000000, font[FONT_TYPE_LOAD_1][FONT_SIZE_32], 0xffffff);
+        DrawStringToHandle(250, 270, "お花をつんだりする非常にほのぼのしたゲームです。", 0x000000, font[FONT_TYPE_LOAD_1][FONT_SIZE_32], 0xffffff);
+        //DrawStringToHandle(300, 320, "他のリンゴを取ってポイントをかせいでください。", 0x000000, font[FONT_TYPE_LOAD_1][FONT_SIZE_32], 0xffffff);
+        //DrawStringToHandle(100, 370, "落下してくるリンゴは４種類です。", 0x000000, font[FONT_TYPE_LOAD_1][FONT_SIZE_32], 0xffffff);
     };
 
     // BGM 再生
