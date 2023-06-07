@@ -2,7 +2,7 @@
 
 #define SCREEN_WIDTH 1280
 #define SCREEN_HEIGHT 720
-#define GAME_NAME "ゲーム名未決定"
+#define GAME_NAME "草花スラッシュ"
 
 #include <stdio.h>
 #include <math.h>
