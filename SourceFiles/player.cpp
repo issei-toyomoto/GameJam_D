@@ -28,7 +28,7 @@ void Player::Update()
     float InpY = -InputControl::TipLeftLStick(STICKL_Y);
 
     //スティック角度・傾き
-    float Rad = InputControl::LstickRad();
+  //  float Rad = InputControl::LstickRad();
     float Tilt = InputControl::LstickTilt();
 
     //加速度
