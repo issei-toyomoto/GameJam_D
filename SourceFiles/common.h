@@ -21,12 +21,12 @@
 #define MARGIN_Y (SCREEN_HEIGHT - UI_SIZE) % BLOCK_SIZE / 2
 
 //花、草のマップ上での数
-#define FLOWER_NUM 3
-#define WEED_NUM 1
+#define FLOWER_NUM 30
+#define WEED_NUM 10
 
 //花、草の二次元配列
-#define FLOWER 1
-#define WEED 2
+#define FLOWER 2
+#define WEED 1
 
 //花、草のスコア
 #define FLOWER_AtkSCORE 300
