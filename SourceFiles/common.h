@@ -29,5 +29,5 @@
 #define WEED 2
 
 //花、草のスコア
-#define FLOWER_SCORE 500
-#define WEED_SCORE 100
+#define FLOWER_AtkSCORE 300
+#define WEED_AtkSCORE 100
