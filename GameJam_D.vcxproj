@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ranking.cpp" />
     <ClCompile Include="SourceFiles\GameMainScene.cpp" />
     <ClCompile Include="SourceFiles\Help.cpp" />
     <ClCompile Include="SourceFiles\main.cpp" />
@@ -30,6 +31,7 @@
     <ClCompile Include="SourceFiles\Title.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ranking.h" />
     <ClInclude Include="SourceFiles\AbstractScene.h" />
     <ClInclude Include="SourceFiles\common.h" />
     <ClInclude Include="SourceFiles\Fps.h" />
