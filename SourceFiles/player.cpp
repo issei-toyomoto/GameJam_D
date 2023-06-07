@@ -158,7 +158,7 @@ void Player::Draw() const
             finAng = 45 * (-Way + 3) + (180 / 5 * (Attack - 1));
             stX = X;
             stY = Y;
-            Dis = 70;
+            Dis = 50;
 
             finX = stX + Dis * cos((3.14 / 180) * (finAng - 90));
             finY = stY + Dis * sin((3.14 / 180) * (finAng - 90));
@@ -168,7 +168,7 @@ void Player::Draw() const
             finAng = 45 * (-Way + 3) + 180;
             stX = X;
             stY = Y;
-            Dis = 70;
+            Dis = 50;
 
             finX = stX + Dis * cos((3.14 / 180) * (finAng - 90));
             finY = stY + Dis * sin((3.14 / 180) * (finAng - 90));
