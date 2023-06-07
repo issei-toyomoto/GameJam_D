@@ -1,9 +1,10 @@
-#include "common.h"
+﻿#include "common.h"
 #include "main.h"
 #include "Result.h"
 #include "PadInput.h"
 
 #include "Player.h"
+#include "UI.h"
 
 
 #define DEBUG
@@ -24,14 +25,11 @@ GameMain::~GameMain() {
 };
 
 AbstractScene* GameMain::Update() { // ここで値の更新など、処理
-    
-
-
 
     player.Update();
 
     if (InputControl::OnButton(XINPUT_BUTTON_START))return new Result(score);
-    if (UI::Update() == -1) {
+    if (ui.Update() == -1) {
         return nullptr;
     };
     return this;    //シーン継続
@@ -73,7 +71,7 @@ void GameMain::Draw() const { // やることは描画のみ、絶対に値の�
     
     player.Draw();
 
-    UI::Draw();
+    ui.Draw();
 };
 
 void GameMain::SetStage(int stage) 
