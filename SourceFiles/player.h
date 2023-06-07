@@ -20,4 +20,5 @@ public:
     void Update();
     void Draw()const;
 
+    int AtkPos(char XY) const;
 };
