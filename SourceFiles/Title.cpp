@@ -12,6 +12,10 @@ Title::Title() {
     // 画像読み込み
     if ((img_title = LoadGraph("Resources/Images/title.png")) == -1) {};
 
+    AnimImg = LoadGraph("images/readyback.png");
+    Anim = 0;
+    Start = false;
+
     // フォント読み込み
     font[0][0] = CreateFontToHandle(NULL, 128, -1, DX_FONTTYPE_NORMAL);
     font[0][1] = CreateFontToHandle(NULL, 64, -1, DX_FONTTYPE_NORMAL);
@@ -61,53 +65,61 @@ AbstractScene* Title::Update() {
     /********************************
     * ゲームモードセレクト処理
     ********************************/
-    // キーボードのボタンが戻ったら操作受付
-    if (((InputControl::TipLeftLStick(STICKL_Y) <= 0.1) && (InputControl::TipLeftLStick(STICKL_Y) >= -0.1)) && !CheckHitKey(KEY_INPUT_UP) && !CheckHitKey(KEY_INPUT_DOWN) && !CheckHitKey(KEY_INPUT_SPACE)) {
-        ctrl_state = 0;
-    };
-    if (((InputControl::TipLeftLStick(STICKL_Y) >= 0.5) && ctrl_state == 0) || InputControl::OnButton(XINPUT_BUTTON_DPAD_UP) || (CheckHitKey(KEY_INPUT_UP) && ctrl_state == 0)) {
-        // カーソル上
-        PlaySoundMem(se_cursor, DX_PLAYTYPE_BACK, TRUE);
-        if (state <= 0) {
-            state = 3;
-        }
-        else {
-            state -= 1;
+    if (!Start)
+    {
+        // キーボードのボタンが戻ったら操作受付
+        if (((InputControl::TipLeftLStick(STICKL_Y) <= 0.1) && (InputControl::TipLeftLStick(STICKL_Y) >= -0.1)) && !CheckHitKey(KEY_INPUT_UP) && !CheckHitKey(KEY_INPUT_DOWN) && !CheckHitKey(KEY_INPUT_SPACE)) {
+            ctrl_state = 0;
         };
-        ctrl_state = 1;
-    }
-    else if (((InputControl::TipLeftLStick(STICKL_Y) <= -0.5) && ctrl_state == 0) || InputControl::OnButton(XINPUT_BUTTON_DPAD_DOWN) || (CheckHitKey(KEY_INPUT_DOWN) && ctrl_state == 0)) {
-        // カーソル下
-        PlaySoundMem(se_cursor, DX_PLAYTYPE_BACK, TRUE);
-        if (state >= 3) {
-            state = 0;
+        if (((InputControl::TipLeftLStick(STICKL_Y) >= 0.5) && ctrl_state == 0) || InputControl::OnButton(XINPUT_BUTTON_DPAD_UP) || (CheckHitKey(KEY_INPUT_UP) && ctrl_state == 0)) {
+            // カーソル上
+            PlaySoundMem(se_cursor, DX_PLAYTYPE_BACK, TRUE);
+            if (state <= 0) {
+                state = 3;
+            }
+            else {
+                state -= 1;
+            };
+            ctrl_state = 1;
         }
-        else {
-            state += 1;
+        else if (((InputControl::TipLeftLStick(STICKL_Y) <= -0.5) && ctrl_state == 0) || InputControl::OnButton(XINPUT_BUTTON_DPAD_DOWN) || (CheckHitKey(KEY_INPUT_DOWN) && ctrl_state == 0)) {
+            // カーソル下
+            PlaySoundMem(se_cursor, DX_PLAYTYPE_BACK, TRUE);
+            if (state >= 3) {
+                state = 0;
+            }
+            else {
+                state += 1;
+            };
+            ctrl_state = 1;
         };
-        ctrl_state = 1;
-    };
 
-    if (InputControl::OnButton(XINPUT_BUTTON_B) || CheckHitKey(KEY_INPUT_SPACE)) {
-        if (CheckSoundMem(se_select) == 0) PlaySoundMem(se_select, DX_PLAYTYPE_BACK, TRUE);
-        if (state == 0) {
-            // スタート選択
-            return new GameMain();
-        }
-        else if (state == 1) {
-            // ヘルプ選択
-            return new Help();
-        }
-        else if (state == 2) {
-            // ランキング選択
-            //return new Ranking();
-        }
-        else if (state == 3) {
-            // 終わる選択
-            //return new End();
-            return nullptr;
+        if (InputControl::OnButton(XINPUT_BUTTON_B) || CheckHitKey(KEY_INPUT_SPACE)) {
+            if (CheckSoundMem(se_select) == 0) PlaySoundMem(se_select, DX_PLAYTYPE_BACK, TRUE);
+            if (state == 0) {
+                // スタート選択
+                Start = true;
+            }
+            else if (state == 1) {
+                // ヘルプ選択
+                return new Help();
+            }
+            else if (state == 2) {
+                // ランキング選択
+                return new DrawRanking();
+            }
+            else if (state == 3) {
+                // 終わる選択
+                //return new End();
+                return nullptr;
+            };
         };
-    };
+    }
+    else
+    {
+        Anim++;
+        if (30 < Anim)return new GameMain();
+    }
 
     return this;
 };
@@ -148,4 +160,10 @@ void Title::Draw() const {
     if (CheckSoundMem(bgm) == 0) {
         PlaySoundMem(bgm, DX_PLAYTYPE_LOOP, TRUE);
     };
+
+    if (Start) 
+    {
+        //画像フェードイン
+        DrawGraph(SCREEN_WIDTH - (SCREEN_WIDTH / 30.f) * Anim, 0, AnimImg, true);
+    }
 };
