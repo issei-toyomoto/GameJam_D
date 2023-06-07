@@ -1,19 +1,19 @@
 ﻿#include "DxLib.h"
 #include "UI.h"
 
-int UI::score;
-int UI::time;
-int UI::stage;
-int UI::Timelimit = 60;
-int UI::FPSCnt;
-//UI::UI() {
-//    score = 0;
-//    Timelimit = 60;
-//    FPSCnt = 0;
-//}
-//
-//UI::~UI() {
-//}
+//int UI::score;
+//int UI::time;
+//int UI::stage;
+//int UI::Timelimit = 60;
+//int UI::FPSCnt;
+UI::UI() {
+    score = 0;
+    Timelimit = 61;
+    FPSCnt = 0;
+}
+
+UI::~UI() {
+}
 
 int UI::Update() //キー入力情報更新
 {
@@ -25,7 +25,7 @@ int UI::Update() //キー入力情報更新
     }
 }
 
-void UI::Draw() { // やることは描画のみ、絶対に値の更新はしない
+void UI::Draw() const{ // やることは描画のみ、絶対に値の更新はしない
     SetFontSize(60);
 
     DrawFormatString(10, 15, 0xffffff, "Stage ");
