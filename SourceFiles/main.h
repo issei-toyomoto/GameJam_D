@@ -19,3 +19,4 @@ using std::to_string;
 #include "GameMainScene.h"
 #include "Result.h"
 #include "Help.h"
+#include "Ranking.h"
