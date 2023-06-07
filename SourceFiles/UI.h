@@ -1,18 +1,25 @@
 ﻿#pragma once
 
-#include "GameMainScene.h"
-
 class UI  {
 private:    
-    static int score;
-    static int time;
-    static int stage;
-    static int Timelimit;
-    static int FPSCnt;
+    int score;
+    int time;
+    int stage;
+    int Timelimit;
+    int FPSCnt;
+    bool count = true;
 public:
-    /*UI();
-    ~UI();*/
+    UI();
+    ~UI();
 
-    static int Update();
-    static void Draw();
+    void switchcount() { 
+        count = !count;
+        FPSCnt = 0;
+    }
+    int GetTime() { return Timelimit; }
+
+    int Update(int StopTime);
+
+    void Draw(int score,int stage) const;
+
 };
