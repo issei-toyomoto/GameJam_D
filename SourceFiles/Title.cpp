@@ -148,6 +148,4 @@ void Title::Draw() const {
     if (CheckSoundMem(bgm) == 0) {
         PlaySoundMem(bgm, DX_PLAYTYPE_LOOP, TRUE);
     };
-
-    DrawFormatString(20, 600, GetColor(255, 255, 255), "%.1f", InputControl::TipLeftLStick(STICKL_Y));
 };
