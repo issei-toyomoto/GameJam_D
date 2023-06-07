@@ -11,8 +11,8 @@
 //スティック
 struct Stick
 {
-    short ThumbX;
-    short ThumbY;
+    short ThumbX;           //横軸値
+    short ThumbY;           //縦軸値
 };
 
 class InputControl
