@@ -22,3 +22,51 @@ using std::to_string;
 #include "Result.h"
 #include "Help.h"
 #include "Ranking.h"
+#include"DrawRanking.h"
+
+#define IMG 0
+#define SND 1
+
+#define BGM 0
+#define SE 1
+
+#define TITLE 0
+#define MAIN 1
+
+class Resources {
+private:
+    static int bgm_title;
+    static int bgm_main;
+    static int se_cursor;
+    static int se_select;
+public:
+    int Get(int media, int type, int getNum) {
+        if (media == 1) {
+            if (type == 0) {
+                if (getNum == 0) {
+                    return bgm_title;
+                } else if (getNum == 1) {
+                    return bgm_main;
+                }
+            }
+            else if (type == 1) {
+
+            };
+        }
+    };
+    void Set(int media, int type, int getNum, int data) {
+        if (media == 1) {
+            if (type == 0) {
+                if (getNum == 0) {
+                    bgm_title = data;
+                }
+                else if (getNum == 1) {
+                    bgm_main = data;
+                }
+            }
+            else if (type == 1) {
+
+            };
+        }
+    };
+};
