@@ -14,6 +14,7 @@
 GameMain::GameMain() {
     // 初期化処理
     state = 0;
+    ZeroCnt = 0;
 
     BackImg = LoadGraph("images/back.png");
     FlowerImg = LoadGraph("images/flower.png");
@@ -33,16 +34,21 @@ AbstractScene* GameMain::Update() { // ここで値の更新など、処理
 
 
     //花、草を刈った時のスコア処理
-    int AtkX = (player.AtkPos('X') - MARGIN_X) / BLOCK_SIZE;
-    int AtkY = (player.AtkPos('Y') - UI_SIZE - MARGIN_Y) / BLOCK_SIZE;
-    if (AtkX >= 0 && AtkY >= 0) {
-        if (Grass[AtkY][AtkX] == FLOWER) {
-            score -= FLOWER_AtkSCORE;
-            Grass[AtkY][AtkX] = 0;
-        }
-        if (Grass[AtkY][AtkX] == WEED) {
-            score += WEED_AtkSCORE;
-            Grass[AtkY][AtkX] = 0;
+    for (int i = 0; i < 3; i++)
+    {
+        int AtkX = (player.AtkPos('X', 32 * i) - MARGIN_X) / BLOCK_SIZE;
+        int AtkY = (player.AtkPos('Y', 32 * i) - UI_SIZE - MARGIN_Y) / BLOCK_SIZE;
+        if (AtkX >= 0 && AtkY >= 0) {
+            if (Grass[AtkY][AtkX] == FLOWER) {
+                score -= FLOWER_AtkSCORE;
+                Grass[AtkY][AtkX] = 0;
+                ZeroCnt++;
+            }
+            if (Grass[AtkY][AtkX] == WEED) {
+                score += WEED_AtkSCORE;
+                Grass[AtkY][AtkX] = 0;
+                ZeroCnt++;
+            }
         }
     }
 
@@ -72,6 +78,7 @@ AbstractScene* GameMain::Update() { // ここで値の更新など、処理
                     {
                         score += 500;
                         Grass[MapY + j][MapX + i] = 0;
+                        ZeroCnt++;
                         i = 2;
                         break;
                     }
@@ -80,6 +87,15 @@ AbstractScene* GameMain::Update() { // ここで値の更新など、処理
         }
 
     }
+
+    if (ZeroCnt == (FLOWER_NUM * StageNum) + (WEED_NUM * StageNum)) {
+        StageNum++;
+        ZeroCnt = 0;
+        if (StageNum > 3) {
+            return new Result(score);
+        }
+    }
+    
 
     if (InputControl::OnButton(XINPUT_BUTTON_START))return new Result(score);
     if (ui.Update() == -1) {
@@ -94,7 +110,7 @@ void GameMain::Draw() const { // やることは描画のみ、絶対に値の�
     DrawGraph(0, 0, BackImg, true);
     DrawBox(0, 0, 1280, 100, GetColor(0, 0, 0), TRUE);
 
-    DrawFormatString(20, 100, GetColor(255, 0, 0), "SCORE:%d", score);
+    DrawFormatString(20, 100, GetColor(255, 0, 0), "ZeroCnt:%d == %d", ZeroCnt, (FLOWER_NUM * StageNum) + (WEED_NUM * StageNum));
 
     //花、草表示処理
     for (int i = 0; i < MAP_HEIGHT; i++) {
@@ -125,10 +141,6 @@ void GameMain::Draw() const { // やることは描画のみ、絶対に値の�
         if (i / BLOCK_SIZE % 5 == 0)DrawLine(i, 100 + margin, i, 720 - margin, 0xff0000);
     }
 
-    DrawFormatString(200, 20, 0xffffff, "X    : %d", player.AtkPos('X'));
-    DrawFormatString(200, 40, 0xffffff, "Y    : %d", player.AtkPos('Y'));
-    DrawFormatString(200, 60, 0xffffff, "NONE : %d", player.AtkPos('Z'));
-    
 #endif
     
     player.Draw();
@@ -146,9 +158,9 @@ void GameMain::SetStage(int stage)
         }
     }
 
-    for (int i = 0; i < WEED_NUM * stage; i++) {
-        y = GetRand(MAP_HEIGHT);
-        x = GetRand(MAP_WIDTH);
+    for (int i = 0; i < FLOWER_NUM * stage; i++) {
+        y = GetRand(MAP_HEIGHT - 1);
+        x = GetRand(MAP_WIDTH - 1);
         if (Grass[y][x] == 0) {
             Grass[y][x] = FLOWER;
         }
@@ -158,9 +170,9 @@ void GameMain::SetStage(int stage)
         
     }
    
-    for (int i = 0; i < FLOWER_NUM * stage; i++) {
-        y = GetRand(MAP_HEIGHT);
-        x = GetRand(MAP_WIDTH);
+    for (int i = 0; i < WEED_NUM * stage; i++) {
+        y = GetRand(MAP_HEIGHT - 1);
+        x = GetRand(MAP_WIDTH - 1);
         if (Grass[y][x] == 0) {
             Grass[y][x] = WEED;
         }

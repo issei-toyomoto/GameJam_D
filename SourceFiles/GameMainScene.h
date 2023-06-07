@@ -26,7 +26,9 @@ private:
     int Grass[MAP_HEIGHT][MAP_WIDTH];   //草・花の状態(0：何もない　1：草　2：花)
     int GrassTmp[MAP_HEIGHT][MAP_WIDTH];
     
-    int GrassZeroCnt = 0;
+    int ZeroCnt;
+    int ItemCnt;
+
 public:
     // コンストラクタ
     GameMain();
