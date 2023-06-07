@@ -11,17 +11,19 @@ private:
     int state;
     int score = 0;
     int Time;
+    int StageNum;
 
     int x;
     int y;
 
     int BackImg;    //背景画像
-    int FlowerImg;  //
-    int WeedImg;
+    int FlowerImg;  //花画像
+    int WeedImg;    //草画像
 
     Player player; //プレイヤー
 
     int Grass[MAP_HEIGHT][MAP_WIDTH];   //草・花の状態(0：何もない　1：草　2：花)
+    int GrassTmp[MAP_HEIGHT][MAP_WIDTH];
     
 public:
     // コンストラクタ
