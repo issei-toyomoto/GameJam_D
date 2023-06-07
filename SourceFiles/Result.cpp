@@ -11,9 +11,6 @@ Result::Result(int score, int time[3]) {
 
     this->score = score;
 
-    FlowerImg = 0;
-    GrassImg = 0;
-
     Stage1Time = time[0];
     Stage2Time = time[1];
     Stage3Time = time[2];\
