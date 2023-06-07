@@ -37,7 +37,7 @@ private:
     static int snd_bgm[];
     static int snd_se[];
 public:
-    int Get(int media, int type, int getNum) {
+    static int Get(int media, int type, int getNum) {
         if (media == 1) {
             if (type == 0) {
                 return snd_bgm[getNum];
@@ -47,7 +47,7 @@ public:
             };
         }
     };
-    void Set(int media, int type, int getNum, int data) {
+    static void Set(int media, int type, int getNum, int data) {
         if (media == 1) {
             if (type == 0) {
                 snd_bgm[getNum] = data;
