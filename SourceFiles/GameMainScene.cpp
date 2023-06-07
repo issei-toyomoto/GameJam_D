@@ -1,9 +1,10 @@
-#include "common.h"
+﻿#include "common.h"
 #include "main.h"
 #include "Result.h"
 #include "PadInput.h"
 
 #include "Player.h"
+#include "UI.h"
 
 
 #define DEBUG
@@ -16,7 +17,7 @@ GameMain::GameMain() {
     FlowerImg = LoadGraph("images/flower.png");
     WeedImg = LoadGraph("images/kusa.png");
     
-    SetStage(1);
+    SetStage(3);
 };
 
 GameMain::~GameMain() {
@@ -24,14 +25,11 @@ GameMain::~GameMain() {
 };
 
 AbstractScene* GameMain::Update() { // ここで値の更新など、処理
-    
-
-
 
     player.Update();
 
     if (InputControl::OnButton(XINPUT_BUTTON_START))return new Result(score);
-    if (UI::Update() == -1) {
+    if (ui.Update() == -1) {
         return nullptr;
     };
     return this;    //シーン継続
@@ -73,7 +71,7 @@ void GameMain::Draw() const { // やることは描画のみ、絶対に値の�
     
     player.Draw();
 
-    UI::Draw();
+    ui.Draw();
 };
 
 void GameMain::SetStage(int stage) 
@@ -86,7 +84,7 @@ void GameMain::SetStage(int stage)
         }
     }
 
-    for (int i = 0; i < 30*stage; i++) {
+    for (int i = 0; i < FLOWER_NUM * stage; i++) {
         y = GetRand(MAP_HEIGHT);
         x = GetRand(MAP_WIDTH);
         if (Grass[y][x] == 0) {
@@ -98,7 +96,7 @@ void GameMain::SetStage(int stage)
         
     }
    
-    for (int i = 0; i < 10*stage; i++) {
+    for (int i = 0; i < WEED_NUM * stage; i++) {
         y = GetRand(MAP_HEIGHT);
         x = GetRand(MAP_WIDTH);
         if (Grass[y][x] == 0) {
