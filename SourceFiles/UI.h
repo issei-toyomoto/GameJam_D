@@ -18,7 +18,7 @@ public:
     }
     int GetTime() { return Timelimit; }
 
-    int Update(int StopTime);
+    int Update();
 
     void Draw(int score,int stage) const;
 
