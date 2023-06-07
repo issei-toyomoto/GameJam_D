@@ -3,7 +3,6 @@
 * 担当：島袋
 ********************************/
 #include "main.h"
-#include "PadInput.h"
 
 Title::Title() {
     // 初期化処理
@@ -39,6 +38,22 @@ Title::Title() {
 
 Title::~Title() {
     // 終了処理
+    img_title = 0;
+
+    // フォント削除
+    for (int i = 0; i < 2; i++) {
+        for (int j = 0; j < 4; j++) {
+            DeleteFontToHandle(font[i][j]);
+        };
+    };
+
+    // サウンド削除
+    StopSoundMem(bgm);
+    DeleteSoundMem(bgm);
+    StopSoundMem(se_cursor);
+    DeleteSoundMem(se_cursor);
+    StopSoundMem(se_select);
+    DeleteSoundMem(se_select);
 };
 
 AbstractScene* Title::Update() {
