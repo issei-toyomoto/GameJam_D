@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="SourceFiles\DrawRanking.cpp" />
     <ClCompile Include="SourceFiles\GameMainScene.cpp" />
     <ClCompile Include="SourceFiles\Help.cpp" />
     <ClCompile Include="SourceFiles\main.cpp" />
@@ -33,6 +34,7 @@
   <ItemGroup>
     <ClInclude Include="SourceFiles\AbstractScene.h" />
     <ClInclude Include="SourceFiles\common.h" />
+    <ClInclude Include="SourceFiles\DrawRanking.h" />
     <ClInclude Include="SourceFiles\Fps.h" />
     <ClInclude Include="SourceFiles\GameMainScene.h" />
     <ClInclude Include="SourceFiles\Help.h" />
