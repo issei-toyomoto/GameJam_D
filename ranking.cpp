@@ -1,10 +1,16 @@
 ﻿#include "ranking.h"
 #include"DxLib.h"
-ranking::ranking()
+//ranking::ranking()
+//{
+//   /* ranking[i];*/
+//    i = 0;
+//    RANKING_MAX=10;
+//}
+void ranking::Init() 
 {
-   /* ranking[i];*/
+    /* ranking[i];*/
     i = 0;
-    RANKING_MAX;
+    RANKING_MAX=10;
 }
 void ranking::Update()
 {
