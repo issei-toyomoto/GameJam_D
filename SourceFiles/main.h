@@ -12,6 +12,8 @@ using std::to_string;
 #include <time.h>
 #include "SceneManager.h"
 
+#include "PadInput.h"
+
 #include "DxLib.h"
 
 // 各シーンのヘッダーファイル
