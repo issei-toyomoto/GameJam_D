@@ -1,18 +1,16 @@
 ﻿#pragma once
 
-#include "GameMainScene.h"
-
 class UI  {
 private:    
-    static int score;
-    static int time;
-    static int stage;
-    static int Timelimit;
-    static int FPSCnt;
+    int score;
+    int time;
+    int stage;
+    int Timelimit;
+    int FPSCnt;
 public:
-    /*UI();
-    ~UI();*/
+    UI();
+    ~UI();
 
-    static int Update();
-    static void Draw();
+    int Update();
+    void Draw() const;
 };
