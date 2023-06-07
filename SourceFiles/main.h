@@ -2,7 +2,7 @@
 
 #define SCREEN_WIDTH 1280
 #define SCREEN_HEIGHT 720
-#define GAME_NAME "老害予備軍！カマを持った花さかじいさん"
+#define GAME_NAME "ゲーム名未決定"
 
 #include <stdio.h>
 #include <math.h>
