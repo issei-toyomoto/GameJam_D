@@ -23,3 +23,11 @@
 //花、草のマップ上での数
 #define FLOWER_NUM 30
 #define WEED_NUM 10
+
+//花、草の二次元配列
+#define FLOWER 1
+#define WEED 2
+
+//花、草のスコア
+#define FLOWER_SCORE 500
+#define WEED_SCORE 100
