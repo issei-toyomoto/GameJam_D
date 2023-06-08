@@ -4,11 +4,19 @@
 DrawRanking::DrawRanking()
 {
     Ranking::ReadRanking();
+    BackImg = LoadGraph("images/Back.png");
 };
 
 DrawRanking::~DrawRanking()
 {
-
+    // フォント削除
+    for (int i = 0; i < 2; i++) 
+    {
+        for (int j = 0; j < 4; j++) 
+        {
+            DeleteFontToHandle(font[i][j]);
+        }
+    }
 };
 
 AbstractScene* DrawRanking::Update()
@@ -24,8 +32,11 @@ AbstractScene* DrawRanking::Update()
 void DrawRanking::Draw()const 
 {
     SetFontSize(64);
+
+    DrawGraph(0, 0, BackImg, TRUE);
+
     for (int i = 0; i < RANK_MAX; i++) {
-        DrawFormatString(120, 100 + (i * 90), GetColor(255, 255, 255), "%d 位　 %s　%7d", Ranking::GetData(i).no, Ranking::GetData(i).name, Ranking::GetData(i).score);
+        DrawFormatString(120, 100 + (i * 90), GetColor(0, 0, 0), "%d 位　 %s　%7d", Ranking::GetData(i).no, Ranking::GetData(i).name, Ranking::GetData(i).score);
     };
 
 };
