@@ -25,11 +25,14 @@ void Credit::Draw()const
    
     // 背景表示
     DrawGraph(0, 0, img_title, TRUE);
-    SetFontSize(64);
-    DrawString(100, 100, "お借りした素材", GetColor(0, 255, 0));
-    DrawString(100, 200, "効果音ラボ", GetColor(255, 0, 0));
-    DrawString(100, 300, "いらすとや", GetColor(255, 0, 0));
-    DrawString(100, 400, "DOVA-SYNDROME", GetColor(255, 0, 0));
+    SetFontSize(32);
+    DrawString(50, 50, "お借りした素材", GetColor(0, 255, 0));
+    DrawString(50, 100, "効果音ラボ", GetColor(255, 0, 0));
+    DrawString(50, 150, "いらすとや", GetColor(255, 0, 0));
+    DrawString(50, 200, "DOVA-SYNDROME", GetColor(255, 0, 0));
+
+    DrawString(50, 400, "Team-D　メンバー", GetColor(0, 255, 0));
+    DrawString(50, 450, "豊元一成　下地隆翔　加藤錦　喜納司貴 仲西康生　島袋 叶望　有川 大晟", GetColor(255, 0, 0));
    /* ChangeScen();*/
     DrawString(530, 600, "Aボタンで戻る", GetColor(255, 0, 0));
 }
