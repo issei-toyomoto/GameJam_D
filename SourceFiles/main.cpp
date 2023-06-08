@@ -31,7 +31,7 @@ int WINAPI WinMain(_In_ HINSTANCE  hInstance, _In_opt_ HINSTANCE hPrevInstance, 
     if ((bgm_title = LoadSoundMem("Resources/Sounds/bgm_title.wav")) == -1) return -1;
     if ((bgm_main = LoadSoundMem("Resources/Sounds/bgm_main.wav")) == -1) return -1;
     if ((se_select = LoadSoundMem("Resources/Sounds/se_select.wav")) == -1) return -1;
-    Resources::Set(SND, BGM, TITLE, 0);
+    Resources::Set(SND, BGM, TITLE, bgm_title);
 
     // ゲームループし、シーンマネジャーでシーンの更新
     while ((ProcessMessage() == 0) && (sceneMng->Update() != nullptr) && !(InputControl::OnButton(XINPUT_BUTTON_BACK))) {
