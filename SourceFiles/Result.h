@@ -12,6 +12,8 @@ private:
     int Stage3Time;
 
     int TotalScore;
+
+    bool SaveFlower;    //全ての花を摘んだならtrue
  
     int timer;
 
@@ -19,10 +21,11 @@ private:
     int se_result_total;
 
     int AnimImg;    //画面移行演出に使う画像
+    int FlowerImg;  //花冠の画像
    
 public:
     // コンストラクタ
-    Result(int score, int time[3]);
+    Result(int score, int time[3], bool SaveFlower);
 
     // デストラクタ
     ~Result();
