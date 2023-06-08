@@ -22,8 +22,7 @@ int WINAPI WinMain(_In_ HINSTANCE  hInstance, _In_opt_ HINSTANCE hPrevInstance, 
     SetDrawScreen(DX_SCREEN_BACK);                 // 描画先画面を裏にする（ダブルバッファリング）
 
     // タイトル シーンオブジェクト作成
-    int array[3] = { 0,0,0 };
-    SceneManager* sceneMng = new SceneManager((AbstractScene*) new Result(0, array));
+    SceneManager* sceneMng = new SceneManager((AbstractScene*) new Title());
 
     Fps fps;
 
