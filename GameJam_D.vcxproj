@@ -28,6 +28,7 @@
     <ClCompile Include="SourceFiles\player.cpp" />
     <ClCompile Include="SourceFiles\Ranking.cpp" />
     <ClCompile Include="SourceFiles\Result.cpp" />
+    <ClCompile Include="SourceFiles\RunWeed.cpp" />
     <ClCompile Include="SourceFiles\SceneManager.cpp" />
     <ClCompile Include="SourceFiles\UI.cpp" />
     <ClCompile Include="SourceFiles\Title.cpp" />
@@ -45,6 +46,7 @@
     <ClInclude Include="SourceFiles\PadInput.h" />
     <ClInclude Include="SourceFiles\player.h" />
     <ClInclude Include="SourceFiles\Result.h" />
+    <ClInclude Include="SourceFiles\RunWeed.h" />
     <ClInclude Include="SourceFiles\SceneManager.h" />
     <ClInclude Include="SourceFiles\UI.h" />
     <ClInclude Include="SourceFiles\Title.h" />
