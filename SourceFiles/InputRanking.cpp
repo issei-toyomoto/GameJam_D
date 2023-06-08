@@ -9,7 +9,7 @@ InputRankingScene::InputRankingScene(int _score)
     XOnce = TRUE;
     YOnce = TRUE;
     CursorPoint = { 0, 0 };
-    ranking.ReadRanking();
+    Ranking::ReadRanking();
 
     //フォント追加
     NameFont1 = CreateFontToHandle("HGS創英角ﾎﾟｯﾌﾟ体", 80, 8, DX_FONTTYPE_ANTIALIASING);
@@ -22,6 +22,7 @@ InputRankingScene::InputRankingScene(int _score)
     {
         throw "Resource/Images/mori.png";
     }
+
     //SE読込
     if ((SelectSE = LoadSoundMem("Resource/sounds/SE/select01.wav")) == -1)
     {
@@ -31,6 +32,7 @@ InputRankingScene::InputRankingScene(int _score)
     {
         throw "Resource/sounds/SE/Decision01.wav";
     }
+
     //音量調整
     ChangeVolumeSoundMem(140, SelectSE);
     ChangeVolumeSoundMem(140, DecisionSE);
