@@ -140,7 +140,7 @@ void Help::Draw() const {
         // 説明内容
         DrawStringToHandle(120, 220, "このゲームは、カマをふり回す危険な主人公を操作して草をかったり、", 0x000000, font[FONT_TYPE_LOAD_1][FONT_SIZE_32], 0xffffff);
         DrawStringToHandle(250, 270, "お花をつんだりする非常にほのぼのしたゲームです。", 0x000000, font[FONT_TYPE_LOAD_1][FONT_SIZE_32], 0xffffff);
-        //DrawStringToHandle(300, 320, "他のリンゴを取ってポイントをかせいでください。", 0x000000, font[FONT_TYPE_LOAD_1][FONT_SIZE_32], 0xffffff);
+        DrawStringToHandle(300, 320, "草をかりながら花をつんで、ポイントをかせいでください。", 0x000000, font[FONT_TYPE_LOAD_1][FONT_SIZE_32], 0xffffff);
         //DrawStringToHandle(100, 370, "落下してくるリンゴは４種類です。", 0x000000, font[FONT_TYPE_LOAD_1][FONT_SIZE_32], 0xffffff);
     };
 
