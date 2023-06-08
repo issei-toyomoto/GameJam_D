@@ -141,7 +141,7 @@ void Title::Draw() const {
     DrawStringToHandle(630, 500, "クレジット", 0x000000, font[FONT_TYPE_LOAD_1][FONT_SIZE_32], 0xffffff);
     DrawStringToHandle(630, 550, "終わる", 0x000000, font[FONT_TYPE_LOAD_1][FONT_SIZE_32], 0xffffff);
 
-    DrawStringToHandle(380, 670, "左スティックで選たく、AボタンまたはBボタンで決定", 0x000000, font[FONT_TYPE_LOAD_1][FONT_SIZE_32], 0xffffff);
+    DrawStringToHandle(380, 670, "左スティックで選たく、Bボタンで決定", 0x000000, font[FONT_TYPE_LOAD_1][FONT_SIZE_32], 0xffffff);
 
     // ゲームモードセレクトのカーソル処理
     if (state == 0) {
