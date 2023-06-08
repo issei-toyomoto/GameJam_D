@@ -39,6 +39,8 @@ private:
     int ZeroCnt;
     int ItemCnt;
 
+    int GrassSe;    //草を刈る効果音
+
 public:
     // コンストラクタ
     GameMain();

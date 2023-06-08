@@ -14,6 +14,7 @@ private:
     int RunCool = 0;            //“¦‚°‚½Œã‚Ì‘Ò‹@ŽžŠÔ
 
     int Image;                  //‰æ‘œ
+    int Se;                     //“¦‚°‚éŒø‰Ê‰¹
 
 public:
     RunWeed(float InitX, float InitY);
