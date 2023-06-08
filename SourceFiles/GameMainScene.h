@@ -63,4 +63,15 @@ public:
 
     int GetScore() { return score; }
     void SortGrass();
+
+    // スコア取得時のエフェクト関数
+    void DrawScoreEffect(int posX, int posY, int drawScore, int minusFlg, int category) {
+        SetFontSize(16);
+        if (minusFlg == 1) {
+            DrawFormatString(posX, posY + 20, GetColor(255, 255, 255), "-%d", drawScore);
+        }
+        else {
+            DrawFormatString(posX, posY + 20, GetColor(255, 255, 255), "%d", drawScore);
+        };
+    };
 };
