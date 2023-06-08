@@ -1,6 +1,6 @@
 ﻿#include "main.h"
 
-#define FILEPATH "../SaveData/ranking.txt"
+#define FILEPATH "SaveData/ranking.txt"
 
 RankingData Ranking::Data[RANK_MAX];
 
