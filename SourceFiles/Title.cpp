@@ -32,12 +32,8 @@ Title::Title() {
     font[1][3] = CreateFontToHandle("しょかきうたげ（無料版）", 16, 9, DX_FONTTYPE_EDGE);
 
     // サウンド読み込み
-    bgm = LoadSoundMem("Resources/Sounds/bgm_title.wav");
     se_cursor = LoadSoundMem("Resources/Sounds/se_cursor.wav");
-    se_select = LoadSoundMem("Resources/Sounds/se_select.wav");
-    ChangeVolumeSoundMem(255, bgm);
     ChangeVolumeSoundMem(130, se_cursor);
-    ChangeVolumeSoundMem(150, se_select);
 };
 
 Title::~Title() {
@@ -52,12 +48,8 @@ Title::~Title() {
     };
 
     // サウンド削除
-    StopSoundMem(bgm);
-    DeleteSoundMem(bgm);
     StopSoundMem(se_cursor);
     DeleteSoundMem(se_cursor);
-    StopSoundMem(se_select);
-    DeleteSoundMem(se_select);
 };
 
 AbstractScene* Title::Update() {
@@ -75,7 +67,7 @@ AbstractScene* Title::Update() {
             // カーソル上
             PlaySoundMem(se_cursor, DX_PLAYTYPE_BACK, TRUE);
             if (state <= 0) {
-                state = 3;
+                state = 4;
             }
             else {
                 state -= 1;
@@ -85,7 +77,7 @@ AbstractScene* Title::Update() {
         else if (((InputControl::TipLeftLStick(STICKL_Y) <= -0.5) && ctrl_state == 0) || InputControl::OnButton(XINPUT_BUTTON_DPAD_DOWN) || (CheckHitKey(KEY_INPUT_DOWN) && ctrl_state == 0)) {
             // カーソル下
             PlaySoundMem(se_cursor, DX_PLAYTYPE_BACK, TRUE);
-            if (state >= 3) {
+            if (state >= 4) {
                 state = 0;
             }
             else {
@@ -95,7 +87,6 @@ AbstractScene* Title::Update() {
         };
 
         if (InputControl::OnButton(XINPUT_BUTTON_B) || InputControl::OnButton(XINPUT_BUTTON_A)) {
-            if (CheckSoundMem(se_select) == 0) PlaySoundMem(se_select, DX_PLAYTYPE_BACK, TRUE);
             if (state == 0) {
                 // スタート選択
                 Start = true;
@@ -109,8 +100,11 @@ AbstractScene* Title::Update() {
                 return new DrawRanking();
             }
             else if (state == 3) {
+                // クレジット選択
+                //return new Credit();
+            }
+            else if (state == 4) {
                 // 終わる選択
-                //return new End();
                 return nullptr;
             };
         };
@@ -142,7 +136,8 @@ void Title::Draw() const {
     DrawStringToHandle(630, 350, "スタート", 0x000000, font[FONT_TYPE_LOAD_1][FONT_SIZE_32], 0xffffff);
     DrawStringToHandle(630, 400, "ヘルプ", 0x000000, font[FONT_TYPE_LOAD_1][FONT_SIZE_32], 0xffffff);
     DrawStringToHandle(630, 450, "ランキング", 0x000000, font[FONT_TYPE_LOAD_1][FONT_SIZE_32], 0xffffff);
-    DrawStringToHandle(630, 500, "終わる", 0x000000, font[FONT_TYPE_LOAD_1][FONT_SIZE_32], 0xffffff);
+    DrawStringToHandle(630, 500, "クレジット", 0x000000, font[FONT_TYPE_LOAD_1][FONT_SIZE_32], 0xffffff);
+    DrawStringToHandle(630, 550, "終わる", 0x000000, font[FONT_TYPE_LOAD_1][FONT_SIZE_32], 0xffffff);
 
     DrawStringToHandle(380, 670, "左スティックで選たく、AボタンまたはBボタンで決定", 0x000000, font[FONT_TYPE_LOAD_1][FONT_SIZE_32], 0xffffff);
 
@@ -158,11 +153,14 @@ void Title::Draw() const {
     }
     else if (state == 3) {
         DrawStringToHandle(570, 500, "→", 0x000000, font[FONT_TYPE_LOAD_1][FONT_SIZE_32], 0xffffff);
+    }
+    else if (state == 4) {
+        DrawStringToHandle(570, 550, "→", 0x000000, font[FONT_TYPE_LOAD_1][FONT_SIZE_32], 0xffffff);
     };
 
     // BGM 再生
-    if (CheckSoundMem(bgm) == 0) {
-        PlaySoundMem(bgm, DX_PLAYTYPE_LOOP, TRUE);
+    if (CheckSoundMem(Resources::Get(SND, BGM, TITLE)) == 0) {
+        PlaySoundMem(Resources::Get(SND, BGM, TITLE), DX_PLAYTYPE_LOOP, TRUE);
     };
 
     if (Start) 

@@ -34,12 +34,22 @@ GameMain::GameMain() {
     
     ui.switchcount();
 
+
+    // サウンド処理
+    StopSoundMem(Resources::Get(SND, BGM, TITLE));
+    bgm_main = LoadSoundMem("Resources/Sounds/bgm_main.wav");
+    ChangeVolumeSoundMem(130, bgm_main);
+
     GrassSe = LoadSoundMem("Resources/Sounds/se_kusa.wav"); 
     ChangeVolumeSoundMem((255 / 100) * 80, GrassSe);
+
 };
 
 GameMain::~GameMain() {
     // 終了処理
+    StopSoundMem(bgm_main);
+    DeleteSoundMem(bgm_main);
+
 };
 
 AbstractScene* GameMain::Update() { // ここで値の更新など、処理
