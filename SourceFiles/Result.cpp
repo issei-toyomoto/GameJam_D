@@ -6,7 +6,7 @@
 #include "PadInput.h"
 #include "InputRanking.h"
 
-Result::Result(int score, int time[3]) {
+Result::Result(int score, int time[3], bool SaveFlower) {
     // 初期化処理
     state = 0;
 
@@ -20,6 +20,8 @@ Result::Result(int score, int time[3]) {
 
     timer = 0;
 
+    this->SaveFlower = SaveFlower;
+
     //サウンド読込
     se_result = LoadSoundMem("Resources/Sounds/se_result.wav");
     se_result_total = LoadSoundMem("Resources/Sounds/se_result_total.wav");
@@ -27,6 +29,7 @@ Result::Result(int score, int time[3]) {
     ChangeVolumeSoundMem(160, se_result_total);
 
     AnimImg = LoadGraph("images/readyback.png");
+    FlowerImg= LoadGraph("images/corolla.png");
 };
 
 Result::~Result() {
