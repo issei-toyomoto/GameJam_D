@@ -16,6 +16,7 @@ Help::Help() {
     // 画像読み込み
     if ((img_title = LoadGraph("Resources/Images/title.png")) == -1) {};
     if ((img_ctrl = LoadGraph("Resources/Images/controller.png")) == -1) {};
+    if ((img_help = LoadGraph("Resources/Images/help.png")) == -1) {};
 
     // フォント読み込み
     font[0][0] = CreateFontToHandle(NULL, 128, -1, DX_FONTTYPE_NORMAL);
@@ -94,19 +95,20 @@ AbstractScene* Help::Update() {
 };
 
 void Help::Draw() const {
-    // 背景表示
-    DrawGraph(0, 0, img_title, TRUE);
-
-    // タイトル表示
-    DrawStringToHandle(180, 40, "ヘルプ", 0x000000, font[FONT_TYPE_LOAD_1][FONT_SIZE_128], 0xffffff);
-
-    // 説明表示
-    DrawStringToHandle(700, 130, "Xボタンで説明を切りかえ", 0x000000, font[FONT_TYPE_LOAD_1][FONT_SIZE_32], 0xffffff);
-
-    // 戻る表示
-    DrawStringToHandle(370, 670, "Bボタンでゲーム開始、Aボタンでもどる", 0x000000, font[FONT_TYPE_LOAD_1][FONT_SIZE_32], 0xffffff);
 
     if (state == 0) {
+        // 背景表示
+        DrawGraph(0, 0, img_title, TRUE);
+
+        // タイトル表示
+        DrawStringToHandle(180, 40, "ヘルプ", 0x000000, font[FONT_TYPE_LOAD_1][FONT_SIZE_128], 0xffffff);
+
+        // 説明表示
+        DrawStringToHandle(700, 130, "Xボタンで説明を切りかえ", 0x000000, font[FONT_TYPE_LOAD_1][FONT_SIZE_32], 0xffffff);
+
+        // 戻る表示
+        DrawStringToHandle(370, 670, "Bボタンでゲーム開始、Aボタンでもどる", 0x000000, font[FONT_TYPE_LOAD_1][FONT_SIZE_32], 0xffffff);
+
         // サブタイトル表示
         DrawStringToHandle(735, 40, "操作説明", 0x000000, font[FONT_TYPE_LOAD_1][FONT_SIZE_64], 0xffffff);
 
@@ -134,13 +136,16 @@ void Help::Draw() const {
         DrawStringToHandle(700, 290, "STARTボタン：ポーズ", 0x000000, font[FONT_TYPE_LOAD_1][FONT_SIZE_32], 0xffffff);
     }
     else if (state == 1) {
+        // ゲーム説明表示
+        DrawExtendGraph(-3, 0, SCREEN_WIDTH, SCREEN_HEIGHT, img_help, TRUE);
+
         // サブタイトル表示
-        DrawStringToHandle(730, 40, "ゲーム説明", 0x000000, font[FONT_TYPE_LOAD_1][FONT_SIZE_64], 0xffffff);
+        //DrawStringToHandle(730, 40, "ゲーム説明", 0x000000, font[FONT_TYPE_LOAD_1][FONT_SIZE_64], 0xffffff);
 
         // 説明内容
-        DrawStringToHandle(120, 220, "このゲームは、カマをふり回す危険な主人公を操作して草をかったり、", 0x000000, font[FONT_TYPE_LOAD_1][FONT_SIZE_32], 0xffffff);
-        DrawStringToHandle(250, 270, "お花をつんだりする非常にほのぼのしたゲームです。", 0x000000, font[FONT_TYPE_LOAD_1][FONT_SIZE_32], 0xffffff);
-        DrawStringToHandle(210, 320, "草をかりながら花をつんで、ポイントをかせいでください。", 0x000000, font[FONT_TYPE_LOAD_1][FONT_SIZE_32], 0xffffff);
+        //DrawStringToHandle(120, 220, "このゲームは、カマをふり回す危険な主人公を操作して草をかったり、", 0x000000, font[FONT_TYPE_LOAD_1][FONT_SIZE_32], 0xffffff);
+        //DrawStringToHandle(250, 270, "お花をつんだりする非常にほのぼのしたゲームです。", 0x000000, font[FONT_TYPE_LOAD_1][FONT_SIZE_32], 0xffffff);
+        //DrawStringToHandle(210, 320, "草をかりながら花をつんで、ポイントをかせいでください。", 0x000000, font[FONT_TYPE_LOAD_1][FONT_SIZE_32], 0xffffff);
         //DrawStringToHandle(100, 370, "落下してくるリンゴは４種類です。", 0x000000, font[FONT_TYPE_LOAD_1][FONT_SIZE_32], 0xffffff);
     };
 
