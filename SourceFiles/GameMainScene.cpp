@@ -4,6 +4,7 @@
 #include "PadInput.h"
 
 #include "Player.h"
+#include "RunWeed.h"
 #include "UI.h"
 
 #include<math.h>
@@ -15,6 +16,12 @@ GameMain::GameMain() {
     // 初期化処理
     state = 0;
     ZeroCnt = 0;
+
+    runweed = new RunWeed * [5];
+    for (int i = 0; i < 5; i++)
+    {
+        runweed[i] = nullptr;
+    }
 
     Time[0] = 0;
     Time[1] = 0;
@@ -34,15 +41,24 @@ GameMain::~GameMain() {
 
 AbstractScene* GameMain::Update() { // ここで値の更新など、処理
 
-
-   if(!Clear && !Pause) player.Update();
+    if (!Clear && !Pause)
+    {
+        player.Update();
+        for (int i = 0; i < 5; i++)
+        {
+            if (runweed[i] != nullptr)runweed[i]->Update(player.GetX(), player.GetY());
+        }
+    }
     ui.Update();
 
     //花、草を刈った時のスコア処理
     for (int i = 0; i < 3; i++)
     {
-        int AtkX = (player.AtkPos('X', 32 * i) - MARGIN_X) / BLOCK_SIZE;
-        int AtkY = (player.AtkPos('Y', 32 * i) - UI_SIZE - MARGIN_Y) / BLOCK_SIZE;
+        int PosX = player.AtkPos('X', 32 * i);
+        int PosY = player.AtkPos('Y', 32 * i);
+
+        int AtkX = (PosX - MARGIN_X) / BLOCK_SIZE;
+        int AtkY = (PosY - UI_SIZE - MARGIN_Y) / BLOCK_SIZE;
         if (AtkX >= 0 && AtkY >= 0) {
             if (Grass[AtkY][AtkX] == FLOWER) {
                 score -= FLOWER_AtkSCORE;
@@ -55,7 +71,27 @@ AbstractScene* GameMain::Update() { // ここで値の更新など、処理
                 ZeroCnt++;
             }
         }
+
+        //逃げる草との当たり判定
+        for (int i = 0; i < 5; i++)
+        {
+            if (runweed[i] != nullptr)
+            {
+                //プレイヤー間のX軸、Y軸との距離を取る
+                float DisX = fabsf(runweed[i]->GetX() - PosX);
+                float DisY = fabsf(runweed[i]->GetY() - PosY);
+
+                float Dis = (float)sqrt(DisX * DisX + DisY * DisY);
+
+                if (Dis <= BLOCK_SIZE / 2) 
+                {
+                    score += 300;
+                    runweed[i] = nullptr;
+                }
+            }
+        }
     }
+    SortGrass();
 
     //花を摘む
     if (InputControl::OnButton(XINPUT_BUTTON_A) && !Clear)
@@ -95,7 +131,7 @@ AbstractScene* GameMain::Update() { // ここで値の更新など、処理
     }
 
     //ステージクリア時処理
-    if (!Clear && (ZeroCnt == (FLOWER_NUM * StageNum) + (WEED_NUM * StageNum) || ui.GetTime() == 0)) {
+    if (!Clear && ((ZeroCnt == (FLOWER_NUM * StageNum) + (WEED_NUM * StageNum) && runweed[0] == nullptr) || ui.GetTime() == 0)) {
         Time[StageNum - 1] = ui.GetTime();
         StageNum++;
         ZeroCnt = 0;
@@ -156,6 +192,19 @@ AbstractScene* GameMain::Update() { // ここで値の更新など、処理
     return this;    //シーン継続
 };
 
+//逃げる草の配列を整理
+void GameMain::SortGrass() 
+{
+    for (int i = 0; i < 5 - 1; i++)
+    {
+        if (runweed[i] == nullptr)
+        {
+            runweed[i] = runweed[i + 1];
+            runweed[i + 1] = nullptr;
+        }
+    }
+}
+
 void GameMain::Draw() const { // やることは描画のみ、絶対に値の更新はしない
     SetFontSize(16);
     DrawGraph(0, 0, BackImg, true);
@@ -195,6 +244,11 @@ void GameMain::Draw() const { // やることは描画のみ、絶対に値の�
 #endif
     
     player.Draw();
+
+    for (int i = 0; i < 5; i++)
+    {
+        if (runweed[i] != nullptr)runweed[i]->Draw();
+    }
 
     int stnum = StageNum;
     if (Clear && Anim <= 30)stnum--;
@@ -355,6 +409,7 @@ void GameMain::Draw() const { // やることは描画のみ、絶対に値の�
     }
 };
 
+//ステージ初期化
 void GameMain::SetStage(int stage) 
 {
 
@@ -386,7 +441,23 @@ void GameMain::SetStage(int stage)
         else {
             i--;
         }
+    }
 
+    int weed = 0;
+    if (stage == 2)weed = 3;
+    else if (stage == 3)weed = 5;
+
+    for (int i = 0; i < weed; i++)
+    {
+        int Y = GetRand(MAP_HEIGHT - 1);
+        int X = GetRand(MAP_WIDTH - 1);
+
+        while (Grass[Y][X] != 0)
+        {
+            Y = GetRand(MAP_HEIGHT - 1);
+            X = GetRand(MAP_WIDTH - 1);
+        }
+        runweed[i] = new RunWeed(MARGIN_X + (BLOCK_SIZE * (X + 0.5)), MARGIN_Y + UI_SIZE + (BLOCK_SIZE * (Y + 0.5)));
     }
    
 }

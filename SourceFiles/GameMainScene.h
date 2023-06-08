@@ -2,6 +2,7 @@
 
 #include "AbstractScene.h"
 #include "Player.h"
+#include "RunWeed.h"
 #include "UI.h"
 #include "common.h"
 
@@ -27,6 +28,7 @@ private:
     bool Pause = false; //ポーズ中ならtrue
 
     Player player; //プレイヤー
+    RunWeed** runweed;  //逃げる草
     UI ui;          //UI
 
     int Grass[MAP_HEIGHT][MAP_WIDTH];   //草・花の状態(0：何もない　1：草　2：花)
@@ -52,4 +54,5 @@ public:
     void SetStage(int level);
 
     int GetScore() { return score; }
+    void SortGrass();
 };

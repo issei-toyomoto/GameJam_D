@@ -16,6 +16,7 @@ Player::Player()
     MSpdX = 8;
     MSpdY = 8;
 
+    LoadDivGraph("images/move.png", 12, 12, 1, 50, 85, Image);
     SickleIng = LoadGraph("images/kama.png");
 }
 
@@ -39,6 +40,9 @@ void Player::Update()
     //スティックの傾きが一定以上なら加速
     if (0.2 <= Tilt && (!Attack || (2 <= Combo && Attack <= 6)))
     {
+        //歩行アニメーション開始
+        Walk++;
+
         //角度取得
         Angle = 180 / 3.14 * Rad + 180;
         
@@ -61,6 +65,9 @@ void Player::Update()
     //スティックの傾きが一定以下なら減速
     else 
     {
+        //歩行アニメーションリセット
+        Walk = 0;
+
         //速度の合計を取る
         float absX = fabsf(SpdX);
         float absY = fabsf(SpdY);
@@ -154,10 +161,21 @@ void Player::Update()
 
 void Player::Draw() const
 {
-    DrawBox(X - BLOCK_SIZE / 2, Y - BLOCK_SIZE / 2, X + BLOCK_SIZE / 2, Y + BLOCK_SIZE / 2, 0x0000ff, true);
+    DrawSickle();
+
+    //プレイヤーキャラ表示
+    int Panim = Walk / 8 % 4;
+    if      (225 <= Angle && Angle <= 315)  DrawRotaGraph2(X, Y, 25, 60, 1, 0, Image[8 + Panim], true);
+    else if (135 <= Angle && Angle <= 225)  DrawRotaGraph2(X, Y, 25, 60, 1, 0, Image[0 + Panim], true, true);
+    else if (45 <= Angle && Angle <= 135)   DrawRotaGraph2(X, Y, 25, 60, 1, 0, Image[4 + Panim], true);
+    else                                    DrawRotaGraph2(X, Y, 25, 60, 1, 0, Image[0 + Panim], true);
+
     DrawCircle(X, Y, BLOCK_SIZE * 1, 0xff9cbc, false, 3);
-    
-    if (Attack) 
+}
+
+void Player::DrawSickle()const
+{
+    if (Attack)
     {
         double stX = 0, stY = 0;		//振りかぶる前の座標
         double finX = 0, finY = 0;		//振りかぶった後の座標
@@ -165,7 +183,7 @@ void Player::Draw() const
         bool Xturn = true;      //画像反転
 
         double finAng = 0;	//振りかぶる角度
-        if (Attack <= 6) 
+        if (Attack <= 6)
         {
             if (Combo % 2 == 0)
             {
