@@ -53,6 +53,7 @@
     </ClCompile>
     <ClCompile Include="SourceFiles\RunWeed.cpp">
  <Filter>ソース ファイル</Filter>
+    </ClCompile>
     <ClCompile Include="SourceFiles\Credit.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
@@ -101,7 +102,8 @@
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="SourceFiles\RunWeed.h">
-<Filter>ヘッダー ファイル</Filter>
+	<Filter>ヘッダー ファイル</Filter>
+</ClInclude>
     <ClInclude Include="SourceFiles\Credit.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
