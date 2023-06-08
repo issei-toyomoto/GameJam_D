@@ -27,10 +27,12 @@ int WINAPI WinMain(_In_ HINSTANCE  hInstance, _In_opt_ HINSTANCE hPrevInstance, 
     Fps fps;
 
     // 一部のリソースをstaticとして読み込み
-    int bgm_title, bgm_main, se_select;
+    int bgm_title, bgm_result;
     if ((bgm_title = LoadSoundMem("Resources/Sounds/bgm_title.wav")) == -1) return -1;
-    if ((bgm_main = LoadSoundMem("Resources/Sounds/bgm_main.wav")) == -1) return -1;
-    if ((se_select = LoadSoundMem("Resources/Sounds/se_select.wav")) == -1) return -1;
+    ChangeVolumeSoundMem(255, bgm_title);
+    Resources::Set(SND, BGM, TITLE, bgm_title);
+    if ((bgm_title = LoadSoundMem("Resources/Sounds/bgm_title.wav")) == -1) return -1;
+    ChangeVolumeSoundMem(255, bgm_title);
     Resources::Set(SND, BGM, TITLE, bgm_title);
 
     // ゲームループし、シーンマネジャーでシーンの更新
