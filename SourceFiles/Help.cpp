@@ -33,12 +33,12 @@ Help::Help() {
     font[1][3] = CreateFontToHandle("しょかきうたげ（無料版）", 16, 9, DX_FONTTYPE_EDGE);
 
     // サウンド読み込み
-    bgm = LoadSoundMem("Resources/Sounds/bgm_title.wav");
     se_cursor = LoadSoundMem("Resources/Sounds/se_cursor.wav");
     se_select = LoadSoundMem("Resources/Sounds/se_select.wav");
-    ChangeVolumeSoundMem(255, bgm);
     ChangeVolumeSoundMem(130, se_cursor);
     ChangeVolumeSoundMem(150, se_select);
+
+    if (CheckSoundMem(se_select) == 0) PlaySoundMem(se_select, DX_PLAYTYPE_BACK, TRUE);
 };
 
 Help::~Help() {
@@ -54,8 +54,6 @@ Help::~Help() {
     };
 
     // サウンド削除
-    StopSoundMem(bgm);
-    DeleteSoundMem(bgm);
     StopSoundMem(se_cursor);
     DeleteSoundMem(se_cursor);
     StopSoundMem(se_select);
@@ -146,8 +144,8 @@ void Help::Draw() const {
     };
 
     // BGM 再生
-    if (CheckSoundMem(bgm) == 0) {
-        PlaySoundMem(bgm, DX_PLAYTYPE_LOOP, TRUE);
+    if (CheckSoundMem(Resources::Get(SND, BGM, TITLE)) == 0) {
+        PlaySoundMem(Resources::Get(SND, BGM, TITLE), DX_PLAYTYPE_LOOP, TRUE);
     };
 
     if (Start)

@@ -33,10 +33,18 @@ GameMain::GameMain() {
     AnimImg = LoadGraph("images/readyback.png");
     
     ui.switchcount();
+
+    // サウンド処理
+    StopSoundMem(Resources::Get(SND, BGM, TITLE));
+    bgm_main = LoadSoundMem("Resources/Sounds/bgm_main.wav");
+    ChangeVolumeSoundMem(130, bgm_main);
 };
 
 GameMain::~GameMain() {
     // 終了処理
+    StopSoundMem(bgm_main);
+    DeleteSoundMem(bgm_main);
+
 };
 
 AbstractScene* GameMain::Update() { // ここで値の更新など、処理
