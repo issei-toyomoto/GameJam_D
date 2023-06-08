@@ -18,6 +18,8 @@ Player::Player()
 
     LoadDivGraph("images/move.png", 12, 12, 1, 50, 85, Image);
     SickleIng = LoadGraph("images/kama.png");
+
+    Attackse = LoadSoundMem("Resources/Sounds/se_swing.wav");
 }
 
 Player::~Player()
@@ -144,6 +146,7 @@ void Player::Update()
     //攻撃に移行
     if (InputControl::OnButton(XINPUT_BUTTON_B) && (Attack == 0 || 15 <= Attack))
     {
+        PlaySoundMem(Attackse, DX_PLAYTYPE_BACK);
         Attack = 1;
         Combo++;
 
