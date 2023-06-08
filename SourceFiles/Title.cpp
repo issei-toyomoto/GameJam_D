@@ -100,8 +100,8 @@ AbstractScene* Title::Update() {
                 return new DrawRanking();
             }
             else if (state == 3) {
-                // クレジット選択
-                //return new Credit();
+                //クレジット選択
+                return new Credit();
             }
             else if (state == 4) {
                 // 終わる選択
