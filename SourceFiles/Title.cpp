@@ -34,6 +34,8 @@ Title::Title() {
     // サウンド読み込み
     se_cursor = LoadSoundMem("Resources/Sounds/se_cursor.wav");
     ChangeVolumeSoundMem(130, se_cursor);
+
+    StopSoundMem(Resources::Get(SND, BGM, 2));
 };
 
 Title::~Title() {
