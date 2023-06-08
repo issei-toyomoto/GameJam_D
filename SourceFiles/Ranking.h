@@ -30,6 +30,9 @@ public:
     static void ReadRanking();
 
     //ランキングの取得の取得
-    static RankingData GetData(int n) { return Data[n]; }
+    static RankingData GetData(int n) 
+    { 
+        return Data[n]; 
+    }
 };
 
