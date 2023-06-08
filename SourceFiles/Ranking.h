@@ -1,4 +1,5 @@
 ﻿#pragma once
+#include"AbstractScene.h"
 
 #define RANK_MAX 5
 #define NAME_MAX 10
@@ -10,7 +11,7 @@ struct RankingData
     int score;
 };
 
-class Ranking
+class Ranking : public AbstractScene
 {
 private:
 
@@ -23,6 +24,14 @@ private:
     static void SaveRanking();
 
 public:
+    //コンストラクタ
+    Ranking();
+
+    //デストラクタ
+    ~Ranking();
+
+    // 描画以外の更新を実装
+    virtual AbstractScene* Update() override;
 
     //ランキングデータの更新
     static void Insert(int score, char name[NAME_MAX]);
@@ -31,6 +40,9 @@ public:
     static void ReadRanking();
 
     //ランキングの取得の取得
-    static RankingData GetData(int n) { return Data[n]; }
+    static RankingData GetData(int n) 
+    {
+        return Data[n]; 
+    }
 };
 
