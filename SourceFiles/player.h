@@ -12,7 +12,10 @@ private:
     int Attack = 0;     //攻撃管理
     int Combo = 0;      //攻撃回数
 
+    int Image[12];   //プレイヤーキャラ画像
     int SickleIng;  //鎌の画像
+
+    int Walk;       //歩行アニメーション
 
 public:
     Player();
@@ -20,6 +23,7 @@ public:
 
     void Update();
     void Draw()const;
+    void DrawSickle()const;
 
     float GetX() { return X; }
     float GetY() { return Y; }
