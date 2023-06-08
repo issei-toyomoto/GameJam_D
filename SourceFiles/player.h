@@ -15,6 +15,8 @@ private:
     int Image[12];   //プレイヤーキャラ画像
     int SickleIng;  //鎌の画像
 
+    int Attackse;   //攻撃効果音
+
     int Walk;       //歩行アニメーション
 
 public:
