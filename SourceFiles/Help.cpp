@@ -137,7 +137,7 @@ void Help::Draw() const {
     }
     else if (state == 1) {
         // ゲーム説明表示
-        DrawExtendGraph(-3, 0, SCREEN_WIDTH, SCREEN_HEIGHT, img_help, TRUE);
+        DrawExtendGraph(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, img_help, TRUE);
 
         // サブタイトル表示
         //DrawStringToHandle(730, 40, "ゲーム説明", 0x000000, font[FONT_TYPE_LOAD_1][FONT_SIZE_64], 0xffffff);
