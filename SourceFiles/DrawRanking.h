@@ -1,6 +1,8 @@
-#pragma once
+ï»¿#pragma once
 
 #include "AbstractScene.h"
+
+#include"DrawRanking.h"
 
 class DrawRanking : public AbstractScene {
 
@@ -8,9 +10,9 @@ public:
     DrawRanking();
     ~DrawRanking();
 
-    // •`‰æˆÈŠO‚ÌXV‚ğÀ‘•
+    // æç”»ä»¥å¤–ã®æ›´æ–°ã‚’å®Ÿè£…
     virtual AbstractScene* Update() override;
 
-    // •`‰æ‚ÉŠÖ‚·‚é‚±‚Æ‚ğÀ‘•
+    // æç”»ã«é–¢ã™ã‚‹ã“ã¨ã‚’å®Ÿè£…
     virtual void Draw() const override;
 };
