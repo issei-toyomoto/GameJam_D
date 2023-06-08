@@ -23,6 +23,8 @@ private:
     int AnimImg;    //ステージ切り替えアニメーション画像
 
     int bgm_main; // メインBGM
+    int se_select; // 画面遷移時SE
+    int se_damage; // 花を刈ってしまった時のダメージSE
 
     int Anim = 0;   //ステージ切り替えアニメーション
     bool Clear = true;  //アニメーション中ならtrue
