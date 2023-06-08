@@ -46,18 +46,18 @@ AbstractScene* Result::Update() { // ここで値の更新など、処理
     //totalscore計算
     TotalScore = score + (Stage1Time * 100) + (Stage2Time * 100) + (Stage3Time * 100);
 
-    if (InputControl::OnButton(XINPUT_BUTTON_A) && timer >= 230)return new InputRankingScene(TotalScore);
+    if (InputControl::OnButton(XINPUT_BUTTON_A) || InputControl::OnButton(XINPUT_BUTTON_B) && timer >= 230)return new InputRankingScene(TotalScore);
     
     if (InputControl::OnButton(XINPUT_BUTTON_A)) {
         timer += 230;
         if (CheckSoundMem(se_result_total) == 0) PlaySoundMem(se_result_total, DX_PLAYTYPE_BACK, TRUE);
     }
     
-    if (InputControl::OnButton(XINPUT_BUTTON_B) && timer < 70 && 30 < timer) timer = 70;
-    if (InputControl::OnButton(XINPUT_BUTTON_B) && timer < 110 && timer > 100) timer = 110;
-    if (InputControl::OnButton(XINPUT_BUTTON_B) && timer < 150 && timer > 110) timer = 150;
-    if (InputControl::OnButton(XINPUT_BUTTON_B) && timer < 190 && timer > 150) timer = 190;
-    if (InputControl::OnButton(XINPUT_BUTTON_B) && timer < 230 && timer > 190) timer = 230;
+    if (InputControl::OnButton(XINPUT_BUTTON_B) || InputControl::OnButton(XINPUT_BUTTON_A) && timer < 70 && 30 < timer) timer = 70;
+    if (InputControl::OnButton(XINPUT_BUTTON_B) || InputControl::OnButton(XINPUT_BUTTON_A) && timer < 110 && timer > 100) timer = 110;
+    if (InputControl::OnButton(XINPUT_BUTTON_B) || InputControl::OnButton(XINPUT_BUTTON_A) && timer < 150 && timer > 110) timer = 150;
+    if (InputControl::OnButton(XINPUT_BUTTON_B) || InputControl::OnButton(XINPUT_BUTTON_A) && timer < 190 && timer > 150) timer = 190;
+    if (InputControl::OnButton(XINPUT_BUTTON_B) || InputControl::OnButton(XINPUT_BUTTON_A)&& timer < 230 && timer > 190) timer = 230;
 
     return this; // シーン継続
 };
