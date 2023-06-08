@@ -11,6 +11,9 @@ InputRankingScene::InputRankingScene(int _score)
     CursorPoint = { 0, 0 };
     Ranking::ReadRanking();
 
+    // 画像読み込み
+    if ((Img = LoadGraph("Resources/Images/title.png")) == -1) {};
+
     //フォント追加
     NameFont1 = CreateFontToHandle("HGS創英角ﾎﾟｯﾌﾟ体", 80, 8, DX_FONTTYPE_ANTIALIASING);
     NameFont2 = CreateFontToHandle("HGS創英角ﾎﾟｯﾌﾟ体", 48, 8, DX_FONTTYPE_ANTIALIASING);
