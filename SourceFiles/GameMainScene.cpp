@@ -90,7 +90,7 @@ AbstractScene* GameMain::Update() { // ここで値の更新など、処理
             if (Grass[AtkY][AtkX] == FLOWER) {
                 score -= FLOWER_AtkSCORE;
                 Grass[AtkY][AtkX] = 0;
-                DrawScoreEffect(AtkY, AtkX, FLOWER_AtkSCORE, 1, 0);
+                //DrawScoreEffect(AtkY, AtkX, FLOWER_AtkSCORE, 1, 0);
                 ZeroCnt++;
                 SaveFlower = false;
 
@@ -100,7 +100,7 @@ AbstractScene* GameMain::Update() { // ここで値の更新など、処理
             if (Grass[AtkY][AtkX] == WEED) {
                 score += WEED_AtkSCORE;
                 Grass[AtkY][AtkX] = 0;
-                DrawScoreEffect(AtkY, AtkX, WEED_AtkSCORE, 0, 0);
+                //DrawScoreEffect(AtkY, AtkX, WEED_AtkSCORE, 0, 0);
                 ZeroCnt++;
                 StopSoundMem(GrassSe);
                 PlaySoundMem(GrassSe, DX_PLAYTYPE_BACK);
@@ -157,7 +157,7 @@ AbstractScene* GameMain::Update() { // ここで値の更新など、処理
                     {
                         score += 500;
                         Grass[MapY + j][MapX + i] = 0;
-                        DrawScoreEffect(MapY + j, MapX + i, FLOWER_AtkSCORE, 0, 0);
+                        //DrawScoreEffect(MapY + j, MapX + i, FLOWER_AtkSCORE, 0, 0);
                         ZeroCnt++;
                         i = 2;
                         StopSoundMem(FlowerSe);
