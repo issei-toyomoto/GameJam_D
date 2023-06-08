@@ -118,7 +118,7 @@ AbstractScene* GameMain::Update() { // ここで値の更新など、処理
 
                 if (Dis <= BLOCK_SIZE / 2) 
                 {
-                    score += 300;
+                    score += 500;
                     runweed[i] = nullptr;
                     StopSoundMem(GrassSe);
                     PlaySoundMem(GrassSe, DX_PLAYTYPE_BACK);
