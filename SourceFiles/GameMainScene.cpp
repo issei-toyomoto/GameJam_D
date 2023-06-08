@@ -37,6 +37,11 @@ GameMain::GameMain() {
 
     // サウンド処理
     StopSoundMem(Resources::Get(SND, BGM, TITLE));
+
+    se_select = LoadSoundMem("Resources/Sounds/se_select.wav");
+    ChangeVolumeSoundMem(150, se_select);
+    if (CheckSoundMem(se_select) == 0) PlaySoundMem(se_select, DX_PLAYTYPE_BACK, TRUE);
+
     bgm_main = LoadSoundMem("Resources/Sounds/bgm_main.wav");
     ChangeVolumeSoundMem(130, bgm_main);
     PlaySoundMem(bgm_main, DX_PLAYTYPE_LOOP, TRUE);
@@ -44,13 +49,19 @@ GameMain::GameMain() {
     GrassSe = LoadSoundMem("Resources/Sounds/se_kusa.wav"); 
     ChangeVolumeSoundMem((255 / 100) * 80, GrassSe);
 
+    se_damage = LoadSoundMem("Resources/Sounds/se_damage.wav");
+    ChangeVolumeSoundMem((255 / 100) * 80, se_damage);
+
 };
 
 GameMain::~GameMain() {
     // 終了処理
     StopSoundMem(bgm_main);
     DeleteSoundMem(bgm_main);
+    StopSoundMem(se_select);
+    DeleteSoundMem(se_select);
 
+    PlaySoundMem(Resources::Get(SND, BGM, MAIN), DX_PLAYTYPE_LOOP, TRUE);
 };
 
 AbstractScene* GameMain::Update() { // ここで値の更新など、処理
@@ -78,8 +89,8 @@ AbstractScene* GameMain::Update() { // ここで値の更新など、処理
                 score -= FLOWER_AtkSCORE;
                 Grass[AtkY][AtkX] = 0;
                 ZeroCnt++;
-                StopSoundMem(GrassSe);
-                PlaySoundMem(GrassSe, DX_PLAYTYPE_BACK);
+                StopSoundMem(se_damage);
+                PlaySoundMem(se_damage, DX_PLAYTYPE_BACK);
             }
             if (Grass[AtkY][AtkX] == WEED) {
                 score += WEED_AtkSCORE;
