@@ -22,7 +22,8 @@ int WINAPI WinMain(_In_ HINSTANCE  hInstance, _In_opt_ HINSTANCE hPrevInstance, 
     SetDrawScreen(DX_SCREEN_BACK);                 // 描画先画面を裏にする（ダブルバッファリング）
 
     // タイトル シーンオブジェクト作成
-    SceneManager* sceneMng = new SceneManager((AbstractScene*) new Title());
+    int array[3] = { 0,0,0 };
+    SceneManager* sceneMng = new SceneManager((AbstractScene*) new Result(0, array));
 
     Fps fps;
 
@@ -31,7 +32,7 @@ int WINAPI WinMain(_In_ HINSTANCE  hInstance, _In_opt_ HINSTANCE hPrevInstance, 
     if ((bgm_title = LoadSoundMem("Resources/Sounds/bgm_title.wav")) == -1) return -1;
     ChangeVolumeSoundMem(255, bgm_title);
     Resources::Set(SND, BGM, TITLE, bgm_title);
-    if ((bgm_result = LoadSoundMem("Resources/Sounds/bgm_title.wav")) == -1) return -1;
+    if ((bgm_result = LoadSoundMem("Resources/Sounds/bgm_result.wav")) == -1) return -1;
     ChangeVolumeSoundMem(255, bgm_result);
     Resources::Set(SND, BGM, 2, bgm_result);
 
