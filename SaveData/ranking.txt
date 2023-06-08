@@ -1,5 +1,5 @@
 1     64400         T
-2     59600       www
-3     58200 NOOOOOOOO
-4     57600         B
-5     54600 HuterHunt
+2     62000         T
+3     59600       www
+4     58200 NOOOOOOOO
+5     57600         B
