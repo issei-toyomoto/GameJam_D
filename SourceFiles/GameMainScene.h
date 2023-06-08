@@ -22,6 +22,8 @@ private:
     int WeedImg;    //草の画像
     int AnimImg;    //ステージ切り替えアニメーション画像
 
+    int bgm_main; // メインBGM
+
     int Anim = 0;   //ステージ切り替えアニメーション
     bool Clear = true;  //アニメーション中ならtrue
 
