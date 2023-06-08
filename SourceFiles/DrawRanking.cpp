@@ -23,8 +23,9 @@ AbstractScene* DrawRanking::Update()
 
 void DrawRanking::Draw()const 
 {
+    SetFontSize(64);
     for (int i = 0; i < RANK_MAX; i++) {
-        DrawFormatString(120, 100 + (i * 30), GetColor(255, 255, 255), "%d 位　 %s　%7d", Ranking::GetData(i).no, Ranking::GetData(i).name, Ranking::GetData(i).score);
+        DrawFormatString(120, 100 + (i * 90), GetColor(255, 255, 255), "%d 位　 %s　%7d", Ranking::GetData(i).no, Ranking::GetData(i).name, Ranking::GetData(i).score);
     };
 
 };
