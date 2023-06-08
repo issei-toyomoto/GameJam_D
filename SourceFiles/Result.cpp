@@ -44,7 +44,7 @@ AbstractScene* Result::Update() { // ここで値の更新など、処理
     if(timer<=230)   timer++;
 
     //totalscore計算
-    TotalScore = score + (Stage1Time * 100) + (Stage1Time * 100) + (Stage1Time * 100);
+    TotalScore = score + (Stage1Time * 100) + (Stage2Time * 100) + (Stage3Time * 100);
 
     if (InputControl::OnButton(XINPUT_BUTTON_A) || InputControl::OnButton(XINPUT_BUTTON_B) && timer >= 230)return new InputRankingScene(TotalScore);
     
