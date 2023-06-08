@@ -16,6 +16,8 @@ RunWeed::RunWeed(float InitX, float InitY)
 
     //‰æ‘œ‚ğİ’è‚·‚é
     Image = LoadGraph("images/kusa.png");
+    Se = LoadSoundMem("Resources/Sounds/se_run.wav");
+    ChangeVolumeSoundMem((255 / 100) * 80, Se);
 }
 
 RunWeed::~RunWeed()
@@ -142,6 +144,7 @@ void RunWeed::Update(float Px, float Py)
     //ƒvƒŒƒCƒ„[‚Æ‚Ì‹——£‚ªˆê’èˆÈã‚È‚ç‰Á‘¬
     if (Dis <= 150 && RunCool == 0)
     {
+        PlaySoundMem(Se, DX_PLAYTYPE_BACK);
         RunTime = 15;
         RunCool = RunTime + 60;
         RunRad = Rad;
