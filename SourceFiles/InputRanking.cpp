@@ -16,13 +16,6 @@ InputRankingScene::InputRankingScene(int _score)
     NameFont2 = CreateFontToHandle("HGS創英角ﾎﾟｯﾌﾟ体", 48, 8, DX_FONTTYPE_ANTIALIASING);
     NameFont3 = CreateFontToHandle("HGS創英角ﾎﾟｯﾌﾟ体", 32, 8, DX_FONTTYPE_ANTIALIASING);
 
-
-    ////画像読込
-    //if ((Img = LoadGraph("Resource/Images/mori.png")) == -1)
-    //{
-    //    throw "Resource/Images/mori.png";
-    //}
-
     //SE読込
     if ((SelectSE = LoadSoundMem("Resources/Sounds/se_cursor.wav")) == -1)
     {

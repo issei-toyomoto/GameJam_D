@@ -4,9 +4,15 @@
 #include"DrawRanking.h"
 
 class DrawRanking : public AbstractScene {
+private:
+    int font[2][4];
+    int Img;	//背景画像格納用
+    int BackImg;
 
 public:
+     
     DrawRanking();
+
     ~DrawRanking();
 
     // 描画以外の更新を実装
