@@ -63,7 +63,7 @@ GameMain::~GameMain() {
     StopSoundMem(se_select);
     DeleteSoundMem(se_select);
 
-    PlaySoundMem(Resources::Get(SND, BGM, MAIN), DX_PLAYTYPE_LOOP, TRUE);
+    PlaySoundMem(Resources::Get(SND, BGM, 2), DX_PLAYTYPE_LOOP, TRUE);
 };
 
 AbstractScene* GameMain::Update() { // ここで値の更新など、処理
