@@ -20,6 +20,7 @@ Player::Player()
     SickleIng = LoadGraph("images/kama.png");
 
     Attackse = LoadSoundMem("Resources/Sounds/se_swing.wav");
+    ChangeVolumeSoundMem((255 / 100) * 120, Attackse);
 }
 
 Player::~Player()
@@ -164,6 +165,8 @@ void Player::Update()
 
 void Player::Draw() const
 {
+
+    DrawCircle(X, Y, BLOCK_SIZE * 1, 0xff9cbc, false, 3);
     DrawSickle();
 
     //プレイヤーキャラ表示
@@ -173,7 +176,6 @@ void Player::Draw() const
     else if (45 <= Angle && Angle <= 135)   DrawRotaGraph2(X, Y, 25, 60, 1, 0, Image[4 + Panim], true);
     else                                    DrawRotaGraph2(X, Y, 25, 60, 1, 0, Image[0 + Panim], true);
 
-    DrawCircle(X, Y, BLOCK_SIZE * 1, 0xff9cbc, false, 3);
 }
 
 void Player::DrawSickle()const
