@@ -118,7 +118,10 @@ AbstractScene* Title::Update() {
     else
     {
         Anim++;
-        if (30 < Anim)return new GameMain();
+        if (30 < Anim)
+        {
+            return new GameMain();
+        };
     }
 
     return this;

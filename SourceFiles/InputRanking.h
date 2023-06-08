@@ -8,7 +8,7 @@
 class InputRankingScene : public AbstractScene
 {
 private:
-    Ranking ranking;
+    RankingData ranking;
 
     int Img;	//背景画像格納用
     int Score;	//スコア格納用

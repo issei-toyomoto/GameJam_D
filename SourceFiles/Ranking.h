@@ -1,5 +1,4 @@
 ﻿#pragma once
-#include"AbstractScene.h"
 
 #define RANK_MAX 5
 #define NAME_MAX 10
