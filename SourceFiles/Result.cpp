@@ -4,6 +4,7 @@
 ********************************/
 #include "main.h"
 #include "PadInput.h"
+#include "InputRanking.h"
 
 Result::Result(int score, int time[3]) {
     // 初期化処理
@@ -45,7 +46,7 @@ AbstractScene* Result::Update() { // ここで値の更新など、処理
     //totalscore計算
     TotalScore = score + (Stage1Time * 100) + (Stage1Time * 100) + (Stage1Time * 100);
 
-    if (InputControl::OnButton(XINPUT_BUTTON_A)&&timer>=230)return new Title();
+    if (InputControl::OnButton(XINPUT_BUTTON_A) && timer >= 230)return new InputRankingScene(TotalScore);
     
     if (InputControl::OnButton(XINPUT_BUTTON_A)) {
         timer += 230;
