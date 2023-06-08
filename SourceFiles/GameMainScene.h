@@ -10,15 +10,21 @@ class GameMain : public AbstractScene {
 private:
     int state;
     int score = 0;
-    int Time;
+    int Time[3];           //残り時間を記録する
     int StageNum = 1;
 
     int x;
     int y;
 
     int BackImg;    //背景画像
-    int FlowerImg;  //
-    int WeedImg;
+    int FlowerImg;  //花の画像
+    int WeedImg;    //草の画像
+    int AnimImg;    //ステージ切り替えアニメーション画像
+
+    int Anim = 0;   //ステージ切り替えアニメーション
+    bool Clear = true;  //アニメーション中ならtrue
+
+    bool Pause = false; //ポーズ中ならtrue
 
     Player player; //プレイヤー
     UI ui;          //UI

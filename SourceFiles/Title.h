@@ -17,6 +17,10 @@ private:
     int img_title;
     int font[2][4];
     int bgm, se_cursor, se_select;
+
+    int AnimImg;    //画面移行演出に使う画像
+    int Anim;       //画面移行演出管理
+    bool Start;     //ゲームメインに移行するならtrue
 public:
     // コンストラクタ
     Title();

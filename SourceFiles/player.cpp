@@ -155,6 +155,7 @@ void Player::Update()
 void Player::Draw() const
 {
     DrawBox(X - BLOCK_SIZE / 2, Y - BLOCK_SIZE / 2, X + BLOCK_SIZE / 2, Y + BLOCK_SIZE / 2, 0x0000ff, true);
+    DrawCircle(X, Y, BLOCK_SIZE * 1, 0xff9cbc, false, 3);
     
     if (Attack) 
     {
