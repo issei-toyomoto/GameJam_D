@@ -63,7 +63,13 @@ public:
 
     int GetScore() { return score; }
     void SortGrass();
+};
 
+class GameEffect {
+private:
+    static int x, y, score;
+    static int minusFlg, category;
+public:
     // スコア取得時のエフェクト関数
     void DrawScoreEffect(int posX, int posY, int drawScore, int minusFlg, int category) {
         SetFontSize(16);
