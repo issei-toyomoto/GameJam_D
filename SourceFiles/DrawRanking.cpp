@@ -13,6 +13,11 @@ DrawRanking::~DrawRanking()
 
 AbstractScene* DrawRanking::Update()
 {
+    if (InputControl::OnButton(XINPUT_BUTTON_A))
+    {
+        return new Title();
+    }
+
     return this;
 };
 
