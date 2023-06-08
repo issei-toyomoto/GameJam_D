@@ -1,7 +1,6 @@
 ﻿#pragma once
 
 #include "AbstractScene.h"
-
 #include"DrawRanking.h"
 
 class DrawRanking : public AbstractScene {
