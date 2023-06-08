@@ -38,6 +38,7 @@ Help::Help() {
     ChangeVolumeSoundMem(130, se_cursor);
     ChangeVolumeSoundMem(150, se_select);
 
+    // サウンド処理
     if (CheckSoundMem(se_select) == 0) PlaySoundMem(se_select, DX_PLAYTYPE_BACK, TRUE);
 };
 
