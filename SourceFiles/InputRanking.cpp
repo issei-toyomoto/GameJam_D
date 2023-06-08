@@ -17,20 +17,20 @@ InputRankingScene::InputRankingScene(int _score)
     NameFont3 = CreateFontToHandle("HGS創英角ﾎﾟｯﾌﾟ体", 32, 8, DX_FONTTYPE_ANTIALIASING);
 
 
-    //画像読込
-    if ((Img = LoadGraph("Resource/Images/mori.png")) == -1)
-    {
-        throw "Resource/Images/mori.png";
-    }
+    ////画像読込
+    //if ((Img = LoadGraph("Resource/Images/mori.png")) == -1)
+    //{
+    //    throw "Resource/Images/mori.png";
+    //}
 
     //SE読込
-    if ((SelectSE = LoadSoundMem("Resource/sounds/SE/select01.wav")) == -1)
+    if ((SelectSE = LoadSoundMem("Resources/Sounds/se_cursor.wav")) == -1)
     {
-        throw "Resource/sounds/SE/select01.wav";
+        throw "Resources/Sounds/se_cursor.wav";
     }
-    if ((DecisionSE = LoadSoundMem("Resource/sounds/SE/Decision01.wav")) == -1)
+    if ((DecisionSE = LoadSoundMem("Resources/Sounds/se_select.wav")) == -1)
     {
-        throw "Resource/sounds/SE/Decision01.wav";
+        throw "Resource/Sounds/se_select.wav";
     }
 
     //音量調整
