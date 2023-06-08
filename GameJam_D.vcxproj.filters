@@ -54,6 +54,9 @@
     <ClCompile Include="SourceFiles\InputRanking.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="SourceFiles\DrawRanking.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SourceFiles\main.h">
@@ -92,7 +95,7 @@
     <ClInclude Include="SourceFiles\Fps.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="SourceFiles\Ranking.h">
+    <ClInclude Include="SourceFiles\DrawRanking.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="SourceFiles\DrawRanking.h">
@@ -101,5 +104,22 @@
     <ClInclude Include="SourceFiles\InputRanking.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="SourceFiles\Ranking.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="images\Back.png">
+      <Filter>リソース ファイル</Filter>
+    </Image>
+    <Image Include="images\flower.png">
+      <Filter>リソース ファイル</Filter>
+    </Image>
+    <Image Include="images\kama.png">
+      <Filter>リソース ファイル</Filter>
+    </Image>
+    <Image Include="images\kusa.png">
+      <Filter>リソース ファイル</Filter>
+    </Image>
   </ItemGroup>
 </Project>
