@@ -66,15 +66,8 @@ AbstractScene* Help::Update() {
 
     if (!Start)
     {
-        if (InputControl::OnButton(XINPUT_BUTTON_A) || CheckHitKey(KEY_INPUT_ESCAPE)) {
-            if (CheckSoundMem(se_select) == 0) PlaySoundMem(se_select, DX_PLAYTYPE_BACK, TRUE);
-            return new Title();
-        }
-        else if (InputControl::OnButton(XINPUT_BUTTON_B) || CheckHitKey(KEY_INPUT_SPACE)) {
-            if (CheckSoundMem(se_select) == 0) PlaySoundMem(se_select, DX_PLAYTYPE_BACK, TRUE);
-            Start = true;
-        }
-        else if (InputControl::OnButton(XINPUT_BUTTON_X) || CheckHitKey(KEY_INPUT_X)) {
+        if (InputControl::OnButton(XINPUT_BUTTON_X) || CheckHitKey(KEY_INPUT_X))
+        {
             if (CheckSoundMem(se_select) == 0) PlaySoundMem(se_select, DX_PLAYTYPE_BACK, TRUE);
             if (state >= 1) {
                 state = 0;
@@ -82,6 +75,14 @@ AbstractScene* Help::Update() {
             else {
                 state++;
             };
+        };
+        if (InputControl::OnButton(XINPUT_BUTTON_A) || CheckHitKey(KEY_INPUT_ESCAPE)) {
+            if (CheckSoundMem(se_select) == 0) PlaySoundMem(se_select, DX_PLAYTYPE_BACK, TRUE);
+            return new Title();
+        }
+        else if (InputControl::OnButton(XINPUT_BUTTON_B) || CheckHitKey(KEY_INPUT_SPACE)) {
+            if (CheckSoundMem(se_select) == 0) PlaySoundMem(se_select, DX_PLAYTYPE_BACK, TRUE);
+            Start = true;
         };
     }
     else
@@ -140,7 +141,7 @@ void Help::Draw() const {
         // 説明内容
         DrawStringToHandle(120, 220, "このゲームは、カマをふり回す危険な主人公を操作して草をかったり、", 0x000000, font[FONT_TYPE_LOAD_1][FONT_SIZE_32], 0xffffff);
         DrawStringToHandle(250, 270, "お花をつんだりする非常にほのぼのしたゲームです。", 0x000000, font[FONT_TYPE_LOAD_1][FONT_SIZE_32], 0xffffff);
-        DrawStringToHandle(300, 320, "草をかりながら花をつんで、ポイントをかせいでください。", 0x000000, font[FONT_TYPE_LOAD_1][FONT_SIZE_32], 0xffffff);
+        DrawStringToHandle(210, 320, "草をかりながら花をつんで、ポイントをかせいでください。", 0x000000, font[FONT_TYPE_LOAD_1][FONT_SIZE_32], 0xffffff);
         //DrawStringToHandle(100, 370, "落下してくるリンゴは４種類です。", 0x000000, font[FONT_TYPE_LOAD_1][FONT_SIZE_32], 0xffffff);
     };
 
