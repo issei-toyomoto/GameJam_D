@@ -34,10 +34,12 @@ private:
     int Grass[MAP_HEIGHT][MAP_WIDTH];   //草・花の状態(0：何もない　1：草　2：花)
     int GrassTmp[MAP_HEIGHT][MAP_WIDTH];
     
-    int ZeroCnt;
+    int ZeroCnt;    //草と花を取った数
+    bool SaveFlower = true; //花を全部取れているならtrue
     int ItemCnt;
 
     int GrassSe;    //草を刈る効果音
+    int FlowerSe;   //花を摘む効果音
 
 public:
     // コンストラクタ

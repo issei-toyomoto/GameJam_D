@@ -35,7 +35,9 @@ GameMain::GameMain() {
     ui.switchcount();
 
     GrassSe = LoadSoundMem("Resources/Sounds/se_kusa.wav"); 
-    ChangeVolumeSoundMem((255 / 100) * 80, GrassSe);
+    ChangeVolumeSoundMem((255 / 100) * 90, GrassSe);
+
+    FlowerSe = LoadSoundMem("Resources/Sounds/se_flower.wav");
 };
 
 GameMain::~GameMain() {
@@ -67,6 +69,7 @@ AbstractScene* GameMain::Update() { // ここで値の更新など、処理
                 score -= FLOWER_AtkSCORE;
                 Grass[AtkY][AtkX] = 0;
                 ZeroCnt++;
+                SaveFlower = false;
                 StopSoundMem(GrassSe);
                 PlaySoundMem(GrassSe, DX_PLAYTYPE_BACK);
             }
@@ -131,6 +134,8 @@ AbstractScene* GameMain::Update() { // ここで値の更新など、処理
                         Grass[MapY + j][MapX + i] = 0;
                         ZeroCnt++;
                         i = 2;
+                        StopSoundMem(FlowerSe);
+                        PlaySoundMem(FlowerSe, DX_PLAYTYPE_BACK);
                         break;
                     }
                 }
@@ -141,6 +146,8 @@ AbstractScene* GameMain::Update() { // ここで値の更新など、処理
 
     //ステージクリア時処理
     if (!Clear && ((ZeroCnt == (FLOWER_NUM * StageNum) + (WEED_NUM * StageNum) && runweed[0] == nullptr) || ui.GetTime() == 0)) {
+
+        if (ui.GetTime() == 0)SaveFlower = false;
         Time[StageNum - 1] = ui.GetTime();
         StageNum++;
         ZeroCnt = 0;
@@ -173,7 +180,7 @@ AbstractScene* GameMain::Update() { // ここで値の更新など、処理
 
         else if (3 < StageNum && 90 < Anim)
         {
-            return new Result(score, Time);
+            return new Result(score, Time, SaveFlower);
         }
 
         if (Anim == 30)
