@@ -36,7 +36,10 @@ void DrawRanking::Draw()const
     DrawGraph(0, 0, BackImg, TRUE);
 
     for (int i = 0; i < RANK_MAX; i++) {
-        DrawFormatString(120, 100 + (i * 90), GetColor(0, 0, 0), "%d 位　 %s　%7d", Ranking::GetData(i).no, Ranking::GetData(i).name, Ranking::GetData(i).score);
+        DrawFormatString(120, 100 + (i * 90), GetColor(0, 0, 0), "%d 位　 %s", Ranking::GetData(i).no, Ranking::GetData(i).name);
+        DrawFormatString(700, 100 + (i * 90), GetColor(0, 0, 0), "%7d", Ranking::GetData(i).score);
+        /*シーン遷移*/
+        DrawFormatString(120, 600, GetColor(0, 0, 0), "A/Bボタンでタイトルへ",TRUE);
     };
 
 };
