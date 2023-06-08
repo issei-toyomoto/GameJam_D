@@ -1,7 +1,7 @@
 ﻿#pragma once
 #include"AbstractScene.h"
 
-#define RANK 5
+#define RANK_MAX 5
 #define NAME_MAX 10
 
 struct RankingData
@@ -15,7 +15,7 @@ class Ranking : public AbstractScene
 {
 private:
 
-    static RankingData Data[RANK];
+    static RankingData Data[RANK_MAX];
 
     //ランキングの並べ替え
     static void SortRanking();

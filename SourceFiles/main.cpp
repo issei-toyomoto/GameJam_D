@@ -6,6 +6,9 @@
 #include"SceneManager.h"
 #include"GameMainScene.h"
 
+int Resources::snd_bgm[5];
+int Resources::snd_se[5];
+
 /********************************
 * メインプログラム 開始
 ********************************/
@@ -23,6 +26,9 @@ int WINAPI WinMain(_In_ HINSTANCE  hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 
     Fps fps;
 
+    // リソース読み込み
+    Resources::Set(SND, BGM, TITLE, 0);
+
     // ゲームループし、シーンマネジャーでシーンの更新
     while ((ProcessMessage() == 0) && (sceneMng->Update() != nullptr) && !(InputControl::OnButton(XINPUT_BUTTON_BACK))) {
         ClearDrawScreen(); // 画面の初期化
@@ -31,7 +37,7 @@ int WINAPI WinMain(_In_ HINSTANCE  hInstance, _In_opt_ HINSTANCE hPrevInstance, 
         sceneMng->Draw();
 
         fps.Update();
-        fps.Draw();
+        //fps.Draw();
         InputControl::Update(); //コントローラー入力更新
         
         ScreenFlip(); // 裏画面の内容を表画面に反映する
