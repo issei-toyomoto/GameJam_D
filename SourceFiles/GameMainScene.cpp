@@ -33,6 +33,9 @@ GameMain::GameMain() {
     AnimImg = LoadGraph("images/readyback.png");
     
     ui.switchcount();
+
+    GrassSe = LoadSoundMem("Resources/Sounds/se_kusa.wav"); 
+    ChangeVolumeSoundMem((255 / 100) * 80, GrassSe);
 };
 
 GameMain::~GameMain() {
@@ -64,11 +67,15 @@ AbstractScene* GameMain::Update() { // ここで値の更新など、処理
                 score -= FLOWER_AtkSCORE;
                 Grass[AtkY][AtkX] = 0;
                 ZeroCnt++;
+                StopSoundMem(GrassSe);
+                PlaySoundMem(GrassSe, DX_PLAYTYPE_BACK);
             }
             if (Grass[AtkY][AtkX] == WEED) {
                 score += WEED_AtkSCORE;
                 Grass[AtkY][AtkX] = 0;
                 ZeroCnt++;
+                StopSoundMem(GrassSe);
+                PlaySoundMem(GrassSe, DX_PLAYTYPE_BACK);
             }
         }
 
@@ -87,6 +94,8 @@ AbstractScene* GameMain::Update() { // ここで値の更新など、処理
                 {
                     score += 300;
                     runweed[i] = nullptr;
+                    StopSoundMem(GrassSe);
+                    PlaySoundMem(GrassSe, DX_PLAYTYPE_BACK);
                 }
             }
         }
