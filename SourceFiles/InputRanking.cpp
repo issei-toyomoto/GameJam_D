@@ -15,9 +15,9 @@ InputRankingScene::InputRankingScene(int _score)
     if ((Img = LoadGraph("Resources/Images/title.png")) == -1) {};
 
     //フォント追加
-    NameFont1 = CreateFontToHandle("HGS創英角ﾎﾟｯﾌﾟ体", 80, 8, DX_FONTTYPE_ANTIALIASING);
-    NameFont2 = CreateFontToHandle("HGS創英角ﾎﾟｯﾌﾟ体", 48, 8, DX_FONTTYPE_ANTIALIASING);
-    NameFont3 = CreateFontToHandle("HGS創英角ﾎﾟｯﾌﾟ体", 32, 8, DX_FONTTYPE_ANTIALIASING);
+    NameFont1 = CreateFontToHandle("ＭＳ ゴシック", 80, 8, DX_FONTTYPE_ANTIALIASING); // HGS創英角ﾎﾟｯﾌﾟ体
+    NameFont2 = CreateFontToHandle("ＭＳ ゴシック", 48, 8, DX_FONTTYPE_ANTIALIASING);
+    NameFont3 = CreateFontToHandle("ＭＳ ゴシック", 32, 8, DX_FONTTYPE_ANTIALIASING);
 
     //SE読込
     if ((SelectSE = LoadSoundMem("Resources/Sounds/se_cursor.wav")) == -1)
