@@ -43,7 +43,7 @@ GameMain::GameMain() {
     if (CheckSoundMem(se_select) == 0) PlaySoundMem(se_select, DX_PLAYTYPE_BACK, TRUE);
 
     bgm_main = LoadSoundMem("Resources/Sounds/bgm_main.wav");
-    ChangeVolumeSoundMem(130, bgm_main);
+    ChangeVolumeSoundMem(200, bgm_main);
     PlaySoundMem(bgm_main, DX_PLAYTYPE_LOOP, TRUE);
 
     GrassSe = LoadSoundMem("Resources/Sounds/se_kusa.wav"); 
@@ -52,7 +52,7 @@ GameMain::GameMain() {
     FlowerSe = LoadSoundMem("Resources/Sounds/se_flower.wav");
 
     se_damage = LoadSoundMem("Resources/Sounds/se_damage.wav");
-    ChangeVolumeSoundMem((255 / 100) * 80, se_damage);
+    ChangeVolumeSoundMem((255 / 100) * 100, se_damage);
     
 };
 
@@ -250,7 +250,10 @@ void GameMain::SortGrass()
 void GameMain::Draw() const { // やることは描画のみ、絶対に値の更新はしない
     SetFontSize(16);
     DrawGraph(0, 0, BackImg, true);
+
+    SetDrawBlendMode(DX_BLENDMODE_ALPHA, 200);
     DrawBox(0, 0, 1280, 100, GetColor(0, 0, 0), TRUE);
+    SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 
     //DrawFormatString(20, 100, GetColor(255, 0, 0), "ZeroCnt:%d == %d", ZeroCnt, (FLOWER_NUM * StageNum) + (WEED_NUM * StageNum));
 
@@ -324,7 +327,7 @@ void GameMain::Draw() const { // やることは描画のみ、絶対に値の�
                 fontx = GetDrawStringWidth("STAGE 1", 7) / 2;
                 if (Anim < 60)
                 {
-                    DrawString(SCREEN_WIDTH / 2 - fontx, SCREEN_HEIGHT / 2 - fonty / 2, "STAGE 1", 0xff0000);
+                    DrawString(SCREEN_WIDTH / 2 - fontx, SCREEN_HEIGHT / 2 - fonty / 2, "STAGE 1", 0xffffff);
                 }
                 else
                 {
@@ -367,7 +370,7 @@ void GameMain::Draw() const { // やることは描画のみ、絶対に値の�
                 fontx = GetDrawStringWidth("STAGE 2", 7) / 2;
                 if (Anim < 150)
                 {
-                    DrawString(SCREEN_WIDTH / 2 - fontx, SCREEN_HEIGHT / 2 - fonty / 2, "STAGE 2", 0xff0000);
+                    DrawString(SCREEN_WIDTH / 2 - fontx, SCREEN_HEIGHT / 2 - fonty / 2, "STAGE 2", 0xffffff);
                 }
                 else
                 {
@@ -410,7 +413,7 @@ void GameMain::Draw() const { // やることは描画のみ、絶対に値の�
                 fontx = GetDrawStringWidth("STAGE 2", 7) / 2;
                 if (Anim < 150)
                 {
-                    DrawString(SCREEN_WIDTH / 2 - fontx, SCREEN_HEIGHT / 2 - fonty / 2, "STAGE 3", 0xff0000);
+                    DrawString(SCREEN_WIDTH / 2 - fontx, SCREEN_HEIGHT / 2 - fonty / 2, "STAGE 3", 0xffffff);
                 }
                 else
                 {
