@@ -251,7 +251,7 @@ void GameMain::Draw() const { // やることは描画のみ、絶対に値の�
     SetFontSize(16);
     DrawGraph(0, 0, BackImg, true);
 
-    SetDrawBlendMode(DX_BLENDMODE_ALPHA, 180);
+    SetDrawBlendMode(DX_BLENDMODE_ALPHA, 200);
     DrawBox(0, 0, 1280, 100, GetColor(0, 0, 0), TRUE);
     SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 

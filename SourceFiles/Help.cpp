@@ -68,7 +68,7 @@ AbstractScene* Help::Update() {
     {
         if (InputControl::OnButton(XINPUT_BUTTON_X) || CheckHitKey(KEY_INPUT_X))
         {
-            if (CheckSoundMem(se_select) == 0) PlaySoundMem(se_select, DX_PLAYTYPE_BACK, TRUE);
+            if (CheckSoundMem(se_cursor) == 0) PlaySoundMem(se_cursor, DX_PLAYTYPE_BACK, TRUE);
             if (state >= 1) {
                 state = 0;
             }
