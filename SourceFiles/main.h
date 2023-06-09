@@ -23,6 +23,7 @@ using std::to_string;
 #include "Help.h"
 #include "Ranking.h"
 #include "DrawRanking.h"
+#include "InputRanking.h"
 #include "Credit.h"
 
 // リソース管理
