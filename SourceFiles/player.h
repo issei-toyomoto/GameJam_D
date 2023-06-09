@@ -13,7 +13,7 @@ private:
     int Combo = 0;      //攻撃回数
 
     int Image[12];   //プレイヤーキャラ画像
-    int SickleIng;  //鎌の画像
+    int SickleImg;  //鎌の画像
 
     int Attackse;   //攻撃効果音
 

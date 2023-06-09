@@ -17,7 +17,7 @@ Player::Player()
     MSpdY = 8;
 
     LoadDivGraph("images/move.png", 12, 12, 1, 50, 85, Image);
-    SickleIng = LoadGraph("images/kama.png");
+    SickleImg = LoadGraph("images/kama.png");
 
     Attackse = LoadSoundMem("Resources/Sounds/se_swing.wav");
     ChangeVolumeSoundMem((255 / 100) * 120, Attackse);
@@ -218,7 +218,7 @@ void Player::DrawSickle()const
             finX = stX + Dis * cos((3.14 / 180) * (finAng - 90));
             finY = stY + Dis * sin((3.14 / 180) * (finAng - 90));
         }
-        DrawRotaGraph(finX, finY, 1, (3.14 / 180) * finAng, SickleIng, true, Xturn);
+        DrawRotaGraph(finX, finY, 1, (3.14 / 180) * finAng, SickleImg, TRUE, Xturn);
     }
 }
 
