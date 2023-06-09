@@ -88,7 +88,7 @@ AbstractScene* Title::Update() {
             ctrl_state = 1;
         };
 
-        if (InputControl::OnButton(XINPUT_BUTTON_B) || InputControl::OnButton(XINPUT_BUTTON_A)) {
+        if (InputControl::OnButton(XINPUT_BUTTON_B) || InputControl::OnButton(XINPUT_BUTTON_A) || CheckHitKey(KEY_INPUT_SPACE)) {
             if (state == 0) {
                 // スタート選択
                 Start = true;
