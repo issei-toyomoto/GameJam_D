@@ -39,5 +39,5 @@ void UI::Draw(int score,int stage) const{ // やることは描画のみ、絶�
     SetFontSize(40);
     DrawFormatString(600, 10, 0xffffff, "Time\n %2d",Timelimit);
     SetFontSize(50);
-    DrawFormatString(800, 25, 0xffffff, "SCORE : %d", score);
+    DrawFormatString(970, 25, 0xffffff, "SCORE:%5d", score);
 };
