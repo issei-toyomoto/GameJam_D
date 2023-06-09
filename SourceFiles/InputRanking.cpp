@@ -191,7 +191,10 @@ void InputRankingScene::Draw() const {
 
     DrawGraph(0, 0, Img, TRUE);
 
-    DrawStringToHandle(120, 100, "名前入力", 0xffffff, NameFont1);
+    //DrawStringToHandle(120, 100, "名前入力", 0xffffff, NameFont1);
+    DrawStringToHandle(90, 70, "おめでとうございます！", 0xffffff, NameFont3);
+    DrawStringToHandle(90, 100, "ランキング上位５位以内に入ったのでスコアと名前を登録します。", 0xffffff, NameFont3);
+    DrawStringToHandle(90, 130, "あなたのお名前をどうぞ！", 0xffffff, NameFont3);
 
     DrawBox(470, 240, 820, 300, 0xffffff, TRUE);
     DrawFormatStringToHandle(480, 250, 0x000000, NameFont2, "%s", Name.c_str());

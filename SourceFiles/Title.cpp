@@ -132,7 +132,7 @@ void Title::Draw() const {
     DrawStringToHandle(300, 260, "草地のかり取りでん説 ～勇者たけしのちょう戦～", 0x000000, font[FONT_TYPE_LOAD_1][FONT_SIZE_32], 0xffffff);
 
     // バージョン表示（仮）
-    DrawStringToHandle(20, 690, "v6.06", 0x000000, font[FONT_TYPE_DEFAULT][FONT_SIZE_16], 0xffffff);
+    DrawStringToHandle(20, 690, "v6.09", 0x000000, font[FONT_TYPE_DEFAULT][FONT_SIZE_16], 0xffffff);
 
     // ゲームモードセレクトの項目
     DrawStringToHandle(630, 350, "スタート", 0x000000, font[FONT_TYPE_LOAD_1][FONT_SIZE_32], 0xffffff);
